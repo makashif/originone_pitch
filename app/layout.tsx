@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
+  subsets: ["latin"],
+  weight: ["500", "700"],
   display: "swap",
 });
 
@@ -24,13 +24,17 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Origin One — Software Development House",
+  metadataBase: new URL('https://originonelabs.com'),
+  title: "Origin One Labs",
   description:
-    "Origin One builds elite mobile apps, AI systems, Web3 platforms, and enterprise software. Production-grade engineering, end-to-end.",
+    "Built on Expertise. Driven by Results. Origin One Labs is a technology partner combining deep technical expertise with strong product thinking to build scalable solutions.",
   keywords: ["Origin One", "software development", "mobile apps", "AI", "Web3", "enterprise software"],
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: "Origin One — Software Development House",
-    description: "We Build Software That Ships.",
+    title: "Origin One Labs",
+    description: "Built on Expertise. Driven by Results.",
     type: "website",
   },
 };
@@ -43,7 +47,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${jakarta.variable} ${jetbrainsMono.variable}`}
     >
       <body>{children}</body>
     </html>

@@ -35,7 +35,7 @@
   --accent-line: rgba(228, 228, 231, 0.30);
 
   /* ─── Fonts ─── */
-  --f-display: var(--font-inter), system-ui, sans-serif;
+  --f-display: var(--font-plus-jakarta), system-ui, sans-serif;
   --f-body: var(--font-inter), system-ui, sans-serif;
   --f-mono: var(--font-jetbrains), ui-monospace, "JetBrains Mono", monospace;
 

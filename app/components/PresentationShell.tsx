@@ -29,6 +29,7 @@ export const SLIDES = [
   { id: "slide-p5", label: "Project 05" },
   { id: "slide-p6", label: "Project 06" },
   { id: "slide-p7", label: "Project 07" },
+  { id: "slide-p8", label: "Project 08" },
   { id: "slide-why", label: "Why Origin One" },
   { id: "slide-connect", label: "Start a Project" },
 ];

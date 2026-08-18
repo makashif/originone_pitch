@@ -45,24 +45,32 @@ const p4Features = [
   { title: "Multi-Surface Ecosystem", desc: "Consumer mobile app, embeddable SDK, and B2B web dashboard — a complete KYC platform from a single integrated build." },
 ];
 
-// ── Project 05 — Digital24 ──
+// ── Project 05 — Fuutura HRMS ──
 const p5Features = [
+  { title: "Unified HR & Work Management", desc: "A modern, industry-agnostic HRMS connecting employee administration, payroll, and leave with task and performance tracking." },
+  { title: "Actionable Performance Data", desc: "Move beyond subjective reviews. Performance is tied directly to a real record of assigned tasks, completed projects, and actual outcomes." },
+  { title: "Connected Talent Lifecycle", desc: "Seamless workflow from recruitment and candidate tracking directly into the employee record, ongoing learning, and career history." },
+  { title: "Configurable Operations", desc: "Built for diverse working environments — effortlessly supporting office employees, field teams, and shift workers across any industry." },
+];
+
+// ── Project 06 — Digital24 ──
+const p6Features = [
   { title: "Multi-Channel Campaign Builder", desc: "Flexible campaign creation with guaranteed placements, newswire, SEO guest posting, and journalist outreach targeting." },
   { title: "Stripe & In-Platform Wallet", desc: "Cart and checkout supporting Stripe card payments and wallet balance, with bulk credit pack purchasing and deferred application." },
   { title: "Role-Based Admin Dashboard", desc: "Full admin panel for user, campaign, offer, and reporting management — powering internal fulfilment operations end-to-end." },
   { title: "CMS-Driven Public Platform", desc: "Sanity-powered public site with pricing, bundles, case studies, and help centre — built for discovery and conversion." },
 ];
 
-// ── Project 06 — Intelizzz | U-Haul ──
-const p6Features = [
+// ── Project 07 — Intelizzz | U-Haul ──
+const p7Features = [
   { title: "Real-Time Vehicle Tracking", desc: "Live SSE data streams powering real-time GPS tracking with geofence engine supporting circle, polygon, and rectangle zones." },
   { title: "Event-Driven Microservices", desc: "12 dedicated Node.js/Koa services on a Kafka pipeline handling device events, wake history, and tracking data at scale." },
   { title: "Offline-First PWA", desc: "Installer PWA with IndexedDB and Workbox service worker — full functionality without connectivity, perfect sync on restore." },
   { title: "Multi-Role Platform", desc: "Consumer, installer, operations, and recovery agent roles across 6 integrated modules with Kubernetes-orchestrated infrastructure." },
 ];
 
-// ── Project 07 — Toybox ──
-const p7Features = [
+// ── Project 08 — Toybox ──
+const p8Features = [
   { title: "Native iOS Member App", desc: "Swift-built iOS app with garage management, concierge booking, vehicle services, and an integrated AI assistant." },
   { title: "AI-Powered Concierge", desc: "Intelligent concierge assistant enabling members to book detailing, wash, transport, and vehicle acquisition with ease." },
   { title: "Staff & Admin Web Applications", desc: "Dedicated Next.js staff and admin surfaces for full operational management — scheduling, reporting, and member oversight." },
@@ -70,16 +78,17 @@ const p7Features = [
 ];
 
 /* ─────────────────────────────────────────────────────────────
-   PAGE COMPOSITION — 14 Slides
+   PAGE COMPOSITION — 15 Slides
    01 Hero → 02 About → 03 Solutions → 04 Tech → 05 Portfolio Overview →
    06 P1 (Fuutura Wallet) →
    07 P2 (Fuutura Trade) →
    08 P3 (Fuutura Extension) →
    09 P4 (Fuutura KYC) →
-   10 P5 (Digital24) →
-   11 P6 (Intelizzz | U-Haul) →
-   12 P7 (Toybox) →
-   13 Why Us → 14 Connect
+   10 P5 (Fuutura HRMS) →
+   11 P6 (Digital24) →
+   12 P7 (Intelizzz | U-Haul) →
+   13 P8 (Toybox) →
+   14 Why Us → 15 Connect
 ───────────────────────────────────────────────────────────── */
 
 export default function Home() {
@@ -159,51 +168,65 @@ export default function Home() {
         mockupSrc="/Fkyc.png"
       />
 
-      {/* ── Project 05 — Digital24 ── */}
+      {/* ── Project 05 — Fuutura HRMS ── */}
       <ProjectSlide
         id="slide-p5"
         slideNumber="10"
+        title="Fuutura HRMS"
+        description="A next-generation platform bridging workforce administration and daily operations. Unifying HR records, recruitment, and actionable performance tracking to show not just who works for the company, but the actual impact of their work."
+        domain="SaaS · HR Tech · Next.js · Node.js"
+        background="/fhrms_premium_bg.png"
+        status="Delivered"
+        features={p5Features}
+        mockupSrc="/hrms.png"
+        mockupType="laptop"
+      />
+
+      {/* ── Project 06 — Digital24 ── */}
+      <ProjectSlide
+        id="slide-p6"
+        slideNumber="11"
         title="Digital24"
         description="A full-featured PR distribution platform streamlining how businesses create, manage, and fulfil media campaigns at scale — from guaranteed placements and newswire to SEO guest posting, journalist outreach, payments, and internal fulfilment."
         domain="SaaS · Next.js · PostgreSQL · Stripe"
         background="/digital24_premium_bg.png"
         status="Delivered"
-        features={p5Features}
+        features={p6Features}
         mockupSrc="/D24.png"
         mockupType="laptop"
       />
 
-      {/* ── Project 06 — Intelizzz | U-Haul ── */}
+      {/* ── Project 07 — Intelizzz | U-Haul ── */}
       <ProjectSlide
-        id="slide-p6"
-        slideNumber="11"
+        id="slide-p7"
+        slideNumber="12"
         title="Intelizzz | U-Haul — Vehicle Intelligence"
         description="Delivered an enterprise-grade vehicle intelligence and fleet management platform for Intelizzz, powering connected vehicle operations and tracking for enterprise fleet customers including U-Haul."
         background="/intelizzz_premium_bg.png"
         status="Delivered"
-        features={p6Features}
+        features={p7Features}
         mockupSrcSplash="/IntelizzzS.png"
         mockupSrc="/intelizzz.jpg"
       />
 
-      {/* ── Project 07 — Toybox ── */}
+      {/* ── Project 08 — Toybox ── */}
       <ProjectSlide
-        id="slide-p7"
-        slideNumber="12"
+        id="slide-p8"
+        slideNumber="13"
         title="Toybox — Automotive Concierge"
         description="A premium automotive concierge ecosystem purpose-built for luxury vehicle owners — delivered across four integrated surfaces covering the full member, staff, and operational experience with native iOS and web applications."
         domain="Luxury Auto · iOS Swift · Next.js"
         background="/toybox_premium_bg.png"
         status="Delivered"
-        features={p7Features}
+        features={p8Features}
         mockupSrcSplash="/ToyBoxS.png"
         mockupSrc="/toybox.jpg"
       />
 
-      {/* ── 13 Why Origin One ── */}
+      {/* ── 14 Why Origin One ── */}
       <WhyChooseSlide />
 
-      {/* ── 14 Let's Connect ── */}
+      {/* ── 15 Let's Connect ── */}
       <ConnectSlide />
     </PresentationShell>
   );

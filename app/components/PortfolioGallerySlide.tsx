@@ -43,20 +43,27 @@ const projects: Project[] = [
   },
   {
     number: "05",
+    title: "Fuutura HRMS",
+    category: "SaaS · Enterprise · HR Tech",
+    stack: "Next.js · Node.js · PostgreSQL · AI · AWS",
+    tags: ["Unified Lifecycle", "Work & Performance", "Industry-Agnostic"],
+  },
+  {
+    number: "06",
     title: "Digital24",
     category: "SaaS · PR Distribution",
     stack: "Next.js · PostgreSQL · Stripe · Sanity · AWS",
     tags: ["PR Campaigns", "Multi-Channel", "CMS-Powered"],
   },
   {
-    number: "06",
+    number: "07",
     title: "Intelizzz | U-Haul",
     category: "IoT · Enterprise · Mobile",
     stack: "React Native · Node.js · Kafka · MongoDB · Kubernetes",
     tags: ["6 Modules", "12 Microservices", "Real-Time Tracking"],
   },
   {
-    number: "07",
+    number: "08",
     title: "Toybox",
     category: "Luxury Automotive · iOS · Web",
     stack: "Swift (iOS) · Next.js · Node.js · AWS",
@@ -87,7 +94,7 @@ export default function PortfolioGallerySlide() {
         </motion.p>
       </div>
 
-      {/* Project grid — 4 cols × 2 rows, last row has 3 cards */}
+      {/* Project grid — 4 cols × 2 rows, with disclaimer on 3rd row */}
       <div className="grid-4" style={{
         background: "transparent",
         gap: "clamp(0.4rem, 0.8vw, 0.75rem)",
@@ -98,10 +105,6 @@ export default function PortfolioGallerySlide() {
             variants={itemVariants}
             onClick={() => goTo(5 + i)}
             className="portfolio-card"
-            style={{
-              // Make the 7th card span wider to balance the last row
-              ...(i === 6 ? { gridColumn: "span 1" } : {}),
-            }}
           >
             {/* Number + category */}
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -156,11 +159,12 @@ export default function PortfolioGallerySlide() {
           </motion.div>
         ))}
 
-        {/* Disclaimer Card (Fills the 8th slot in the grid) */}
+        {/* Disclaimer Card (Spans the 3rd row) */}
         <motion.div
           variants={itemVariants}
           className="portfolio-card"
           style={{
+            gridColumn: "1 / -1",
             background: "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%)",
             border: "1px solid var(--border-bright)",
             display: "flex",
