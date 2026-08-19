@@ -83,7 +83,7 @@ export default function FluidBackground() {
         top: 0,
         left: 0,
         width: "100vw",
-        height: "100vh",
+        height: "100svh",
         zIndex: 1, // Sit above the dark background (-1) and overlay (0), but below content (2)
         pointerEvents: "none", // Let clicks pass through
         opacity: 0.8, // Slightly fade to keep it elegant and non-distracting

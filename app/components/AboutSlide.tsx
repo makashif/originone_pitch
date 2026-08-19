@@ -62,7 +62,7 @@ export default function AboutSlide() {
             </motion.div>
 
             {/* Mission / Vision */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.15fr", gap: "2rem", alignItems: "start" }}>
+            <div className="mv-grid">
               {[
                 { tag: "Mission", text: "To design and deliver intelligent technology solutions that help businesses innovate, scale, and compete in a digital-first world." },
                 { tag: "Vision", text: "To become a globally trusted technology and engineering partner known for building innovative, scalable, and impactful digital systems." },

@@ -10,6 +10,7 @@ import {
   ReactNode,
 } from "react";
 import { usePdfExport } from "../lib/usePdfExport";
+import useFitSlides from "../lib/useFitSlides";
 import PdfExportOverlay from "./PdfExportOverlay";
 import FluidBackground from "./FluidBackground";
 
@@ -71,6 +72,10 @@ export const useDeck = () => useContext(DeckContext);
 ───────────────────────────────────────── */
 export default function PresentationShell({ children }: { children: ReactNode }) {
   const [current, setCurrent] = useState(0);
+
+  /* Guarantees no slide is ever cropped, at any viewport height. */
+  useFitSlides();
+
   const containerRef = useRef<HTMLDivElement>(null);
   const isScrollingRef = useRef(false);
 
@@ -256,6 +261,8 @@ export default function PresentationShell({ children }: { children: ReactNode })
           overflowY: "scroll",
           overflowX: "hidden",
           scrollBehavior: "smooth",
+          WebkitOverflowScrolling: "touch",
+          overscrollBehaviorY: "contain",
         }}
       >
         {children}
@@ -390,7 +397,7 @@ function KeyHint() {
 
   return (
     <div
-      className="no-print"
+      className="no-print key-hint"
       style={{
         position: "fixed",
         bottom: "2rem",

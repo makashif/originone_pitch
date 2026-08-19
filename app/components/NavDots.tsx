@@ -8,7 +8,7 @@ export default function NavDots() {
   return (
     <nav
       aria-label="Slide navigation"
-      className="no-print"
+      className="no-print nav-dots"
       style={{
         position: "fixed",
         right: "clamp(1.2rem, 2.5vw, 2.2rem)",
@@ -17,7 +17,6 @@ export default function NavDots() {
         zIndex: 500,
         display: "flex",
         flexDirection: "column",
-        gap: "10px",
         alignItems: "center",
       }}
     >

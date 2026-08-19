@@ -33,7 +33,7 @@ export default function ProjectSlide({
   return (
     <SlideWrapper id={id} bgImage={background} overlay="rgba(7,7,7,0.85)">
       {/* Full-height positioning context */}
-      <div style={{ position: "relative", width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+      <div className="project-slide-frame">
 
         {/* ── Top: label + title + description + divider ── */}
         <div className="stack stack-sm" style={{ maxWidth: topMaxWidth }}>
@@ -102,7 +102,7 @@ export default function ProjectSlide({
             <motion.div variants={itemVariants} style={{ borderBottom: "1px solid var(--border)", margin: "0.25rem 0", maxWidth: "900px" }} />
 
             {/* Key Features (2x2 Grid) */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "clamp(0.5rem, 3vh, 1.25rem)", maxWidth: "100%", marginTop: "clamp(0.5rem, 3vh, 1rem)" }}>
+            <div className="feature-grid">
               {features.map((f, i) => (
                 <motion.div
                   key={i}

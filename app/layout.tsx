@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -37,6 +37,17 @@ export const metadata: Metadata = {
     description: "Built on Expertise. Driven by Results.",
     type: "website",
   },
+};
+
+/* Without this, mobile browsers assume a 980px-wide desktop canvas and
+   scale the whole deck down — every media query below 960px would be
+   dead code. viewportFit:"cover" lets the deck fill notched displays. */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+  themeColor: "#070707",
 };
 
 export default function RootLayout({

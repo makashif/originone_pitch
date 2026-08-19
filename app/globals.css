@@ -39,10 +39,13 @@
   --f-body: var(--font-inter), system-ui, sans-serif;
   --f-mono: var(--font-jetbrains), ui-monospace, "JetBrains Mono", monospace;
 
-  /* ─── Slide margins — calibrated for presentation feel ─── */
+  /* ─── Slide margins — calibrated for presentation feel ───
+     Both axes are driven by the SMALLER of a width- and a height-derived
+     value, so the outer margin stays visually proportional on a short
+     wide laptop screen just as it does on a tall desktop monitor. ─── */
   --px: clamp(2rem, min(6.5vw, 11.5vh), 7rem);
   /* horizontal padding  */
-  --py: clamp(0.5rem, 4.5vh, 4rem);
+  --py: clamp(1.25rem, min(5vh, 4vw), 3.75rem);
   /* vertical padding    */
 
   /* ─── Content max-width — fits elegantly at all presentation sizes ─── */
@@ -148,10 +151,17 @@ body {
   z-index: 2;
   width: 100%;
   max-width: var(--slide-max);
-  /* Overflow guard: content cannot exceed the padded area height */
-  max-height: calc(100svh - 2 * var(--py));
   overflow: visible;
-  /* Changed from hidden to prevent shadow cropping */
+  /* Never let the flex parent squash this — it must report its true
+     natural height so the auto-fit engine can measure it. */
+  flex: 0 0 auto;
+  /* ── Auto-fit ──
+     `--fit` is written by useFitSlides() when the natural content height
+     exceeds the padded safe area. Transform is used (not zoom/height) so
+     the element's measured layout size stays constant — that is what
+     makes the measure→scale loop convergent and jitter-free. */
+  transform: scale(var(--fit, 1));
+  transform-origin: center center;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }
@@ -291,16 +301,52 @@ body {
 /* Auto-fit card grid (3–4 col) */
 .grid-auto {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(clamp(180px, 22vw, 300px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(180px, 22vw, 300px)), 1fr));
   gap: 1px;
 }
 
 /* Auto-fit large card grid (2–3 col) */
 .grid-auto-lg {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 25vw, 340px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(200px, 25vw, 340px)), 1fr));
   gap: 1px;
   background: var(--border);
+}
+
+/* Feature grid — ProjectSlide 2x2 key-features block */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(0.5rem, 3vh, 1.25rem);
+  max-width: 100%;
+  margin-top: clamp(0.5rem, 3vh, 1rem);
+}
+
+/* Mission / Vision pair — AboutSlide */
+.mv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: start;
+}
+
+/* Paired form fields — ConnectSlide */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: clamp(1rem, 2vh, 1.5rem);
+}
+
+/* Tech pill wall — TechSlide */
+.tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tech-grid > * {
+  width: calc(33.333% - 0.25rem);
+  min-width: 0;
 }
 
 /* 4-column pillar grid */
@@ -342,6 +388,15 @@ body {
 }
 
 /* Project Slide Layout */
+.project-slide-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .project-slide-row {
   display: flex;
   flex-wrap: wrap;
@@ -796,16 +851,40 @@ body.pdf-export-active .mockup-positioning {
 
 /* ═══════════════════════════════════════════════════════
    RESPONSIVE BREAKPOINTS
+   ───────────────────────────────────────────────────────
+   Three independent axes, each solving a different problem:
+
+   1. WIDTH  → column counts. Wide grids step down 5→3→2→1
+              so cards never get narrower than they are readable.
+   2. HEIGHT → vertical density. Short laptop screens get tighter
+              margins, smaller mockups and a shorter spacing scale
+              BEFORE the auto-fit engine has to downscale anything.
+   3. MOBILE → continuous scroll reading mode, single column.
+
+   The width and height axes are deliberately separate media queries:
+   a 1440×720 laptop needs the height treatment but NOT the mobile
+   column collapse, and the old width-only breakpoints could not
+   express that.
 ═══════════════════════════════════════════════════════ */
 
-/* 1100px — tighten to 2-column pillar grids */
+/* ═══════════ AXIS 1 — WIDTH: column counts ═══════════ */
+
+/* ─── ≤1400px — 19 portfolio cards no longer fit 5-up comfortably ─── */
+@media screen and (max-width: 1400px) {
+  .grid-5 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ─── ≤1200px — step the dense grids down ─── */
 @media screen and (max-width: 1200px) {
   .grid-4 {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .grid-5,
   .portfolio-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .process-strip {
@@ -813,22 +892,30 @@ body.pdf-export-active .mockup-positioning {
   }
 }
 
-/* 960px — reduce device size slightly, collapse 2-col grids */
+/* ─── ≤960px — tablet / large phone ─── */
 @media screen and (max-width: 960px) {
   :root {
     --device-h: clamp(200px, 35svh, 300px);
     --ext-h: clamp(180px, 32svh, 280px);
     --laptop-w: clamp(260px, min(70vw, 80vh), 400px);
-    --px: clamp(1.5rem, min(5vw, 9vh), 3.5rem);
-    --py: clamp(0.5rem, 6vh, 4rem);
+    --px: clamp(1.5rem, 5vw, 3.5rem);
+    --py: clamp(2rem, 5vh, 4rem);
   }
 
-  .grid-2 {
+  .grid-2,
+  .mv-grid {
     grid-template-columns: 1fr;
     gap: var(--sp-md);
   }
 
-  /* SCROLLABLE READING MODE ON MOBILE */
+  .grid-5,
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* ── SCROLLABLE READING MODE ──
+     Slides stop being fixed-height frames and become sections that
+     grow with their content, stacked in one continuous scroll. ── */
   #deck-container {
     scroll-snap-type: none !important;
   }
@@ -837,18 +924,26 @@ body.pdf-export-active .mockup-positioning {
     height: auto;
     min-height: 100svh;
     overflow: visible;
-    justify-content: flex-start;
+    justify-content: center;
     scroll-snap-align: none !important;
   }
 
+  /* Auto-fit is a desktop-only concern: on mobile the slide grows
+     instead of clipping, so content must always render at 1:1. */
   .slide-content {
     max-height: none !important;
     overflow: visible !important;
+    transform: none !important;
   }
 
   .project-slide-right {
     padding-left: 0 !important;
-    padding-top: 3rem !important;
+    padding-top: clamp(1.5rem, 5vh, 3rem) !important;
+  }
+
+  /* The upward nudge only makes sense inside a fixed-height frame. */
+  .mockup-positioning {
+    top: 0;
   }
 
   .about-values-empty {
@@ -858,28 +953,235 @@ body.pdf-export-active .mockup-positioning {
   .about-values-header {
     gap: 0 !important;
   }
+
+  /* Side rail would overlap content in a narrow single column. */
+  .nav-dots,
+  .key-hint {
+    display: none !important;
+  }
 }
 
-/* 640px — mobile fallback */
-@media screen and (max-width: 640px) {
+/* ─── ≤700px — PHONES: everything collapses to a single column ─── */
+@media screen and (max-width: 700px) {
   :root {
-    --device-h: clamp(180px, 30svh, 250px);
-    --ext-h: clamp(160px, 28svh, 230px);
-    --laptop-w: clamp(220px, min(85vw, 95vh), 300px);
+    --device-h: clamp(200px, 34svh, 280px);
+    --ext-h: clamp(180px, 30svh, 250px);
+    --laptop-w: min(84vw, 340px);
     --px: 1.25rem;
-    --py: clamp(0.5rem, 5vh, 2.5rem);
+    --py: clamp(1.75rem, 4.5vh, 2.5rem);
   }
 
-  .grid-4 {
-    grid-template-columns: 1fr;
+  /* Every deck grid, one column. Declared together so a new grid
+     utility cannot accidentally escape the mobile collapse. */
+  .grid-2,
+  .grid-4,
+  .grid-5,
+  .grid-auto,
+  .grid-auto-lg,
+  .portfolio-grid,
+  .mv-grid,
+  .feature-grid,
+  .form-row {
+    grid-template-columns: 1fr !important;
   }
 
+  /* Process strip stays 2-up: six one-line steps stacked 6-high
+     wastes a full screen of scroll for no gain in legibility. */
+  .process-strip {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Card gaps: 1px hairline seams read as cramped on a phone, where
+     each card is now full-width. Give them real separation. */
+  .grid-4,
+  .grid-auto,
+  .grid-auto-lg,
+  .grid-5,
   .portfolio-grid {
-    grid-template-columns: 1fr;
+    gap: 1px;
+  }
+
+  .tech-grid {
+    gap: 0.4rem;
+  }
+
+  .tech-grid > * {
+    width: calc(50% - 0.2rem) !important;
+  }
+
+  .project-slide-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .project-slide-left,
+  .project-slide-right {
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+    width: 100%;
+  }
+
+  /* Two phone mockups side by side do not fit; let them wrap. */
+  .mockup-positioning > * {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .t-hero {
+    font-size: clamp(2.4rem, 12vw, 3.6rem);
+  }
+
+  .t-h2 {
+    font-size: clamp(1.7rem, 8vw, 2.6rem);
+  }
+
+  .t-h3 {
+    font-size: clamp(1.3rem, 6.5vw, 2rem);
+  }
+}
+
+/* ─── ≤420px — small phones: hairline safety ─── */
+@media screen and (max-width: 420px) {
+  :root {
+    --px: 1rem;
   }
 
   .process-strip {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr !important;
+  }
+
+  .tech-grid > * {
+    width: 100% !important;
+  }
+}
+
+/* ═══════════ AXIS 2 — HEIGHT: short screens ═══════════
+   Scoped to `min-width: 961px` so phones in landscape (which are in
+   continuous-scroll mode and do not need this) are left alone.
+
+   Typical targets:
+     900px tall  → 14" laptop, browser chrome, no taskbar
+     780px tall  → 1366×768 Windows laptop, chrome + taskbar
+     640px tall  → the same with bookmarks bar, or a half-height window
+═══════════════════════════════════════════════════════════ */
+
+@media screen and (min-width: 961px) and (max-height: 900px) {
+  :root {
+    --py: clamp(1rem, 3.2vh, 2rem);
+    --device-h: clamp(200px, 40svh, 340px);
+    --ext-h: clamp(190px, 36svh, 320px);
+    --laptop-w: clamp(280px, min(34vw, 62vh), 460px);
+    --sp-md: clamp(0.6rem, 2.6vh, 1.1rem);
+    --sp-lg: clamp(0.9rem, 4vh, 1.8rem);
+    --sp-xl: clamp(1.1rem, 6vh, 2.6rem);
+  }
+
+  .card {
+    padding: clamp(0.7rem, 1.5vh, 1.1rem) clamp(0.8rem, 1.4vw, 1.2rem);
+  }
+
+  .portfolio-card {
+    padding: clamp(0.5rem, 1.1vh, 0.85rem) clamp(0.7rem, 0.9vw, 1rem);
+    gap: 0.4rem;
+  }
+
+  .mockup-positioning {
+    top: -3vh;
+  }
+}
+
+@media screen and (min-width: 961px) and (max-height: 780px) {
+  :root {
+    --py: clamp(0.85rem, 2.6vh, 1.5rem);
+    --device-h: clamp(190px, 38svh, 300px);
+    --ext-h: clamp(175px, 34svh, 280px);
+    --laptop-w: clamp(260px, min(30vw, 58vh), 420px);
+    --sp-xs: clamp(0.15rem, 0.7vh, 0.3rem);
+    --sp-sm: clamp(0.3rem, 1.4vh, 0.6rem);
+    --sp-md: clamp(0.5rem, 2.2vh, 0.9rem);
+    --sp-lg: clamp(0.75rem, 3.4vh, 1.5rem);
+    --sp-xl: clamp(0.9rem, 5vh, 2rem);
+  }
+
+  .card {
+    padding: clamp(0.55rem, 1.2vh, 0.9rem) clamp(0.7rem, 1.2vw, 1.05rem);
+  }
+
+  .portfolio-card {
+    padding: 0.5rem 0.7rem;
+    gap: 0.32rem;
+  }
+
+  .portfolio-mini-device {
+    height: clamp(80px, 16svh, 140px);
+  }
+
+  .mockup-positioning {
+    top: 0;
+  }
+}
+
+@media screen and (min-width: 961px) and (max-height: 640px) {
+  :root {
+    --py: clamp(0.7rem, 2vh, 1.1rem);
+    --px: clamp(1.5rem, min(5vw, 9vh), 4rem);
+    --device-h: clamp(170px, 36svh, 260px);
+    --ext-h: clamp(160px, 32svh, 240px);
+    --laptop-w: clamp(240px, min(28vw, 54vh), 380px);
+  }
+
+  .card {
+    padding: 0.5rem 0.65rem;
+  }
+}
+
+/* ═══════════ AXIS 3 — SHORT *AND* NARROW ═══════════
+   Landscape phones and small split-screen windows: below this the
+   deck is genuinely too small to hold a slide, so we release the
+   full-height lock and let the slide scroll like the mobile mode.
+═══════════════════════════════════════════════════════ */
+
+@media screen and (max-height: 480px) and (min-width: 961px) {
+  .slide {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+
+  #deck-container {
+    scroll-snap-type: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   SLIDE NAV RAIL
+   26 dots must fit any screen height, so the rail is a
+   scroll-free flex column that tightens as height shrinks.
+═══════════════════════════════════════════════════════ */
+
+.nav-dots {
+  gap: 10px;
+}
+
+@media screen and (max-height: 900px) {
+  .nav-dots {
+    gap: 7px;
+  }
+}
+
+@media screen and (max-height: 780px) {
+  .nav-dots {
+    gap: 5px;
+  }
+}
+
+@media screen and (max-height: 640px) {
+  .nav-dots {
+    gap: 3px;
+  }
+
+  .nav-dots button {
+    height: 6px !important;
   }
 }
 
@@ -1016,6 +1318,9 @@ body.pdf-export-active .slide {
 }
 
 body.pdf-export-active .slide-content {
+  /* The export canvas is a fixed 1380x976 frame — the screen auto-fit
+     scale would double-transform it. */
+  transform: none !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;

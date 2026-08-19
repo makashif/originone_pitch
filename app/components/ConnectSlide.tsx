@@ -234,7 +234,7 @@ export default function ConnectSlide() {
                     <form onSubmit={handleSubmit} className="stack" style={{ textAlign: "left", gap: "clamp(1rem, 2vh, 1.5rem)" }}>
                       <input type="hidden" name="_subject" value="New Project Inquiry" />
 
-                      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "clamp(1rem, 2vh, 1.5rem)" }}>
+                      <div className="form-row">
                         <div className="stack" style={{ gap: "0.4rem" }}>
                           <label style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", letterSpacing: "0.15em", color: "rgba(255, 255, 255, 0.7)" }}>NAME *</label>
                           <input type="text" name="name" required className="form-input" placeholder="Enter your name" />
@@ -245,7 +245,7 @@ export default function ConnectSlide() {
                         </div>
                       </div>
 
-                      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "clamp(1rem, 2vh, 1.5rem)" }}>
+                      <div className="form-row">
                         <div className="stack" style={{ gap: "0.4rem" }}>
                           <label style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", letterSpacing: "0.15em", color: "rgba(255, 255, 255, 0.7)" }}>COMPANY</label>
                           <input type="text" name="company" className="form-input" placeholder="Your company name" />

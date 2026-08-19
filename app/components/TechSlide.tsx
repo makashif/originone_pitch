@@ -97,8 +97,7 @@ export default function TechSlide() {
             <motion.p className="t-label" variants={itemVariants} style={{ marginBottom: "0.4rem" }}>
               Tools & Technologies
             </motion.p>
-            <motion.div variants={itemVariants}
-              style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
+            <motion.div variants={itemVariants} className="tech-grid">
               {techStack.map((tech, i) => (
                 <motion.div key={i} className="tech-pill"
                   style={{
@@ -106,8 +105,6 @@ export default function TechSlide() {
                     padding: "0.55rem 0.75rem",
                     background: "var(--surface)",
                     border: "1px solid var(--border)",
-                    width: "calc(33.333% - 0.25rem)", // Ensure 3 columns fit
-                    minWidth: "100px",
                   }}>
                   {tech.icon && <tech.icon size={18} strokeWidth={1.5} style={{ color: "var(--tx-2)" }} />}
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.1rem" }}>
