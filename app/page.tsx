@@ -45,6 +45,23 @@ const p4Features = [
   { title: "Multi-Surface Ecosystem", desc: "Consumer mobile app, embeddable SDK, and B2B web dashboard — a complete KYC platform from a single integrated build." },
 ];
 
+// ── Project 4b — Fuutura Chat ──
+const pChatFeatures = [
+  { title: "End-to-End Encrypted Messaging", desc: "A modern, platform-agnostic messenger foundation connecting 1:1 chat, group conversations, and encrypted attachments with offline delivery and automatic sync when users come back online." },
+  { title: "Server-Blind by Design", desc: "The backend routes ciphertext only. Messages, files, and call signaling stay encrypted on device — giving you private chat without relying on the server to read or store plaintext." },
+  { title: "Connected Communication Lifecycle", desc: "Seamless flow from phone OTP login and contact discovery into profiles, statuses, chat history, and call records — keeping identity, presence, and conversation context in one messenger experience." },
+  { title: "Production-Ready Messenger Features", desc: "Built for real-world chat apps — voice and video calls, push notifications, group management, user profiles, story-style statuses, and call history across iOS, Android, and self-hosted backend." },
+];
+
+// ── Project 4c — Fuutura VPN ──
+const pVpnFeatures = [
+  { title: "Global VPN Infrastructure", desc: "Distributed server infrastructure across multiple regions and locations, enabling users to establish fast, encrypted connections with intelligent server selection, load balancing, and automatic failover." },
+  { title: "Security & Privacy Engine", desc: "Advanced encryption, secure tunneling protocols, DNS protection, kill-switch functionality, IP masking, and threat-prevention controls designed to protect user traffic, identity, and sensitive information." },
+  { title: "User, Device & Access Management", desc: "Centralized management of accounts, subscriptions, connected devices, teams, and access policies. Role-based controls and configurable permissions enable both individual and enterprise VPN deployments." },
+  { title: "Subscription, Billing & Analytics", desc: "Integrated subscription management with multiple plans, payment gateways, recurring billing, usage monitoring, and administrative analytics — providing complete visibility into customers, infrastructure performance, revenue, and service utilization." },
+];
+
+
 // ── Project 05 — Fuutura HRMS ──
 const p5Features = [
   { title: "Unified HR & Work Management", desc: "A modern, industry-agnostic HRMS connecting employee administration, payroll, and leave with task and performance tracking." },
@@ -77,18 +94,109 @@ const p8Features = [
   { title: "Role-Based Access Across 4 Surfaces", desc: "Member app, staff web app, admin dashboard, and member portal — all unified with role-based access and consistent data." },
 ];
 
+// ── Project 09 — Health & Care Platform ──
+const p9Features = [
+  { title: "Unified Clinical & Care Management", desc: "A modern, industry-agnostic health and care platform connecting patient records, outpatient visits, prescriptions, and lab work with vaccination, grooming, and hospitalization tracking — all in one connected workflow." },
+  { title: "Actionable Clinical Data", desc: "Move beyond scattered notes and paper files. Every consultation, diagnosis, lab result, imaging report, and prescription is tied directly to a real record of assigned care, completed treatments, and measurable outcomes over time." },
+  { title: "Connected Patient Lifecycle", desc: "Seamless workflow from front-desk intake and OPD case management directly into longitudinal medical history — vaccinations, deworming, surgery, radiology, and ongoing follow-up care across the pet’s full life at the clinic." },
+  { title: "Configurable Care Operations", desc: "Built for diverse care environments — effortlessly supporting busy outpatient clinics, in-house laboratories, imaging departments, and multi-staff teams across reception, veterinary, and admin roles in any health and care setting." },
+];
+
+// ── Project 10 — SAAP ──
+const p10Features = [
+  { title: "Data & Resource Management", desc: "Real-time management of business data, resources, records, statuses, and operational activity. Centralized controls provide accurate visibility while reducing duplication, errors, and information gaps." },
+  { title: "Configurable Workflow Automation", desc: "Flexible multi-stage workflows for managing complex business processes from initiation through completion. Automated status tracking, approvals, notifications, performance monitoring, and bottleneck identification keep operations moving efficiently." },
+  { title: "Users, Teams & Partner Management", desc: "Centralized management of users, departments, customers, vendors, and external partners. Role-based access, assignments, activity tracking, and performance visibility enable secure collaboration across the organization." },
+  { title: "Analytics, Reporting & Business Controls", desc: "Integrated dashboards, financial and operational tracking, audit trails, and configurable reporting. Accurate data aggregation with PDF and CSV exports supports better decision-making, compliance, and enterprise-level reporting." },
+];
+
+// ── Project 11 — Marketplace Platform ──
+const p11Features = [
+  { title: "Asset Management & Property Listings", desc: "Real-time indexing of residential and commercial properties, off-plan developments, and key geographic areas with advanced filtering, floor plans, and developer profiles." },
+  { title: "End-to-End Asset Management", desc: "Comprehensive portfolio oversight covering tenant lifecycle workflows, rental collection tracking, property maintenance requests, and regulatory compliance monitoring." },
+  { title: "Investment & Capital Advisory", desc: "Integrated financial planning tools for portfolio optimization, yield forecasting, capital management, and structured property financing solutions." },
+  { title: "Brokerage & Insurance Services", desc: "Streamlined client inquiry pipelines, interactive consultation scheduling, and tailored insurance support designed to protect real estate assets." },
+];
+
+// ── Project 12 — Logistics & Dispatch Platform ──
+const p12Features = [
+  { title: "Real-Time Fleet & Dispatch Control", desc: "Centralized tracking of active transit routes, daily trip loads, and vehicle availability. Automated assignment workflows to maximize driver capacity and minimize dispatch downtime." },
+  { title: "Operational Trip & Freight Management", desc: "End-to-end monitoring of individual transit legs—from origin dispatch to final drop-off—with live status updates, route optimization, and operational status logs." },
+  { title: "Directory & Asset Management", desc: "Centralized registry for driver profiles, transport vehicles, carrier partners, and client directories to streamline compliance, contact mapping, and fleet assignments." },
+  { title: "Performance & Financial Analytics", desc: "Real-time dashboard metrics tracking total trip volumes, daily/monthly revenue trends, operational expenditures, and exportable reporting for executive fleet oversight." },
+];
+
+// ── Project 13 — Creative Community & Media Platform ──
+const p13Features = [
+  { title: "Social Media Platform", desc: "Interactive content feeds enabling users to share media updates, engage via likes and comments, build personalized creator profiles, and discover tailored recommendations across the network." },
+  { title: "Community Hubs", desc: "Dedicated spaces and interest-based groups allowing creators to connect, foster discussions, collaborate on specialized topics, and cultivate niche digital communities." },
+  { title: "Peer-to-Peer Marketplace", desc: "Integrated commerce system enabling creators and members to list, browse, sell, and exchange gear, digital assets, and specialized products directly within the ecosystem." },
+  { title: "Podcast & Audio Streaming", desc: "Embedded media hub designed for streaming long-form audio discussions, expert interviews, and featured series, seamlessly bridging community discussions with audio content." },
+];
+
+// ── Project 14 — FinTech Platform ──
+const p14Features = [
+  { title: "Multi-Lender Aggregation Engine", desc: "Single-application submission flow that routes credit requests to multiple financial institutions simultaneously, fostering competitive bidding to secure optimal lending terms." },
+  { title: "Automated Onboarding & Credit Pipeline", desc: "Frictionless digital profile setup and evaluation workflows designed to accelerate verification, minimize drop-offs, and expedite approval turnarounds." },
+  { title: "Financial Literacy & Educational Hub", desc: "Integrated learning portal and resource center providing interactive courses, capital management guides, and knowledge bases to empower informed decision-making." },
+  { title: "Secure Portal & Offer Management", desc: "Centralized dashboard allowing users to track application statuses in real time, evaluate personalized financing offers side-by-side, and connect directly with matched providers." },
+];
+
+// ── Project 15 — Multiple Payment Gateways & Advertisement Platform ──
+const p15Features = [
+  { title: "Advertisement Campaign Management", desc: "End-to-end campaign creation and management across digital advertising channels. Configure campaign objectives, audiences, budgets, creatives, placements, schedules, and performance targets from a centralized dashboard." },
+  { title: "Multi-Gateway Payment Infrastructure", desc: "Flexible payment orchestration layer integrating multiple payment gateways, digital wallets, cards, bank transfers, and local payment methods. Intelligent routing, transaction tracking, refunds, reconciliation, and gateway-level reporting provide a seamless global payment experience." },
+  { title: "Ad Placement & Distribution Engine", desc: "Centralized system for managing advertisement inventory, placements, categories, targeting rules, and distribution channels. Dynamically deliver relevant advertisements based on audience, location, campaign parameters, and available inventory." },
+  { title: "Analytics, Billing & Revenue Management", desc: "Unified analytics and financial dashboard providing real-time visibility into impressions, clicks, conversions, advertising spend, payment transactions, commissions, and platform revenue. Automated billing, settlement, reconciliation, and exportable reports deliver complete financial and campaign transparency." },
+];
+
+// ── Project 16 — E-Commerce Platform ──
+const p16Features = [
+  { title: "Multi-Vendor Storefront Engine", desc: "Hybrid marketplace architecture supporting both platform-direct sales and independent merchant storefronts with isolated product management and order fulfillment flows." },
+  { title: "Catalog & Inventory Control", desc: "Dynamic product indexing with category hierarchy, live stock status indicators, targeted promotional discounting, and rich variant attributes across consumer categories." },
+  { title: "Search & Discovery Experience", desc: "Frictionless product lookup with category filtering, real-time search auto-complete, featured showcase carousels, and optimized item detail pages." },
+  { title: "Cart & Order Management", desc: "Centralized cart persistence, real-time total calculations, user account authentication, and streamlined checkout pipelines designed for high conversion efficiency." },
+];
+
+// ── Project 17 — CRM Platform ──
+const p17Features = [
+  { title: "Leads & Sales Pipeline Management", desc: "Centralized lead and opportunity management with customizable sales stages, deal tracking, lead scoring, assignments, follow-ups, and real-time pipeline visibility from initial contact through conversion." },
+  { title: "Customer & Account Management", desc: "Unified customer profiles combining contacts, organizations, communication history, documents, activities, transactions, and relationship data — providing teams with a complete 360-degree view of every customer." },
+  { title: "Workflow & Communication Automation", desc: "Configurable workflows for task assignment, approvals, email communication, notifications, reminders, follow-up sequences, and sales automation — reducing manual operations while maintaining consistent customer engagement." },
+  { title: "Analytics, Reporting & Integrations", desc: "Real-time dashboards covering sales performance, conversion rates, team productivity, forecasts, and customer activity. API-driven integrations with email, calendars, payment platforms, marketing tools, ERP systems, and third-party applications create a connected business ecosystem." },
+];
+
+
+
+
+
+
+
+
+
 /* ─────────────────────────────────────────────────────────────
-   PAGE COMPOSITION — 15 Slides
+   PAGE COMPOSITION — 26 Slides
    01 Hero → 02 About → 03 Solutions → 04 Tech → 05 Portfolio Overview →
    06 P1 (Fuutura Wallet) →
    07 P2 (Fuutura Trade) →
    08 P3 (Fuutura Extension) →
    09 P4 (Fuutura KYC) →
-   10 P5 (Fuutura HRMS) →
-   11 P6 (Digital24) →
-   12 P7 (Intelizzz | U-Haul) →
-   13 P8 (Toybox) →
-   14 Why Us → 15 Connect
+   10 P4b (Fuutura Chat) →
+   11 P4c (Fuutura VPN) →
+   12 P5 (Fuutura HRMS) →
+   13 P6 (Digital24) →
+   14 P7 (Intelizzz | U-Haul) →
+   15 P8 (Toybox) →
+   16 P9 (Health & Care Platform) →
+   17 P10 (SAAP) →
+   18 P11 (Marketplace Platform) →
+   19 P12 (Logistics & Dispatch) →
+   20 P13 (Creative Community) →
+   21 P14 (FinTech Platform) →
+   22 P15 (Ads & Payment) →
+   23 P16 (E-Commerce Platform) →
+   24 P17 (CRM Platform) →
+   25 Why Us → 26 Connect
 ───────────────────────────────────────────────────────────── */
 
 export default function Home() {
@@ -114,64 +222,95 @@ export default function Home() {
       {/* ── Project 01 — Fuutura Wallet ── */}
       <ProjectSlide
         id="slide-p1"
-        slideNumber="06"
+        slideNumber="6"
         title="Fuutura Wallet"
         description="A secure, enterprise-grade non-custodial Web3 wallet bridging digital asset management and trading — enabling users to store, manage, transfer, and swap cryptocurrencies across multiple blockchain ecosystems while maintaining complete asset ownership."
         domain="Web3 · DeFi · React.js · Node.js"
         background="/fwallet_premium_bg.png"
         status="Delivered"
         features={p1Features}
-        mockupSrcSplash="/FwalletS.png"
-        mockupSrc="/Fwallet.png"
+        mockupSrcSplash="/FwalletS.jpg"
+        mockupSrc="/Fwallet.jpg"
       />
 
       {/* ── Project 02 — Fuutura Trade ── */}
       <ProjectSlide
         id="slide-p2"
-        slideNumber="07"
+        slideNumber="7"
         title="Fuutura Trade"
         description="A sophisticated full-stack hybrid trading platform bridging traditional finance and decentralized ecosystems. Built for both Web2 and Web3 users in a single unified experience, delivering institutional-grade trading with real-time performance."
         domain="Trading · React.js · Zustand · WebSocket"
         background="/ftrade_premium_bg.png"
         status="Delivered"
         features={p2Features}
-        mockupSrcSplash="/FtradeS.png"
-        mockupSrc="/Ftrade.png"
+        mockupSrcSplash="/FtradeS.jpg"
+        mockupSrc="/Ftrade.jpg"
       />
 
       {/* ── Project 03 — Fuutura Extension ── */}
       <ProjectSlide
         id="slide-p3"
-        slideNumber="08"
+        slideNumber="8"
         title="Fuutura Extension"
         description="A production-grade, non-custodial browser extension wallet engineered to deliver the fluency and familiarity of leading wallet extensions — while maintaining the full security architecture of the Fuutura ecosystem."
         domain="Browser Extension · Next.js · Viem · AWS"
         background="/fextension_premium_bg.png"
         status="Delivered"
         features={p3Features}
-        mockupSrcSplash="/FextS.png"
-        mockupSrc="/Fext.png"
+        mockupSrcSplash="/FextS.jpg"
+        mockupSrc="/Fext.jpg"
         mockupType="extension"
       />
 
       {/* ── Project 04 — Fuutura KYC ── */}
       <ProjectSlide
         id="slide-p4"
-        slideNumber="09"
+        slideNumber="9"
         title="Fuutura KYC"
         description="A multi-surface, AI-powered KYC ecosystem making identity verification fast, intelligent, and blockchain-backed. Serves individual users and enterprise clients via a consumer mobile app, embeddable SDK, and B2B web dashboard."
         domain="AI · Identity · Python · LLaMA · Polygon"
         background="/fkyc_premium_bg.png"
         status="Delivered"
         features={p4Features}
-        mockupSrcSplash="/FkycS.png"
-        mockupSrc="/Fkyc.png"
+        mockupSrcSplash="/FidS.jpg"
+        mockupSrc="/Fid.jpg"
       />
+
+      {/* ── Project 4b — Fuutura Chat ── */}
+      <ProjectSlide
+        id="slide-p4b"
+        slideNumber="10"
+        title="Fuutura Chat"
+        description="A next-generation encrypted chat and messenger stack for building private communication into any app. Unifying end-to-end messaging, voice and video calls, and real-time sync — so teams can chat securely without exposing message content on the server."
+        domain="Communication · Security · React Native"
+        background="/fchat_premium_bg.jpg"
+        status="Delivered"
+        features={pChatFeatures}
+        mockupSrcSplash="/FchatS.jpg"
+        mockupSrc="/Fchat.jpg"
+        mockupType="mobile"
+      />
+
+      {/* ── Project 4c — Fuutura VPN ── */}
+      <ProjectSlide
+        id="slide-p4c"
+        slideNumber="11"
+        title="Fuutura VPN"
+        description="An enterprise-grade VPN and secure connectivity platform engineered to deliver private, encrypted, and high-performance internet access — enabling users and organizations to securely connect across global networks through a unified infrastructure."
+        domain="Security · Infrastructure · C++"
+        background="/fvpn_premium_bg.jpg"
+        status="Delivered"
+        features={pVpnFeatures}
+        mockupSrcSplash="/FvpnS.jpg"
+        mockupSrc="/Fvpn.jpg"
+        mockupType="mobile"
+      />
+
 
       {/* ── Project 05 — Fuutura HRMS ── */}
       <ProjectSlide
         id="slide-p5"
-        slideNumber="10"
+        slideNumber="12"
         title="Fuutura HRMS"
         description="A next-generation platform bridging workforce administration and daily operations. Unifying HR records, recruitment, and actionable performance tracking to show not just who works for the company, but the actual impact of their work."
         domain="SaaS · HR Tech · Next.js · Node.js"
@@ -185,7 +324,7 @@ export default function Home() {
       {/* ── Project 06 — Digital24 ── */}
       <ProjectSlide
         id="slide-p6"
-        slideNumber="11"
+        slideNumber="13"
         title="Digital24"
         description="A full-featured PR distribution platform streamlining how businesses create, manage, and fulfil media campaigns at scale — from guaranteed placements and newswire to SEO guest posting, journalist outreach, payments, and internal fulfilment."
         domain="SaaS · Next.js · PostgreSQL · Stripe"
@@ -199,7 +338,7 @@ export default function Home() {
       {/* ── Project 07 — Intelizzz | U-Haul ── */}
       <ProjectSlide
         id="slide-p7"
-        slideNumber="12"
+        slideNumber="14"
         title="Intelizzz | U-Haul — Vehicle Intelligence"
         description="Delivered an enterprise-grade vehicle intelligence and fleet management platform for Intelizzz, powering connected vehicle operations and tracking for enterprise fleet customers including U-Haul."
         background="/intelizzz_premium_bg.png"
@@ -212,7 +351,7 @@ export default function Home() {
       {/* ── Project 08 — Toybox ── */}
       <ProjectSlide
         id="slide-p8"
-        slideNumber="13"
+        slideNumber="15"
         title="Toybox — Automotive Concierge"
         description="A premium automotive concierge ecosystem purpose-built for luxury vehicle owners — delivered across four integrated surfaces covering the full member, staff, and operational experience with native iOS and web applications."
         domain="Luxury Auto · iOS Swift · Next.js"
@@ -223,10 +362,137 @@ export default function Home() {
         mockupSrc="/toybox.jpg"
       />
 
-      {/* ── 14 Why Origin One ── */}
+      {/* ── Project 09 — Health & Care Platform ── */}
+      <ProjectSlide
+        id="slide-p9"
+        slideNumber="16"
+        title="Health & Care Platform (Ai Based)"
+        description="A next-generation platform bridging clinical administration and day-to-day patient care. Unifying pet records, outpatient workflows, and actionable treatment tracking to show not just who is under care, but the full clinical journey and outcomes of every case."
+        domain="HealthTech · Veterinary · Next.js"
+        background="/health_premium_bg.jpg"
+        status="Delivered"
+        features={p9Features}
+        mockupSrc="/new screens/IMG_8589.jpg"
+        mockupType="laptop"
+      />
+
+      {/* ── Project 10 — SAAP ── */}
+      <ProjectSlide
+        id="slide-p10"
+        slideNumber="17"
+        title="SAAP (Ai Based)"
+        description="An enterprise-grade SaaS platform engineered to streamline complex business operations through centralized workflows, real-time data visibility, automation, and intelligent reporting — creating a single source of truth across teams and processes."
+        domain="Enterprise SaaS · Next.js · Node.js"
+        background="/saap_premium_bg.jpg"
+        status="Delivered"
+        features={p10Features}
+        mockupSrc="/new screens/IMG_8591.jpg"
+        mockupType="laptop"
+      />
+
+      {/* ── Project 11 — Marketplace Platform ── */}
+      <ProjectSlide
+        id="slide-p11"
+        slideNumber="18"
+        title="Marketplace Platform (Ai Based)"
+        description="An enterprise-grade, multi-service marketplace platform engineered to deliver seamless asset discovery and transaction management — connecting buyers, developers, and investors with comprehensive property listings and financial advisory tools."
+        domain="Real Estate · Marketplace · Next.js"
+        background="/marketplace_premium_bg.jpg"
+        status="Delivered"
+        features={p11Features}
+        mockupSrc="/new screens/IMG_8600.jpg"
+        mockupType="laptop"
+      />
+
+      {/* ── Project 12 — Logistics & Dispatch Platform ── */}
+      <ProjectSlide
+        id="slide-p12"
+        slideNumber="19"
+        title="Logistics & Dispatch Platform (Ai Based)"
+        description="An enterprise-grade, fleet management platform engineered to optimize freight movement, dispatch operations, and transit visibility — consolidating load scheduling, driver tracking, and performance analytics into a central dispatch hub."
+        domain="Logistics · Fleet Management · Next.js"
+        background="/logistics_premium_bg.jpg"
+        status="Delivered"
+        features={p12Features}
+        mockupSrc="/new screens/IMG_8593.jpg"
+        mockupType="laptop"
+      />
+
+      {/* ── Project 13 — Creative Community & Media Platform ── */}
+      <ProjectSlide
+        id="slide-p13"
+        slideNumber="20"
+        title="Creative Community & Media Platform (Ai Based)"
+        description="An enterprise-grade, multi-functional community ecosystem engineered to unite creators, enthusiasts, and brands — seamlessly integrating dynamic social interactions, collaborative group hubs, peer-to-peer commerce, and audio content streaming."
+        domain="Social Media · Audio Streaming · Next.js"
+        background="/community_premium_bg.jpg"
+        status="Delivered"
+        features={p13Features}
+        mockupSrc="/new screens/IMG_8594.jpg"
+        mockupType="laptop"
+      />
+
+      {/* ── Project 14 — FinTech Platform ── */}
+      <ProjectSlide
+        id="slide-p14"
+        slideNumber="21"
+        title="FinTech Platform (Ai Based)"
+        description="An enterprise-grade, digital credit marketplace engineered to streamline borrowing and capital distribution — connecting applicants with a network of competing financial institutions through automated matching, friction-free onboarding, and financial literacy resources."
+        domain="FinTech · Lending · Next.js"
+        background="/fintech_premium_bg.jpg"
+        status="Delivered"
+        features={p14Features}
+        mockupSrc="/new screens/IMG_8602.jpg"
+        mockupType="laptop"
+      />
+
+      {/* ── Project 15 — Multiple Payment Gateways & Advertisement Platform ── */}
+      <ProjectSlide
+        id="slide-p15"
+        slideNumber="22"
+        title="Multiple Payment Gateways & Advertisement Platform (Ai Based)"
+        description="An enterprise-grade advertising and payment orchestration platform engineered to centralize digital campaign management, multi-channel advertising, and multi-gateway payment processing — enabling businesses to launch, manage, monetize, and analyze campaigns through a unified ecosystem."
+        domain="AdTech · FinTech · Next.js"
+        background="/ads_payment_premium_bg.jpg"
+        status="Delivered"
+        features={p15Features}
+        mockupSrc="/new screens/IMG_8603.jpg"
+        mockupType="laptop"
+        topMaxWidth="850px"
+      />
+
+      {/* ── Project 16 — E-Commerce Platform ── */}
+      <ProjectSlide
+        id="slide-p16"
+        slideNumber="23"
+        title="E-Commerce Platform (Ai Based)"
+        description="An enterprise-grade, digital retail platform engineered to power multi-vendor commerce — uniting single and direct seller storefronts with catalog management, real-time cart tracking, and product discovery."
+        domain="E-Commerce · Retail · Next.js"
+        background="/ecommerce_premium_bg.jpg"
+        status="Delivered"
+        features={p16Features}
+        mockupSrc="/new screens/IMG_8599.jpg"
+        mockupType="laptop"
+      />
+
+      {/* ── Project 17 — CRM Platform ── */}
+      <ProjectSlide
+        id="slide-p17"
+        slideNumber="24"
+        title="CRM Platform (Ai Based)"
+        description="An enterprise-grade Customer Relationship Management platform engineered to centralize sales, customer interactions, business workflows, and performance intelligence — enabling organizations to manage the complete customer lifecycle through a unified digital workspace."
+        domain="CRM · B2B SaaS · Next.js"
+        background="/crm_premium_bg.jpg"
+        status="Delivered"
+        features={p17Features}
+        mockupSrc="/new screens/image.jpg"
+        mockupType="laptop"
+      />
+
+      {/* ── 23 Why Origin One ── */}
       <WhyChooseSlide />
 
-      {/* ── 15 Let's Connect ── */}
+      {/* ── 24 Let's Connect ── */}
       <ConnectSlide />
     </PresentationShell>
   );

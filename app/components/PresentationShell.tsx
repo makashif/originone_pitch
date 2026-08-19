@@ -22,14 +22,25 @@ export const SLIDES = [
   { id: "slide-solutions", label: "What We Build" },
   { id: "slide-tech", label: "Tech Stack" },
   { id: "slide-portfolio", label: "Portfolio Overview" },
-  { id: "slide-p1", label: "Project 01" },
-  { id: "slide-p2", label: "Project 02" },
-  { id: "slide-p3", label: "Project 03" },
-  { id: "slide-p4", label: "Project 04" },
-  { id: "slide-p5", label: "Project 05" },
-  { id: "slide-p6", label: "Project 06" },
-  { id: "slide-p7", label: "Project 07" },
-  { id: "slide-p8", label: "Project 08" },
+  { id: "slide-p1", label: "Fuutura Wallet" },
+  { id: "slide-p2", label: "Fuutura Trade" },
+  { id: "slide-p3", label: "Fuutura Extension" },
+  { id: "slide-p4", label: "Fuutura KYC" },
+  { id: "slide-p4b", label: "Fuutura Chat" },
+  { id: "slide-p4c", label: "Fuutura VPN" },
+  { id: "slide-p5", label: "Fuutura HRMS" },
+  { id: "slide-p6", label: "Digital24" },
+  { id: "slide-p7", label: "Intelizzz | U-Haul" },
+  { id: "slide-p8", label: "Toybox" },
+  { id: "slide-p9", label: "Health & Care Platform (Ai Based)" },
+  { id: "slide-p10", label: "SAAP (Ai Based)" },
+  { id: "slide-p11", label: "Marketplace Platform (Ai Based)" },
+  { id: "slide-p12", label: "Logistics & Dispatch (Ai Based)" },
+  { id: "slide-p13", label: "Creative Community (Ai Based)" },
+  { id: "slide-p14", label: "FinTech Platform (Ai Based)" },
+  { id: "slide-p15", label: "Ads & Payment (Ai Based)" },
+  { id: "slide-p16", label: "E-Commerce Platform (Ai Based)" },
+  { id: "slide-p17", label: "CRM Platform (Ai Based)" },
   { id: "slide-why", label: "Why Origin One" },
   { id: "slide-connect", label: "Start a Project" },
 ];
@@ -205,7 +216,7 @@ export default function PresentationShell({ children }: { children: ReactNode })
 
     const handleTouchEnd = (e: TouchEvent) => {
       if (window.innerWidth <= 960) return; // Disable custom swipe navigation on screens that use continuous scroll
-      
+
       const dy = startY - e.changedTouches[0].clientY;
       const dx = startX - e.changedTouches[0].clientX;
       if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 40) {

@@ -43,31 +43,108 @@ const projects: Project[] = [
   },
   {
     number: "05",
+    title: "Fuutura Chat",
+    category: "Communication · Security",
+    stack: "React Native · Next.js · Node.js · WebRTC",
+    tags: ["E2E Encryption", "Server-Blind", "Voice & Video"],
+  },
+  {
+    number: "06",
+    title: "Fuutura VPN",
+    category: "Security · Infrastructure",
+    stack: "C++ · Next.js · Node.js · AWS",
+    tags: ["Global Network", "Zero-Log", "Threat Prevention"],
+  },
+  {
+    number: "07",
     title: "Fuutura HRMS",
     category: "SaaS · Enterprise · HR Tech",
     stack: "Next.js · Node.js · PostgreSQL · AI · AWS",
     tags: ["Unified Lifecycle", "Work & Performance", "Industry-Agnostic"],
   },
   {
-    number: "06",
+    number: "08",
     title: "Digital24",
     category: "SaaS · PR Distribution",
     stack: "Next.js · PostgreSQL · Stripe · Sanity · AWS",
     tags: ["PR Campaigns", "Multi-Channel", "CMS-Powered"],
   },
   {
-    number: "07",
+    number: "09",
     title: "Intelizzz | U-Haul",
     category: "IoT · Enterprise · Mobile",
     stack: "React Native · Node.js · Kafka · MongoDB · Kubernetes",
     tags: ["6 Modules", "12 Microservices", "Real-Time Tracking"],
   },
   {
-    number: "08",
+    number: "10",
     title: "Toybox",
     category: "Luxury Automotive · iOS · Web",
     stack: "Swift (iOS) · Next.js · Node.js · AWS",
     tags: ["AI Concierge", "4 Surfaces", "Native iOS"],
+  },
+  {
+    number: "11",
+    title: "Health & Care Platform (Ai Based)",
+    category: "HealthTech · Veterinary",
+    stack: "Next.js · Node.js · PostgreSQL",
+    tags: ["Clinical Records", "Patient Lifecycle", "Care Operations"],
+  },
+  {
+    number: "12",
+    title: "SAAP (Ai Based)",
+    category: "Enterprise SaaS · B2B",
+    stack: "Next.js · Node.js · PostgreSQL · AWS",
+    tags: ["Workflow Automation", "Resource Management", "Business Analytics"],
+  },
+  {
+    number: "13",
+    title: "Marketplace Platform (Ai Based)",
+    category: "Real Estate · Marketplace",
+    stack: "Next.js · Node.js · PostgreSQL",
+    tags: ["Property Listings", "Asset Management", "Capital Advisory"],
+  },
+  {
+    number: "14",
+    title: "Logistics & Dispatch (Ai Based)",
+    category: "Logistics · Fleet Management",
+    stack: "Next.js · Node.js · PostgreSQL · AWS",
+    tags: ["Fleet Control", "Trip Management", "Performance Analytics"],
+  },
+  {
+    number: "15",
+    title: "Creative Community (Ai Based)",
+    category: "Social Media · Media",
+    stack: "Next.js · Node.js · AWS",
+    tags: ["Community Hubs", "Audio Streaming", "P2P Marketplace"],
+  },
+  {
+    number: "16",
+    title: "FinTech Platform (Ai Based)",
+    category: "FinTech · Lending",
+    stack: "Next.js · Node.js · AWS",
+    tags: ["Credit Pipeline", "Lender Matching", "Financial Literacy"],
+  },
+  {
+    number: "17",
+    title: "Ads & Payment Platform (Ai Based)",
+    category: "AdTech · FinTech",
+    stack: "Next.js · Node.js · PostgreSQL",
+    tags: ["Ad Management", "Payment Gateways", "Revenue Analytics"],
+  },
+  {
+    number: "18",
+    title: "E-Commerce Platform (Ai Based)",
+    category: "E-Commerce · Retail",
+    stack: "Next.js · Node.js · PostgreSQL",
+    tags: ["Multi-Vendor", "Catalog Management", "Order Pipeline"],
+  },
+  {
+    number: "19",
+    title: "CRM Platform (Ai Based)",
+    category: "SaaS · CRM",
+    stack: "Next.js · Node.js · PostgreSQL",
+    tags: ["Sales Pipeline", "Workflow Automation", "Analytics"],
   },
 ];
 
@@ -81,7 +158,7 @@ export default function PortfolioGallerySlide() {
         <motion.p className="t-label" variants={itemVariants}>
           05 / Our Track Record
         </motion.p>
-        <motion.h2 className="t-h2" variants={itemVariants} style={{ maxWidth: "700px" }}>
+        <motion.h2 className="t-h2" variants={itemVariants} style={{ maxWidth: "900px" }}>
           Multiple projects delivered.<br />
           <span style={{ color: "rgba(242,242,242,0.28)" }}>Engineered for scale.</span>
         </motion.h2>
@@ -89,15 +166,15 @@ export default function PortfolioGallerySlide() {
 
       <div style={{ display: "flex", justifyContent: "flex-start", margin: "1.5rem 0" }}>
         <motion.p className="t-body" variants={itemVariants}
-          style={{ maxWidth: "440px" }}>
+          style={{ maxWidth: "900px" }}>
           Below are some of our featured work from multiple successfully delivered projects. From Web3 infrastructure to AI ecosystems, we architect and deploy battle-tested technology that powers global businesses.
         </motion.p>
       </div>
 
       {/* Project grid — 4 cols × 2 rows, with disclaimer on 3rd row */}
-      <div className="grid-4" style={{
+      <div className="grid-5" style={{
         background: "transparent",
-        gap: "clamp(0.4rem, 0.8vw, 0.75rem)",
+        gap: "clamp(0.2rem, 0.4vw, 0.75rem)",
       }}>
         {projects.map((project, i) => (
           <motion.div
@@ -164,44 +241,39 @@ export default function PortfolioGallerySlide() {
           variants={itemVariants}
           className="portfolio-card"
           style={{
-            gridColumn: "1 / -1",
+            // gridColumn: "1 / -1",
             background: "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%)",
-            border: "1px solid var(--border-bright)",
+            border: "5px solid var(--border-bright)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
-            padding: "clamp(0.9rem, 1.4vw, 1.5rem)",
+            padding: "clamp(0.5rem, 0.4vw, 1.5rem)",
             opacity: 1
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", marginBottom: "0.7rem" }}>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--tx-2)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: "0.4rem" }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--tx-2)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: "0.4rem" }}>
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="12" y1="16" x2="12" y2="12"></line>
               <line x1="12" y1="8" x2="12.01" y2="8"></line>
             </svg>
-            <span style={{ fontFamily: "var(--f-mono)", fontSize: "0.5rem", letterSpacing: "0.12em", color: "var(--tx-1)", textTransform: "uppercase" }}>
+            <h3 style={{
+              fontFamily: "var(--f-display)", fontWeight: 600,
+              fontSize: "clamp(0.72rem, 1vw, 0.88rem)",
+              color: "var(--tx-1)", letterSpacing: "-0.01em", lineHeight: 1.25,
+            }}>
               Disclaimer
-            </span>
+            </h3>
           </div>
 
           <p style={{
             fontFamily: "var(--f-body)", fontSize: "clamp(0.52rem, 0.7vw, 0.65rem)",
-            color: "var(--tx-2)", lineHeight: 1.6
+            color: "var(--tx-2)", lineHeight: 1.2
           }}>
             The projects and case studies featured on this website represent a selected portfolio of Origin One Labs&apos; work. We have successfully delivered 50+ projects across diverse industries; however, many engagements are protected by confidentiality agreements and cannot be publicly disclosed.
           </p>
         </motion.div>
       </div>
-
-      {/* Footer */}
-      <motion.p
-        className="t-mono"
-        variants={itemVariants}
-        style={{ marginTop: "clamp(0.5rem, 1vh, 0.9rem)", opacity: 0.25 }}
-      >
-        Every system displayed is live in production · Deep-dive architectural case studies available upon request
-      </motion.p>
     </SlideWrapper>
   );
 }

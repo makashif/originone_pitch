@@ -311,6 +311,14 @@ body {
   background: var(--border);
 }
 
+/* 5-column pillar grid */
+.grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+
 .process-strip {
   grid-template-columns: repeat(6, 1fr);
 }
@@ -346,7 +354,7 @@ body {
   flex-shrink: 0;
   width: 100%;
   flex: 1 1 500px;
-  max-width: 600px;
+  max-width: 800px;
 }
 
 .project-slide-right {
@@ -609,6 +617,7 @@ body {
   position: relative;
   background: #000;
   overflow: hidden;
+  border-radius: 0.6rem;
 }
 
 .ext-body img {
@@ -683,7 +692,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: top left;
   display: block;
 }
 
@@ -750,10 +759,10 @@ body.pdf-export-active .mockup-positioning {
 
 .portfolio-card {
   background: var(--surface);
-  padding: clamp(1rem, 2vh, 1.6rem) clamp(0.9rem, 1.6vw, 1.4rem);
+  padding: clamp(1rem, 0.5vh, 1.6rem) clamp(0.9rem, 0.5vw, 1.4rem);
   display: flex;
   flex-direction: column;
-  gap: clamp(0.7rem, 1.4vh, 1.2rem);
+  gap: clamp(0.6rem, 0.4vh, 1.2rem);
   transition: background 0.2s;
   cursor: default;
   -webkit-print-color-adjust: exact;
@@ -845,7 +854,7 @@ body.pdf-export-active .mockup-positioning {
   .about-values-empty {
     display: none !important;
   }
-  
+
   .about-values-header {
     gap: 0 !important;
   }
@@ -1302,7 +1311,8 @@ body.pdf-export-active .device-body {
 /* ═══════════════════════════════════════════════════════
    FORM STYLES
 ═══════════════════════════════════════════════════════ */
-.form-input, .form-textarea {
+.form-input,
+.form-textarea {
   width: 100%;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1313,24 +1323,27 @@ body.pdf-export-active .device-body {
   color: #fff;
   outline: none;
   transition: all 0.3s ease;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
-.form-input::placeholder, .form-textarea::placeholder {
+.form-input::placeholder,
+.form-textarea::placeholder {
   color: rgba(255, 255, 255, 0.3);
 }
 
-.form-input:hover, .form-textarea:hover {
+.form-input:hover,
+.form-textarea:hover {
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-.form-input:focus, .form-textarea:focus {
+.form-input:focus,
+.form-textarea:focus {
   border-color: rgba(255, 255, 255, 0.5);
   background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05), inset 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05), inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .form-textarea {
