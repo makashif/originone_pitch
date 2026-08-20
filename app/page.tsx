@@ -372,7 +372,7 @@ export default function Home() {
         background="/health_premium_bg.jpg"
         status="Delivered"
         features={p9Features}
-        mockupSrc="/new screens/IMG_8589.jpg"
+        mockupSrc="/new screens/IMG_8589.png"
         mockupType="laptop"
       />
 
@@ -386,7 +386,7 @@ export default function Home() {
         background="/saap_premium_bg.jpg"
         status="Delivered"
         features={p10Features}
-        mockupSrc="/new screens/IMG_8591.jpg"
+        mockupSrc="/new screens/IMG_8591.png"
         mockupType="laptop"
       />
 
@@ -400,7 +400,7 @@ export default function Home() {
         background="/marketplace_premium_bg.jpg"
         status="Delivered"
         features={p11Features}
-        mockupSrc="/new screens/IMG_8600.jpg"
+        mockupSrc="/new screens/IMG_8600.png"
         mockupType="laptop"
       />
 
@@ -414,7 +414,7 @@ export default function Home() {
         background="/logistics_premium_bg.jpg"
         status="Delivered"
         features={p12Features}
-        mockupSrc="/new screens/IMG_8593.jpg"
+        mockupSrc="/new screens/IMG_8593.png"
         mockupType="laptop"
       />
 
@@ -428,7 +428,7 @@ export default function Home() {
         background="/community_premium_bg.jpg"
         status="Delivered"
         features={p13Features}
-        mockupSrc="/new screens/IMG_8594.jpg"
+        mockupSrc="/new screens/IMG_8594.png"
         mockupType="laptop"
       />
 
@@ -442,7 +442,7 @@ export default function Home() {
         background="/fintech_premium_bg.jpg"
         status="Delivered"
         features={p14Features}
-        mockupSrc="/new screens/IMG_8602.jpg"
+        mockupSrc="/new screens/IMG_8602.png"
         mockupType="laptop"
       />
 
@@ -456,7 +456,7 @@ export default function Home() {
         background="/ads_payment_premium_bg.jpg"
         status="Delivered"
         features={p15Features}
-        mockupSrc="/new screens/IMG_8603.jpg"
+        mockupSrc="/new screens/IMG_8603.png"
         mockupType="laptop"
         topMaxWidth="850px"
       />
@@ -471,7 +471,7 @@ export default function Home() {
         background="/ecommerce_premium_bg.jpg"
         status="Delivered"
         features={p16Features}
-        mockupSrc="/new screens/IMG_8599.jpg"
+        mockupSrc="/new screens/IMG_8599.png"
         mockupType="laptop"
       />
 
