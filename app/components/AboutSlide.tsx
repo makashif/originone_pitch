@@ -70,7 +70,7 @@ export default function AboutSlide() {
                 <motion.div key={item.tag} variants={itemVariants}
                   style={{
                     borderLeft: "1px solid var(--border-strong)",
-                    paddingLeft: "1.25rem", paddingTop: "0.65rem", paddingBottom: "0.65rem"
+                    paddingLeft: "clamp(0.8rem, 1.6vw, 1.25rem)", paddingTop: "clamp(0.3rem, 1.2vh, 0.65rem)", paddingBottom: "clamp(0.3rem, 1.2vh, 0.65rem)"
                   }}>
                   <p className="t-mono" style={{ color: "var(--tx-3)", marginBottom: "0.25rem" }}>
                     {item.tag}
@@ -87,14 +87,14 @@ export default function AboutSlide() {
             <div style={{ 
               display: "flex", 
               flexDirection: "column", 
-              gap: "1.25rem", 
+              gap: "clamp(0.5rem, 2.2vh, 1.25rem)",
               marginTop: "auto", /* Align bottom with Mission/Vision */
             }}>
               {coreValues.map((v, i) => (
                 <motion.div key={i} variants={itemVariants}
                   style={{
-                    display: "flex", alignItems: "flex-start", gap: "1.25rem",
-                    paddingBottom: "1.15rem",
+                    display: "flex", alignItems: "flex-start", gap: "clamp(0.7rem, 1.6vw, 1.25rem)",
+                    paddingBottom: "clamp(0.45rem, 2vh, 1.15rem)",
                     borderBottom: "1px solid var(--border)",
                   }}>
                   <span className="t-mono t-accent" style={{ width: "2rem", flexShrink: 0, marginTop: "0.2rem" }}>
@@ -112,7 +112,7 @@ export default function AboutSlide() {
         </div>
 
         <motion.div variants={itemVariants}
-          style={{ display: "flex", justifyContent: "center", paddingTop: "3rem", width: "100%" }}>
+          style={{ display: "flex", justifyContent: "center", paddingTop: "clamp(0.75rem, 4vh, 3rem)", width: "100%" }}>
           <span style={{ fontFamily: "var(--font-inter)", fontWeight: 600, fontSize: "0.75rem", letterSpacing: "0.25em", color: "#FFF" }}>
             ORIGIN ONE LABS
           </span>

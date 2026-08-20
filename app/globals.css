@@ -160,7 +160,7 @@ body {
      exceeds the padded safe area. Transform is used (not zoom/height) so
      the element's measured layout size stays constant — that is what
      makes the measure→scale loop convergent and jitter-free. */
-  transform: scale(var(--fit, 1));
+  transform: translateY(var(--fit-y, 0px)) scale(var(--fit, 1));
   transform-origin: center center;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
@@ -869,22 +869,27 @@ body.pdf-export-active .mockup-positioning {
 
 /* ═══════════ AXIS 1 — WIDTH: column counts ═══════════ */
 
-/* ─── ≤1400px — 19 portfolio cards no longer fit 5-up comfortably ─── */
-@media screen and (max-width: 1400px) {
-  .grid-5 {
+/* ─── Column counts are deliberately held HIGH ───
+   Counter-intuitively, dropping columns early hurts short screens:
+   19 portfolio cards at 5-up are 4 rows, at 3-up they are 7 rows —
+   nearly double the height, which the auto-fit engine then has to
+   claw back by shrinking every card. Columns now step down only when
+   a card would genuinely become too narrow to read (~185px), not
+   merely because the window got smaller. ─── */
+
+/* ─── ≤1150px — portfolio cards would drop under ~185px at 5-up ─── */
+@media screen and (max-width: 1150px) {
+
+  .grid-5,
+  .portfolio-grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-/* ─── ≤1200px — step the dense grids down ─── */
-@media screen and (max-width: 1200px) {
+/* ─── ≤1050px — service pillars and the process strip step down ─── */
+@media screen and (max-width: 1050px) {
   .grid-4 {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .grid-5,
-  .portfolio-grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 
   .process-strip {
@@ -926,6 +931,14 @@ body.pdf-export-active .mockup-positioning {
     overflow: visible;
     justify-content: center;
     scroll-snap-align: none !important;
+  }
+
+  /* In reading mode `.slide` is `overflow: visible`, so the slow
+     zoom on `.slide-bg` (scale 1.05) would bleed past the slide edge
+     and over its neighbour. Hold the backdrop still on mobile — it
+     also saves continuous compositing on battery-powered devices. */
+  .slide-bg {
+    animation: none;
   }
 
   /* Auto-fit is a desktop-only concern: on mobile the slide grows

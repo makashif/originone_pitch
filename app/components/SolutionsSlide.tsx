@@ -82,7 +82,7 @@ export default function SolutionsSlide() {
         </motion.h2>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "flex-start", margin: "1.5rem 0" }}>
+      <div style={{ display: "flex", justifyContent: "flex-start", margin: "clamp(0.5rem, 2.5vh, 1.5rem) 0" }}>
         <motion.p className="t-body" variants={itemVariants}
           style={{ maxWidth: "360px" }}>
           From concept to production. We design, develop, and scale digital solutions that solve real business challenges.
@@ -112,7 +112,7 @@ export default function SolutionsSlide() {
       {/* Process strip */}
       <motion.div variants={itemVariants} className="process-strip"
         style={{
-          display: "grid", marginTop: "1rem",
+          display: "grid", marginTop: "clamp(0.4rem, 1.8vh, 1rem)",
           background: "var(--border)", gap: "1px", overflow: "hidden", borderRadius: "4px"
         }}>
         {process.map((step, i) => (

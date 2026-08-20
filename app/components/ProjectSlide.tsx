@@ -117,7 +117,7 @@ export default function ProjectSlide({
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   className="stack stack-xs"
                   style={{
-                    padding: "1.25rem",
+                    padding: "clamp(0.7rem, 2vh, 1.25rem) clamp(0.85rem, 1.6vw, 1.25rem)",
                     borderRadius: "12px",
                     border: "1px solid rgba(255,255,255,0.02)",
                     background: "rgba(255,255,255,0.01)",
@@ -151,7 +151,7 @@ export default function ProjectSlide({
                       viewport={{ once: true }}
                     />
                   </div>
-                  <h3 className="t-h5" style={{ fontSize: "clamp(0.75rem, 0.95vw, 0.9rem)", marginTop: "0.5rem", position: "relative", zIndex: 1 }}>
+                  <h3 className="t-h5" style={{ fontSize: "clamp(0.75rem, 0.95vw, 0.9rem)", marginTop: "clamp(0.2rem, 1vh, 0.5rem)", position: "relative", zIndex: 1 }}>
                     {f.title}
                   </h3>
                   <p className="t-sm" style={{ fontSize: "clamp(0.65rem, 0.85vw, 0.8rem)", color: "var(--tx-2)", position: "relative", zIndex: 1 }}>

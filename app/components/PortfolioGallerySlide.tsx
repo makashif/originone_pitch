@@ -164,7 +164,7 @@ export default function PortfolioGallerySlide() {
         </motion.h2>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "flex-start", margin: "1.5rem 0" }}>
+      <div style={{ display: "flex", justifyContent: "flex-start", margin: "clamp(0.5rem, 2.2vh, 1.5rem) 0" }}>
         <motion.p className="t-body" variants={itemVariants}
           style={{ maxWidth: "900px" }}>
           Below are some of our featured work from multiple successfully delivered projects. From Web3 infrastructure to AI ecosystems, we architect and deploy battle-tested technology that powers global businesses.

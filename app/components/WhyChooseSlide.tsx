@@ -54,7 +54,7 @@ export default function WhyChooseSlide() {
             <span style={{ color: "rgba(242,242,242,0.28)" }}>Not Just Another Dev Company.</span>
           </motion.h2>
           <motion.p className="t-body" variants={itemVariants}
-            style={{ maxWidth: "400px", margin: "1.5rem 0" }}>
+            style={{ maxWidth: "400px", margin: "clamp(0.5rem, 2.5vh, 1.5rem) 0" }}>
             Many businesses struggle because technology projects are spread across multiple vendors. We provide a single accountable team. We don&apos;t simply build software. We help businesses build technology that lasts.
           </motion.p>
         </div>
