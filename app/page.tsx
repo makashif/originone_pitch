@@ -62,7 +62,7 @@ const pVpnFeatures = [
 ];
 
 
-// ── Project 05 — Fuutura HRMS ──
+// ── Project 05 — Origin One Labs HRMS ──
 const p5Features = [
   { title: "Unified HR & Work Management", desc: "A modern, industry-agnostic HRMS connecting employee administration, payroll, and leave with task and performance tracking." },
   { title: "Actionable Performance Data", desc: "Move beyond subjective reviews. Performance is tied directly to a real record of assigned tasks, completed projects, and actual outcomes." },
@@ -183,7 +183,7 @@ const p17Features = [
    09 P4 (Fuutura KYC) →
    10 P4b (Fuutura Chat) →
    11 P4c (Fuutura VPN) →
-   12 P5 (Fuutura HRMS) →
+   12 P5 (Origin One Labs HRMS) →
    13 P6 (Digital24) →
    14 P7 (Intelizzz | U-Haul) →
    15 P8 (Toybox) →
@@ -307,11 +307,11 @@ export default function Home() {
       />
 
 
-      {/* ── Project 05 — Fuutura HRMS ── */}
+      {/* ── Project 05 — Origin One Labs HRMS ── */}
       <ProjectSlide
         id="slide-p5"
         slideNumber="12"
-        title="Fuutura HRMS"
+        title="Origin One Labs HRMS"
         description="A next-generation platform bridging workforce administration and daily operations. Unifying HR records, recruitment, and actionable performance tracking to show not just who works for the company, but the actual impact of their work."
         domain="SaaS · HR Tech · Next.js · Node.js"
         background="/fhrms_premium_bg.png"
@@ -485,7 +485,7 @@ export default function Home() {
         background="/crm_premium_bg.jpg"
         status="Delivered"
         features={p17Features}
-        mockupSrc="/new screens/image.jpg"
+        mockupSrc="/new screens/image.png"
         mockupType="laptop"
       />
 

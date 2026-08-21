@@ -57,7 +57,7 @@ const projects: Project[] = [
   },
   {
     number: "07",
-    title: "Fuutura HRMS",
+    title: "Origin One Labs HRMS",
     category: "SaaS · Enterprise · HR Tech",
     stack: "Next.js · Node.js · PostgreSQL · AI · AWS",
     tags: ["Unified Lifecycle", "Work & Performance", "Industry-Agnostic"],

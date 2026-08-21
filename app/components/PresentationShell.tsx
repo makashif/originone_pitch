@@ -29,7 +29,7 @@ export const SLIDES = [
   { id: "slide-p4", label: "Fuutura KYC" },
   { id: "slide-p4b", label: "Fuutura Chat" },
   { id: "slide-p4c", label: "Fuutura VPN" },
-  { id: "slide-p5", label: "Fuutura HRMS" },
+  { id: "slide-p5", label: "Origin One Labs HRMS" },
   { id: "slide-p6", label: "Digital24" },
   { id: "slide-p7", label: "Intelizzz | U-Haul" },
   { id: "slide-p8", label: "Toybox" },
