@@ -31,7 +31,7 @@ export const SLIDES = [
   { id: "slide-p4c", label: "Fuutura VPN" },
   { id: "slide-p5", label: "Origin One Labs HRMS" },
   { id: "slide-p6", label: "Digital24" },
-  { id: "slide-p7", label: "Intelizzz | U-Haul" },
+  { id: "slide-p7", label: "Intelizzz" },
   { id: "slide-p8", label: "Toybox" },
   { id: "slide-p9", label: "Health & Care Platform (Ai Based)" },
   { id: "slide-p10", label: "SAAP (Ai Based)" },

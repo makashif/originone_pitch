@@ -78,7 +78,7 @@ const p6Features = [
   { title: "CMS-Driven Public Platform", desc: "Sanity-powered public site with pricing, bundles, case studies, and help centre — built for discovery and conversion." },
 ];
 
-// ── Project 07 — Intelizzz | U-Haul ──
+// ── Project 07 — Intelizzz ──
 const p7Features = [
   { title: "Real-Time Vehicle Tracking", desc: "Live SSE data streams powering real-time GPS tracking with geofence engine supporting circle, polygon, and rectangle zones." },
   { title: "Event-Driven Microservices", desc: "12 dedicated Node.js/Koa services on a Kafka pipeline handling device events, wake history, and tracking data at scale." },
@@ -185,7 +185,7 @@ const p17Features = [
    11 P4c (Fuutura VPN) →
    12 P5 (Origin One Labs HRMS) →
    13 P6 (Digital24) →
-   14 P7 (Intelizzz | U-Haul) →
+   14 P7 (Intelizzz) →
    15 P8 (Toybox) →
    16 P9 (Health & Care Platform) →
    17 P10 (SAAP) →
@@ -335,12 +335,12 @@ export default function Home() {
         mockupType="laptop"
       />
 
-      {/* ── Project 07 — Intelizzz | U-Haul ── */}
+      {/* ── Project 07 — Intelizzz ── */}
       <ProjectSlide
         id="slide-p7"
         slideNumber="14"
-        title="Intelizzz | U-Haul — Vehicle Intelligence"
-        description="Delivered an enterprise-grade vehicle intelligence and fleet management platform for Intelizzz, powering connected vehicle operations and tracking for enterprise fleet customers including U-Haul."
+        title="Intelizzz — Vehicle Intelligence"
+        description="Delivered an enterprise-grade vehicle intelligence and fleet management platform for Intelizzz, powering connected vehicle operations and tracking for enterprise fleet customers."
         background="/intelizzz_premium_bg.png"
         status="Delivered"
         features={p7Features}

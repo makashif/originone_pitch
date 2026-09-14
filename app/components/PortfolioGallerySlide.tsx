@@ -71,7 +71,7 @@ const projects: Project[] = [
   },
   {
     number: "09",
-    title: "Intelizzz | U-Haul",
+    title: "Intelizzz",
     category: "IoT · Enterprise · Mobile",
     stack: "React Native · Node.js · Kafka · MongoDB · Kubernetes",
     tags: ["6 Modules", "12 Microservices", "Real-Time Tracking"],

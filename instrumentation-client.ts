@@ -1,5 +1,7 @@
 /**
  * Loaded automatically by Next.js on the client, before hydration.
- * Nothing else in the app needs to import or render anything.
+ * Prints a branded signature in the browser DevTools console.
+ * Nothing is rendered into the page DOM, so search crawlers see nothing.
  */
-import '@makashif/brand/auto';
+import { consoleBrand } from '@makashif/brand/browser';
+consoleBrand();
