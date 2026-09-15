@@ -366,7 +366,7 @@ export default function Home() {
       <ProjectSlide
         id="slide-p9"
         slideNumber="16"
-        title="Health & Care Platform (Ai Based)"
+        title="Clinic Management Platform"
         description="A next-generation platform bridging clinical administration and day-to-day patient care. Unifying pet records, outpatient workflows, and actionable treatment tracking to show not just who is under care, but the full clinical journey and outcomes of every case."
         domain="HealthTech · Veterinary · Next.js"
         background="/health_premium_bg.jpg"
@@ -380,7 +380,7 @@ export default function Home() {
       <ProjectSlide
         id="slide-p10"
         slideNumber="17"
-        title="SAAP (Ai Based)"
+        title="Manufacturing & Production Management Platform"
         description="An enterprise-grade SaaS platform engineered to streamline complex business operations through centralized workflows, real-time data visibility, automation, and intelligent reporting — creating a single source of truth across teams and processes."
         domain="Enterprise SaaS · Next.js · Node.js"
         background="/saap_premium_bg.jpg"
@@ -394,7 +394,7 @@ export default function Home() {
       <ProjectSlide
         id="slide-p11"
         slideNumber="18"
-        title="Marketplace Platform (Ai Based)"
+        title="Community & Social Commerce Platform"
         description="An enterprise-grade, multi-service marketplace platform engineered to deliver seamless asset discovery and transaction management — connecting buyers, developers, and investors with comprehensive property listings and financial advisory tools."
         domain="Real Estate · Marketplace · Next.js"
         background="/marketplace_premium_bg.jpg"
@@ -408,7 +408,7 @@ export default function Home() {
       <ProjectSlide
         id="slide-p12"
         slideNumber="19"
-        title="Logistics & Dispatch Platform (Ai Based)"
+        title="Logistics & Dispatch"
         description="An enterprise-grade, fleet management platform engineered to optimize freight movement, dispatch operations, and transit visibility — consolidating load scheduling, driver tracking, and performance analytics into a central dispatch hub."
         domain="Logistics · Fleet Management · Next.js"
         background="/logistics_premium_bg.jpg"
@@ -422,7 +422,7 @@ export default function Home() {
       <ProjectSlide
         id="slide-p13"
         slideNumber="20"
-        title="Creative Community & Media Platform (Ai Based)"
+        title="Creative Community"
         description="An enterprise-grade, multi-functional community ecosystem engineered to unite creators, enthusiasts, and brands — seamlessly integrating dynamic social interactions, collaborative group hubs, peer-to-peer commerce, and audio content streaming."
         domain="Social Media · Audio Streaming · Next.js"
         background="/community_premium_bg.jpg"
@@ -436,7 +436,7 @@ export default function Home() {
       <ProjectSlide
         id="slide-p14"
         slideNumber="21"
-        title="FinTech Platform (Ai Based)"
+        title="Payment & Credit Services Platform"
         description="An enterprise-grade, digital credit marketplace engineered to streamline borrowing and capital distribution — connecting applicants with a network of competing financial institutions through automated matching, friction-free onboarding, and financial literacy resources."
         domain="FinTech · Lending · Next.js"
         background="/fintech_premium_bg.jpg"
@@ -450,7 +450,7 @@ export default function Home() {
       <ProjectSlide
         id="slide-p15"
         slideNumber="22"
-        title="Multiple Payment Gateways & Advertisement Platform (Ai Based)"
+        title="Ads & Payment"
         description="An enterprise-grade advertising and payment orchestration platform engineered to centralize digital campaign management, multi-channel advertising, and multi-gateway payment processing — enabling businesses to launch, manage, monetize, and analyze campaigns through a unified ecosystem."
         domain="AdTech · FinTech · Next.js"
         background="/ads_payment_premium_bg.jpg"
@@ -465,7 +465,7 @@ export default function Home() {
       <ProjectSlide
         id="slide-p16"
         slideNumber="23"
-        title="E-Commerce Platform (Ai Based)"
+        title="E-commerce & Retail Management Platform"
         description="An enterprise-grade, digital retail platform engineered to power multi-vendor commerce — uniting single and direct seller storefronts with catalog management, real-time cart tracking, and product discovery."
         domain="E-Commerce · Retail · Next.js"
         background="/ecommerce_premium_bg.jpg"
@@ -479,7 +479,7 @@ export default function Home() {
       <ProjectSlide
         id="slide-p17"
         slideNumber="24"
-        title="CRM Platform (Ai Based)"
+        title="Real Estate Discovery & Investment Platform"
         description="An enterprise-grade Customer Relationship Management platform engineered to centralize sales, customer interactions, business workflows, and performance intelligence — enabling organizations to manage the complete customer lifecycle through a unified digital workspace."
         domain="CRM · B2B SaaS · Next.js"
         background="/crm_premium_bg.jpg"
