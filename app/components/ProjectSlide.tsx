@@ -31,7 +31,7 @@ export default function ProjectSlide({
   id, slideNumber, title, description, domain, background, status, features, mockupSrc, mockupSrcSplash, mockupType = "mobile", topMaxWidth = "620px",
 }: ProjectSlideProps) {
   return (
-    <SlideWrapper id={id} bgImage={background} overlay="rgba(7,7,7,0.85)">
+    <SlideWrapper id={id} bgImage={background} overlay="rgba(246,245,240,0.86)">
       {/* Full-height positioning context */}
       <div className="project-slide-frame">
 
@@ -40,7 +40,7 @@ export default function ProjectSlide({
 
           {/* Top row */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingBottom: "0.2rem" }}>
-            <motion.p className="t-label" variants={itemVariants} style={{ position: "relative", overflow: "hidden" }}>
+            <motion.p className="t-label eyebrow" variants={itemVariants} style={{ position: "relative", overflow: "hidden" }}>
               <motion.span
                 initial={{ left: "-100%" }}
                 animate={{ left: "200%" }}
@@ -48,7 +48,7 @@ export default function ProjectSlide({
                 style={{
                   position: "absolute",
                   top: 0, left: 0, width: "40%", height: "100%",
-                  background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)",
+                  background: "linear-gradient(90deg, transparent, rgb(var(--stem-bright-rgb) / 0.55), transparent)",
                   transform: "skewX(-25deg)",
                   pointerEvents: "none"
                 }}
@@ -58,18 +58,19 @@ export default function ProjectSlide({
             <motion.span variants={itemVariants}
               style={{
                 display: "inline-flex", alignItems: "center", gap: "0.45rem",
-                padding: "0.28rem 0.85rem", border: "1px solid var(--border)",
-                background: "var(--surface)",
+                padding: "0.28rem 0.85rem", border: "1px solid var(--accent-line)",
+                borderRadius: "999px",
+                background: "var(--accent-dim)",
                 fontFamily: "var(--f-body)", fontSize: "0.58rem",
-                letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--tx-3)"
+                letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--stem-ink)", fontWeight: 600
               }}>
               <motion.span
                 animate={{ opacity: [0.3, 1, 0.3] }}
                 transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
                 style={{
                   width: "6px", height: "6px", borderRadius: "50%",
-                  background: status === "Delivered" ? "var(--accent)" : "rgba(255,255,255,0.2)",
-                  boxShadow: status === "Delivered" ? "0 0 8px 1px rgba(228, 228, 231, 0.4)" : "none"
+                  background: status === "Delivered" ? "var(--stem-bright)" : "var(--border-strong)",
+                  boxShadow: status === "Delivered" ? "0 0 8px 1px rgb(var(--stem-bright-rgb) / 0.7)" : "none"
                 }}
               />
               {status}
@@ -110,17 +111,17 @@ export default function ProjectSlide({
                   whileHover={{
                     scale: 1.03,
                     y: -5,
-                    backgroundColor: "rgba(255,255,255,0.03)",
-                    borderColor: "rgba(255,255,255,0.12)",
-                    boxShadow: "0 15px 35px -10px rgba(0,0,0,0.6)"
+                    backgroundColor: "rgba(255,255,255,0.85)",
+                    borderColor: "rgb(var(--stem-rgb) / 0.4)",
+                    boxShadow: "0 18px 40px -22px rgba(11,12,16,0.3)"
                   }}
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   className="stack stack-xs"
                   style={{
                     padding: "clamp(0.7rem, 2vh, 1.25rem) clamp(0.85rem, 1.6vw, 1.25rem)",
                     borderRadius: "12px",
-                    border: "1px solid rgba(255,255,255,0.02)",
-                    background: "rgba(255,255,255,0.01)",
+                    border: "1px solid var(--border)",
+                    background: "rgb(var(--ivory-rgb) / 0.55)",
                     cursor: "default",
                     position: "relative",
                     overflow: "hidden"
@@ -133,13 +134,13 @@ export default function ProjectSlide({
                     transition={{ duration: 0.5 }}
                     style={{
                       position: "absolute", inset: 0,
-                      background: "radial-gradient(circle at top left, rgba(255,255,255,0.06), transparent 70%)",
+                      background: "radial-gradient(circle at top left, rgb(var(--stem-bright-rgb) / 0.14), transparent 70%)",
                       pointerEvents: "none"
                     }}
                   />
 
                   <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", position: "relative", zIndex: 1 }}>
-                    <span className="t-mono" style={{ color: "var(--accent)", opacity: 0.5, fontSize: "0.7rem" }}>
+                    <span className="t-mono" style={{ color: "var(--accent)", fontSize: "0.7rem" }}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <motion.span

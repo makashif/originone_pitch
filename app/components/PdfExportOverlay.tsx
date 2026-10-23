@@ -20,7 +20,7 @@ export default function PdfExportOverlay({ isExporting, progress, total }: PdfEx
         position: "fixed",
         inset: 0,
         zIndex: 9999,
-        background: "rgba(7, 7, 7, 0.85)",
+        background: "rgba(246, 245, 240, 0.85)",
         backdropFilter: "blur(8px)",
         WebkitBackdropFilter: "blur(8px)",
         display: "flex",
@@ -33,25 +33,25 @@ export default function PdfExportOverlay({ isExporting, progress, total }: PdfEx
         animate={{ opacity: 1, scale: 1 }}
         className="stack"
         style={{
-          background: "rgba(20, 20, 20, 0.9)",
-          border: "1px solid rgba(255, 255, 255, 0.1)",
+          background: "#fbfaf6",
+          border: "1px solid rgba(11, 12, 16, 0.12)",
           padding: "2rem 3rem",
           borderRadius: "8px",
           alignItems: "center",
           gap: "1.5rem",
           minWidth: "320px",
-          boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
+          boxShadow: "0 30px 60px -30px rgba(11,12,16,0.35)",
         }}
       >
-        <div className="t-h4" style={{ color: "#f2f2f2", fontWeight: 500 }}>
+        <div className="t-h4" style={{ fontWeight: 600 }}>
           Exporting PDF...
         </div>
 
-        <div style={{ width: "100%", background: "rgba(255, 255, 255, 0.1)", height: "4px", borderRadius: "2px", overflow: "hidden" }}>
+        <div style={{ width: "100%", background: "rgba(11, 12, 16, 0.08)", height: "4px", borderRadius: "2px", overflow: "hidden" }}>
           <motion.div
             style={{
               height: "100%",
-              background: "#e4e4e7",
+              background: "var(--tri-hi)",
             }}
             initial={{ width: 0 }}
             animate={{ width: `${percentage}%` }}

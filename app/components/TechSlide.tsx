@@ -60,17 +60,17 @@ const capabilities = [
 
 export default function TechSlide() {
   return (
-    <SlideWrapper id="slide-tech" bgImage="/tech_bg.png" overlay="rgba(7,7,7,0.8)">
+    <SlideWrapper id="slide-tech" bgImage="/light/tech_bg.jpg" overlay="rgba(246,245,240,0.84)">
       <div className="stack stack-md">
 
         {/* Header */}
         <div className="stack stack-xs">
-          <motion.p className="t-label" variants={itemVariants}>
+          <motion.p className="t-label eyebrow" variants={itemVariants}>
             04 / Technology Stack
           </motion.p>
           <motion.h2 className="t-h2" variants={itemVariants} style={{ maxWidth: "620px" }}>
             Engineering Across<br />
-            <span style={{ color: "rgba(242,242,242,0.28)" }}>Every Layer.</span>
+            <span className="t-dim">Every Layer.</span>
           </motion.h2>
         </div>
 
@@ -81,10 +81,10 @@ export default function TechSlide() {
             {capabilities.map((cap, i) => (
               <motion.div key={i} variants={itemVariants} className="card stack stack-xs">
                 <div style={{ display: "flex", alignItems: "center", gap: "0.8rem" }}>
-                  <span className="t-mono" style={{ color: "var(--accent)", opacity: 0.55 }}>
+                  <span className="t-mono" style={{ color: "var(--accent)" }}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
+                  <div className="rule-stem" style={{ flex: 1, height: "1px" }} />
                 </div>
                 <h3 className="t-h4">{cap.title}</h3>
                 <p className="t-sm">{cap.desc}</p>

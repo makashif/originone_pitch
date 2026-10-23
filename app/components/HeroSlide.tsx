@@ -18,11 +18,11 @@ export default function HeroSlide() {
       {/* Background */}
       <div
         className="slide-bg"
-        style={{ backgroundImage: "url('/hero_corporate_bg.png')", backgroundPosition: "center 30%" }}
+        style={{ backgroundImage: "url('/light/hero_corporate_bg.jpg')", backgroundPosition: "center 30%" }}
       />
       <div
         className="slide-overlay"
-        style={{ background: "linear-gradient(180deg, rgba(7,7,7,0.25) 0%, rgba(7,7,7,0.6) 42%, rgba(7,7,7,0.97) 100%)" }}
+        style={{ background: "linear-gradient(180deg, rgba(246,245,240,0.3) 0%, rgba(246,245,240,0.68) 42%, rgba(246,245,240,0.97) 100%)" }}
       />
 
       {/* ── Content ── */}
@@ -34,8 +34,8 @@ export default function HeroSlide() {
 
         {/* Eyebrow */}
         <motion.p
-          className="t-label"
-          style={{ letterSpacing: "0.28em", color: "rgba(255,255,255,0.35)" }}
+          className="t-label eyebrow"
+          style={{ letterSpacing: "0.28em", alignSelf: "center" }}
           initial={{ opacity: 0, y: 8 }} animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.18 }}
         >
@@ -45,12 +45,12 @@ export default function HeroSlide() {
         {/* Headline */}
         <motion.h1
           className="t-hero"
-          style={{ color: "#f2f2f2" }}
+          style={{ color: "var(--ink)" }}
           initial={{ opacity: 0, y: 36 }} animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.95, delay: 0.32, ease }}
         >
           Build What<br />
-          <span style={{ color: "rgba(242,242,242,0.35)" }}>Matters</span>
+          <span className="t-dim">Matters</span>
         </motion.h1>
 
         {/* Sub */}
@@ -69,8 +69,8 @@ export default function HeroSlide() {
 
         {/* Rule */}
         <motion.span
-          className="rule"
-          style={{ transformOrigin: "center" }}
+          className="rule rule-stem"
+          style={{ transformOrigin: "center", width: "48px" }}
           initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}}
           transition={{ duration: 0.55, delay: 0.78 }}
         />
@@ -89,7 +89,7 @@ export default function HeroSlide() {
         {/* Tagline */}
         <motion.p
           className="t-mono"
-          style={{ color: "rgba(255,255,255,0.18)", marginTop: "0.2rem" }}
+          style={{ marginTop: "0.2rem" }}
           initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 1.05 }}
         >
@@ -110,7 +110,7 @@ export default function HeroSlide() {
       >
         <svg width="14" height="22" viewBox="0 0 14 22" fill="none"
           style={{ animation: "bounce 2.2s ease-in-out infinite" }} aria-hidden="true">
-          <path d="M7 3L7 19M7 19L2 13M7 19L12 13" stroke="rgba(255,255,255,0.2)"
+          <path d="M7 3L7 19M7 19L2 13M7 19L12 13" stroke="rgba(11,12,16,0.3)"
             strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </motion.div>

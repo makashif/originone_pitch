@@ -226,7 +226,7 @@ export default function Home() {
         title="Fuutura Wallet"
         description="A secure, enterprise-grade non-custodial Web3 wallet bridging digital asset management and trading — enabling users to store, manage, transfer, and swap cryptocurrencies across multiple blockchain ecosystems while maintaining complete asset ownership."
         domain="Web3 · DeFi · React.js · Node.js"
-        background="/fwallet_premium_bg.png"
+        background="/light/fwallet_premium_bg.jpg"
         status="Delivered"
         features={p1Features}
         mockupSrcSplash="/FwalletS.jpg"
@@ -240,7 +240,7 @@ export default function Home() {
         title="Fuutura Trade"
         description="A sophisticated full-stack hybrid trading platform bridging traditional finance and decentralized ecosystems. Built for both Web2 and Web3 users in a single unified experience, delivering institutional-grade trading with real-time performance."
         domain="Trading · React.js · Zustand · WebSocket"
-        background="/ftrade_premium_bg.png"
+        background="/light/ftrade_premium_bg.jpg"
         status="Delivered"
         features={p2Features}
         mockupSrcSplash="/FtradeS.jpg"
@@ -254,7 +254,7 @@ export default function Home() {
         title="Fuutura Extension"
         description="A production-grade, non-custodial browser extension wallet engineered to deliver the fluency and familiarity of leading wallet extensions — while maintaining the full security architecture of the Fuutura ecosystem."
         domain="Browser Extension · Next.js · Viem · AWS"
-        background="/fextension_premium_bg.png"
+        background="/light/fextension_premium_bg.jpg"
         status="Delivered"
         features={p3Features}
         mockupSrcSplash="/FextS.jpg"
@@ -269,7 +269,7 @@ export default function Home() {
         title="Fuutura KYC"
         description="A multi-surface, AI-powered KYC ecosystem making identity verification fast, intelligent, and blockchain-backed. Serves individual users and enterprise clients via a consumer mobile app, embeddable SDK, and B2B web dashboard."
         domain="AI · Identity · Python · LLaMA · Polygon"
-        background="/fkyc_premium_bg.png"
+        background="/light/fkyc_premium_bg.jpg"
         status="Delivered"
         features={p4Features}
         mockupSrcSplash="/FidS.jpg"
@@ -283,7 +283,7 @@ export default function Home() {
         title="Fuutura Chat"
         description="A next-generation encrypted chat and messenger stack for building private communication into any app. Unifying end-to-end messaging, voice and video calls, and real-time sync — so teams can chat securely without exposing message content on the server."
         domain="Communication · Security · React Native"
-        background="/fchat_premium_bg.jpg"
+        background="/light/fchat_premium_bg.jpg"
         status="Delivered"
         features={pChatFeatures}
         mockupSrcSplash="/FchatS.jpg"
@@ -298,7 +298,7 @@ export default function Home() {
         title="Fuutura VPN"
         description="An enterprise-grade VPN and secure connectivity platform engineered to deliver private, encrypted, and high-performance internet access — enabling users and organizations to securely connect across global networks through a unified infrastructure."
         domain="Security · Infrastructure · C++"
-        background="/fvpn_premium_bg.jpg"
+        background="/light/fvpn_premium_bg.jpg"
         status="Delivered"
         features={pVpnFeatures}
         mockupSrcSplash="/FvpnS.jpg"
@@ -314,7 +314,7 @@ export default function Home() {
         title="Origin One Labs HRMS"
         description="A next-generation platform bridging workforce administration and daily operations. Unifying HR records, recruitment, and actionable performance tracking to show not just who works for the company, but the actual impact of their work."
         domain="SaaS · HR Tech · Next.js · Node.js"
-        background="/fhrms_premium_bg.png"
+        background="/light/fhrms_premium_bg.jpg"
         status="Delivered"
         features={p5Features}
         mockupSrc="/hrms.png"
@@ -328,7 +328,7 @@ export default function Home() {
         title="Digital24"
         description="A full-featured PR distribution platform streamlining how businesses create, manage, and fulfil media campaigns at scale — from guaranteed placements and newswire to SEO guest posting, journalist outreach, payments, and internal fulfilment."
         domain="SaaS · Next.js · PostgreSQL · Stripe"
-        background="/digital24_premium_bg.png"
+        background="/light/digital24_premium_bg.jpg"
         status="Delivered"
         features={p6Features}
         mockupSrc="/D24.png"
@@ -341,7 +341,7 @@ export default function Home() {
         slideNumber="14"
         title="Intelizzz — Vehicle Intelligence"
         description="Delivered an enterprise-grade vehicle intelligence and fleet management platform for Intelizzz, powering connected vehicle operations and tracking for enterprise fleet customers."
-        background="/intelizzz_premium_bg.png"
+        background="/light/intelizzz_premium_bg.jpg"
         status="Delivered"
         features={p7Features}
         mockupSrcSplash="/IntelizzzS.png"
@@ -355,7 +355,7 @@ export default function Home() {
         title="Toybox — Automotive Concierge"
         description="A premium automotive concierge ecosystem purpose-built for luxury vehicle owners — delivered across four integrated surfaces covering the full member, staff, and operational experience with native iOS and web applications."
         domain="Luxury Auto · iOS Swift · Next.js"
-        background="/toybox_premium_bg.png"
+        background="/light/toybox_premium_bg.jpg"
         status="Delivered"
         features={p8Features}
         mockupSrcSplash="/ToyBoxS.png"
@@ -369,7 +369,7 @@ export default function Home() {
         title="Clinic Management Platform"
         description="A next-generation platform bridging clinical administration and day-to-day patient care. Unifying pet records, outpatient workflows, and actionable treatment tracking to show not just who is under care, but the full clinical journey and outcomes of every case."
         domain="HealthTech · Veterinary · Next.js"
-        background="/health_premium_bg.jpg"
+        background="/light/health_premium_bg.jpg"
         status="Delivered"
         features={p9Features}
         mockupSrc="/new screens/IMG_8589.png"
@@ -383,7 +383,7 @@ export default function Home() {
         title="Manufacturing & Production Management Platform"
         description="An enterprise-grade SaaS platform engineered to streamline complex business operations through centralized workflows, real-time data visibility, automation, and intelligent reporting — creating a single source of truth across teams and processes."
         domain="Enterprise SaaS · Next.js · Node.js"
-        background="/saap_premium_bg.jpg"
+        background="/light/saap_premium_bg.jpg"
         status="Delivered"
         features={p10Features}
         mockupSrc="/new screens/IMG_8591.png"
@@ -397,7 +397,7 @@ export default function Home() {
         title="Community & Social Commerce Platform"
         description="An enterprise-grade, multi-service marketplace platform engineered to deliver seamless asset discovery and transaction management — connecting buyers, developers, and investors with comprehensive property listings and financial advisory tools."
         domain="Real Estate · Marketplace · Next.js"
-        background="/marketplace_premium_bg.jpg"
+        background="/light/marketplace_premium_bg.jpg"
         status="Delivered"
         features={p11Features}
         mockupSrc="/new screens/IMG_8600.png"
@@ -411,7 +411,7 @@ export default function Home() {
         title="Logistics & Dispatch"
         description="An enterprise-grade, fleet management platform engineered to optimize freight movement, dispatch operations, and transit visibility — consolidating load scheduling, driver tracking, and performance analytics into a central dispatch hub."
         domain="Logistics · Fleet Management · Next.js"
-        background="/logistics_premium_bg.jpg"
+        background="/light/logistics_premium_bg.jpg"
         status="Delivered"
         features={p12Features}
         mockupSrc="/new screens/IMG_8593.png"
@@ -425,7 +425,7 @@ export default function Home() {
         title="Creative Community"
         description="An enterprise-grade, multi-functional community ecosystem engineered to unite creators, enthusiasts, and brands — seamlessly integrating dynamic social interactions, collaborative group hubs, peer-to-peer commerce, and audio content streaming."
         domain="Social Media · Audio Streaming · Next.js"
-        background="/community_premium_bg.jpg"
+        background="/light/community_premium_bg.jpg"
         status="Delivered"
         features={p13Features}
         mockupSrc="/new screens/IMG_8594.png"
@@ -439,7 +439,7 @@ export default function Home() {
         title="Payment & Credit Services Platform"
         description="An enterprise-grade, digital credit marketplace engineered to streamline borrowing and capital distribution — connecting applicants with a network of competing financial institutions through automated matching, friction-free onboarding, and financial literacy resources."
         domain="FinTech · Lending · Next.js"
-        background="/fintech_premium_bg.jpg"
+        background="/light/fintech_premium_bg.jpg"
         status="Delivered"
         features={p14Features}
         mockupSrc="/new screens/IMG_8602.png"
@@ -453,7 +453,7 @@ export default function Home() {
         title="Ads & Payment"
         description="An enterprise-grade advertising and payment orchestration platform engineered to centralize digital campaign management, multi-channel advertising, and multi-gateway payment processing — enabling businesses to launch, manage, monetize, and analyze campaigns through a unified ecosystem."
         domain="AdTech · FinTech · Next.js"
-        background="/ads_payment_premium_bg.jpg"
+        background="/light/ads_payment_premium_bg.jpg"
         status="Delivered"
         features={p15Features}
         mockupSrc="/new screens/IMG_8603.png"
@@ -468,7 +468,7 @@ export default function Home() {
         title="E-commerce & Retail Management Platform"
         description="An enterprise-grade, digital retail platform engineered to power multi-vendor commerce — uniting single and direct seller storefronts with catalog management, real-time cart tracking, and product discovery."
         domain="E-Commerce · Retail · Next.js"
-        background="/ecommerce_premium_bg.jpg"
+        background="/light/ecommerce_premium_bg.jpg"
         status="Delivered"
         features={p16Features}
         mockupSrc="/new screens/IMG_8599.png"
@@ -482,7 +482,7 @@ export default function Home() {
         title="Real Estate Discovery & Investment Platform"
         description="An enterprise-grade Customer Relationship Management platform engineered to centralize sales, customer interactions, business workflows, and performance intelligence — enabling organizations to manage the complete customer lifecycle through a unified digital workspace."
         domain="CRM · B2B SaaS · Next.js"
-        background="/crm_premium_bg.jpg"
+        background="/light/crm_premium_bg.jpg"
         status="Delivered"
         features={p17Features}
         mockupSrc="/new screens/image.png"

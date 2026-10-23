@@ -15,18 +15,18 @@ export default function FluidBackground() {
     const fluid = new WebGLFluid(containerRef.current);
     fluid.setConfig({
       hover: true,
-      densityDissipation: 2.5,
-      velocityDissipation: 2.0,
-      pressure: 0.1,
-      curl: 3,
+      densityDissipation: 4,
+      velocityDissipation: 1.5,
+      pressure: 0.5,
+      curl: 4,
       splatRadius: 0.1,
       shading: true,
-      colorful: false,
-      colorPalette: ["#333333", "#444444", "#555555", "#666666"],
-      bloom: true,
+      colorful: true,
+      colorPalette: ["#1cc8d0", "#2ab4f5", "#5fe3b8"], // the three brand stems
+      bloom: false,
       bloomIterations: 8,
       bloomResolution: 256,
-      bloomIntensity: 0.2,
+      bloomIntensity: 0.1,
       bloomThreshold: 0.6,
       bloomSoftKnee: 0.7,
       sunrays: true,
@@ -86,8 +86,8 @@ export default function FluidBackground() {
         height: "100svh",
         zIndex: 1, // Sit above the dark background (-1) and overlay (0), but below content (2)
         pointerEvents: "none", // Let clicks pass through
-        opacity: 0.8, // Slightly fade to keep it elegant and non-distracting
-        mixBlendMode: "screen", // Perfectly makes the black canvas transparent on dark themes!
+        opacity: 0.6, // Slightly fade to keep it elegant and non-distracting
+        mixBlendMode: "multiply", // Tints the ivory page with the stem dyes; empty canvas stays invisible
       }}
     >
       <div ref={containerRef} style={{ width: "100%", height: "100%" }} />

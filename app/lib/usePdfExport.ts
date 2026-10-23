@@ -28,7 +28,7 @@ export function usePdfExport() {
         scale: 2,
         useCORS: true,
         allowTaint: false,
-        backgroundColor: "#070707",
+        backgroundColor: "#f6f5f0",
         logging: false,
         windowWidth: 1380,
         windowHeight: 976,
@@ -110,7 +110,7 @@ export function usePdfExport() {
           scale: 2, // 2x resolution for crispness (144dpi effective)
           useCORS: true,
           allowTaint: false,
-          backgroundColor: "#070707",
+          backgroundColor: "#f6f5f0",
           logging: false,
           windowWidth: 1380, // Force a fixed window width so html2canvas doesn't crop at the user's viewport edge
           windowHeight: 976,

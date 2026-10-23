@@ -15,18 +15,18 @@ export default function AboutSlide() {
   return (
     <SlideWrapper
       id="slide-about"
-      bgImage="/Extremely_professional_corporate_background_for_202606181541.jpeg"
-      overlay="rgba(7,7,7,0.93)"
+      bgImage="/light/Extremely_professional_corporate_background_for_202606181541.jpg"
+      overlay="rgba(246,245,240,0.9)"
     >
       <div className="stack stack-md">
         {/* Header */}
         <div className="stack stack-xs">
-          <motion.p className="t-label" variants={itemVariants}>
+          <motion.p className="t-label eyebrow" variants={itemVariants}>
             02 / About Origin One Labs
           </motion.p>
           <motion.h2 className="t-h2" variants={itemVariants}>
             Engineering the Future<br />
-            <span style={{ color: "rgba(242,242,242,0.28)" }}>of Business.</span>
+            <span className="t-dim">of Business.</span>
           </motion.h2>
         </div>
 
@@ -113,7 +113,7 @@ export default function AboutSlide() {
 
         <motion.div variants={itemVariants}
           style={{ display: "flex", justifyContent: "center", paddingTop: "clamp(0.75rem, 4vh, 3rem)", width: "100%" }}>
-          <span style={{ fontFamily: "var(--font-inter)", fontWeight: 600, fontSize: "0.75rem", letterSpacing: "0.25em", color: "#FFF" }}>
+          <span style={{ fontFamily: "var(--font-inter)", fontWeight: 600, fontSize: "0.75rem", letterSpacing: "0.25em", color: "var(--ink)" }}>
             ORIGIN ONE LABS
           </span>
         </motion.div>

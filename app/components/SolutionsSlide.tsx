@@ -68,17 +68,17 @@ export default function SolutionsSlide() {
   return (
     <SlideWrapper
       id="slide-solutions"
-      bgImage="/solutions_bg.png"
-      overlay="rgba(7,7,7,0.8)"
+      bgImage="/light/solutions_bg.jpg"
+      overlay="rgba(246,245,240,0.84)"
     >
       {/* Header */}
       <div className="stack stack-xs" style={{ marginBottom: "clamp(0.5rem, 1vh, 1rem)" }}>
-        <motion.p className="t-label" variants={itemVariants}>
+        <motion.p className="t-label eyebrow" variants={itemVariants}>
           03 / What We Do
         </motion.p>
         <motion.h2 className="t-h2" variants={itemVariants} style={{ maxWidth: "620px", fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>
           Everything You Need<br />
-          <span style={{ color: "rgba(242,242,242,0.28)" }}>to Build and Scale.</span>
+          <span className="t-dim">to Build and Scale.</span>
         </motion.h2>
       </div>
 
@@ -121,7 +121,7 @@ export default function SolutionsSlide() {
             padding: "0.5rem 0.6rem",
             display: "flex", alignItems: "center", gap: "0.4rem",
           }}>
-            <span className="t-mono" style={{ color: "var(--accent)", opacity: 0.45, flexShrink: 0, fontSize: "0.55rem" }}>
+            <span className="t-mono" style={{ color: "var(--accent)", flexShrink: 0, fontSize: "0.55rem" }}>
               {String(i + 1).padStart(2, "0")}
             </span>
             <span className="t-sm" style={{ color: "var(--tx-2)", fontSize: "0.55rem", lineHeight: 1.2 }}>{step}</span>

@@ -280,8 +280,8 @@ export default function PresentationShell({ children }: { children: ReactNode })
           left: 0,
           height: "2px",
           width: `${((current + 1) / SLIDES.length) * 100}%`,
-          background: "linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0.8))",
-          boxShadow: "0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(255,255,255,0.2)",
+          background: "var(--tri-hi)",
+          boxShadow: "0 0 12px rgba(28,200,208,0.6)",
           zIndex: 1000,
           transition: "width 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
         }}
@@ -304,17 +304,17 @@ export default function PresentationShell({ children }: { children: ReactNode })
       >
         <span style={{
           fontFamily: "var(--font-mono)", fontSize: "0.58rem",
-          letterSpacing: "0.15em", color: "rgba(255,255,255,0.22)"
+          letterSpacing: "0.15em", color: "rgba(11,12,16,0.5)"
         }}>
           {String(current + 1).padStart(2, "0")}{" "}
           <span style={{ opacity: 0.4 }}>/</span>{" "}
           {String(SLIDES.length).padStart(2, "0")}
         </span>
-        <span style={{ width: "1px", height: "10px", background: "rgba(255,255,255,0.1)" }} />
+        <span style={{ width: "1px", height: "10px", background: "rgba(11,12,16,0.14)" }} />
         <span style={{
           fontFamily: "var(--font-body)", fontSize: "0.58rem",
           letterSpacing: "0.14em", textTransform: "uppercase",
-          color: "rgba(255,255,255,0.18)", maxWidth: "160px",
+          color: "rgba(11,12,16,0.42)", maxWidth: "160px",
           whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"
         }}>
           {SLIDES[current].label}
@@ -336,7 +336,9 @@ export default function PresentationShell({ children }: { children: ReactNode })
             width: "100%",
             height: "100%",
             zIndex: 9999,
-            backgroundColor: "rgba(0,0,0,0.85)",
+            backgroundColor: "rgba(246,245,240,0.88)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -346,8 +348,8 @@ export default function PresentationShell({ children }: { children: ReactNode })
         >
           {isPreviewing ? (
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" }}>
-              <div className="spinner" style={{ width: "24px", height: "24px", border: "2px solid rgba(255,255,255,0.2)", borderTopColor: "white", borderRadius: "50%", animation: "spin 1s linear infinite" }} />
-              <p style={{ color: "white", fontFamily: "var(--font-mono)", fontSize: "0.75rem", letterSpacing: "0.15em" }}>
+              <div className="spinner" style={{ width: "24px", height: "24px", border: "2px solid rgba(11,12,16,0.15)", borderTopColor: "var(--stem)", borderRadius: "50%", animation: "spin 1s linear infinite" }} />
+              <p style={{ color: "var(--ink)", fontFamily: "var(--f-mono)", fontSize: "0.75rem", letterSpacing: "0.15em" }}>
                 GENERATING EXACT FRAME...
               </p>
               <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
@@ -361,12 +363,12 @@ export default function PresentationShell({ children }: { children: ReactNode })
                 style={{
                   maxWidth: "90%",
                   maxHeight: "90%",
-                  boxShadow: "0 20px 60px rgba(0,0,0,0.6)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  background: "#070707" // match pdf background
+                  boxShadow: "0 30px 80px -30px rgba(11,12,16,0.45)",
+                  border: "1px solid rgba(11,12,16,0.12)",
+                  background: "#f6f5f0" // match pdf background
                 }}
               />
-              <p style={{ color: "rgba(255,255,255,0.5)", marginTop: "1.5rem", fontFamily: "var(--font-mono)", fontSize: "0.6rem", letterSpacing: "0.1em" }}>
+              <p style={{ color: "rgba(11,12,16,0.56)", marginTop: "1.5rem", fontFamily: "var(--f-mono)", fontSize: "0.6rem", letterSpacing: "0.1em" }}>
                 PRESS &apos;M&apos;, &apos;ESC&apos;, OR CLICK ANYWHERE TO CLOSE
               </p>
             </>
@@ -406,12 +408,13 @@ function KeyHint() {
         display: "flex",
         alignItems: "center",
         gap: "0.75rem",
-        background: "rgba(255,255,255,0.04)",
-        border: "1px solid rgba(255,255,255,0.07)",
+        background: "rgba(251,250,246,0.75)",
+        border: "1px solid rgba(11,12,16,0.1)",
+        boxShadow: "0 8px 24px -12px rgba(11,12,16,0.18)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         padding: "0.5rem 1rem",
-        borderRadius: "2px",
+        borderRadius: "999px",
         animation: "fadeIn 0.6s ease both",
         opacity: visible ? 1 : 0,
         transition: "opacity 0.5s ease",
@@ -424,9 +427,9 @@ function KeyHint() {
           style={{
             fontFamily: "var(--font-body)",
             fontSize: "0.75rem",
-            color: "rgba(255,255,255,0.5)",
-            background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.1)",
+            color: "rgba(11,12,16,0.7)",
+            background: "#fff",
+            border: "1px solid rgba(11,12,16,0.14)",
             borderRadius: "3px",
             padding: "0.15rem 0.4rem",
             lineHeight: 1,
@@ -441,19 +444,19 @@ function KeyHint() {
           fontSize: "0.6rem",
           letterSpacing: "0.12em",
           textTransform: "uppercase",
-          color: "rgba(255,255,255,0.22)",
+          color: "rgba(11,12,16,0.5)",
         }}
       >
         Navigate
       </span>
-      <span style={{ width: "1px", height: "10px", background: "rgba(255,255,255,0.1)", margin: "0 4px" }} />
+      <span style={{ width: "1px", height: "10px", background: "rgba(11,12,16,0.14)", margin: "0 4px" }} />
       <kbd
         style={{
           fontFamily: "var(--font-body)",
           fontSize: "0.75rem",
-          color: "rgba(255,255,255,0.5)",
-          background: "rgba(255,255,255,0.06)",
-          border: "1px solid rgba(255,255,255,0.1)",
+          color: "rgba(11,12,16,0.7)",
+          background: "#fff",
+          border: "1px solid rgba(11,12,16,0.14)",
           borderRadius: "3px",
           padding: "0.15rem 0.4rem",
           lineHeight: 1,
@@ -467,7 +470,7 @@ function KeyHint() {
           fontSize: "0.6rem",
           letterSpacing: "0.12em",
           textTransform: "uppercase",
-          color: "rgba(255,255,255,0.22)",
+          color: "rgba(11,12,16,0.5)",
         }}
       >
         PDF

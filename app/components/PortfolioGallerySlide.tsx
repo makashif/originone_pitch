@@ -152,15 +152,15 @@ export default function PortfolioGallerySlide() {
   const { goTo } = useDeck();
 
   return (
-    <SlideWrapper id="slide-portfolio" bgImage="/sleek_dark_bg.png" overlay="rgba(7,7,7,0.82)">
+    <SlideWrapper id="slide-portfolio" bgImage="/light/sleek_dark_bg.jpg" overlay="rgba(246,245,240,0.86)">
       {/* Header */}
       <div className="stack stack-xs" style={{ marginBottom: "clamp(0.5rem, 1vh, 1rem)" }}>
-        <motion.p className="t-label" variants={itemVariants}>
+        <motion.p className="t-label eyebrow" variants={itemVariants}>
           05 / Our Track Record
         </motion.p>
         <motion.h2 className="t-h2" variants={itemVariants} style={{ maxWidth: "900px" }}>
           Multiple projects delivered.<br />
-          <span style={{ color: "rgba(242,242,242,0.28)" }}>Engineered for scale.</span>
+          <span className="t-dim">Engineered for scale.</span>
         </motion.h2>
       </div>
 
@@ -187,7 +187,7 @@ export default function PortfolioGallerySlide() {
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <span style={{
                 fontFamily: "var(--f-mono)", fontSize: "0.5rem",
-                letterSpacing: "0.12em", color: "var(--accent)", opacity: 0.45,
+                letterSpacing: "0.12em", color: "var(--accent)",
               }}>
                 {project.number}
               </span>
@@ -242,8 +242,8 @@ export default function PortfolioGallerySlide() {
           className="portfolio-card"
           style={{
             // gridColumn: "1 / -1",
-            background: "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%)",
-            border: "5px solid var(--border-bright)",
+            background: "linear-gradient(135deg, rgb(var(--stem-bright-rgb) / 0.12) 0%, rgb(var(--ivory-rgb) / 0.6) 100%)",
+            border: "1px solid var(--accent-line)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
@@ -252,7 +252,7 @@ export default function PortfolioGallerySlide() {
           }}
         >
           <div style={{ display: "flex", alignItems: "center" }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--tx-2)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: "0.4rem" }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--stem)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: "0.4rem" }}>
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="12" y1="16" x2="12" y2="12"></line>
               <line x1="12" y1="8" x2="12.01" y2="8"></line>
