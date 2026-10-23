@@ -23,8 +23,25 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+/* Absolute origin of the deployment actually serving this deck.
+   Link-preview crawlers (WhatsApp, LinkedIn, X, Slack…) fetch og:image
+   and og:url as full URLs, so they must point at this host — not at
+   the main originonelabs.com site, which has no /opengraph-image.
+   Set NEXT_PUBLIC_SITE_URL to pin a custom domain; on Vercel the
+   project's production domain is used automatically. */
+function siteUrl(): URL {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
+  if (explicit) return new URL(explicit);
+  const vercelHost =
+    process.env.VERCEL_ENV === "production"
+      ? process.env.VERCEL_PROJECT_PRODUCTION_URL
+      : process.env.VERCEL_BRANCH_URL ?? process.env.VERCEL_URL;
+  if (vercelHost) return new URL(`https://${vercelHost}`);
+  return new URL(`http://localhost:${process.env.PORT ?? 3000}`);
+}
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://originonelabs.com'),
+  metadataBase: siteUrl(),
   title: "Origin One Labs",
   description:
     "Built on Expertise. Driven by Results. Origin One Labs is a technology partner combining deep technical expertise with strong product thinking to build scalable solutions.",
@@ -32,10 +49,32 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  /* Brand kit V2 icon set — same files as the main originonelabs.com
+     site (app/favicon.ico, app/icon.png and app/apple-icon.png are
+     picked up by file convention; these add the sized PNGs). */
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  /* og:image / twitter:image come from app/opengraph-image.tsx. */
   openGraph: {
+    url: '/',
+    siteName: "Origin One Labs",
     title: "Origin One Labs",
     description: "Built on Expertise. Driven by Results.",
     type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Origin One Labs",
+    description: "Built on Expertise. Driven by Results.",
   },
 };
 
