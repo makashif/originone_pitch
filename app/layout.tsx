@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const inter = Inter({
@@ -9,10 +10,16 @@ const inter = Inter({
   display: "swap",
 });
 
-const jakarta = Plus_Jakarta_Sans({
+/* Self-hosted (OFL, Fontsource latin subset) rather than next/font/google:
+   on Vercel, Turbopack failed to resolve the Google-fetched Plus Jakarta
+   Sans files ("next/font/google queries have exactly one entry"), which
+   broke the whole build. Local files take the network out of the build. */
+const jakarta = localFont({
   variable: "--font-plus-jakarta",
-  subsets: ["latin"],
-  weight: ["500", "700"],
+  src: [
+    { path: "./fonts/PlusJakartaSans-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/PlusJakartaSans-700.woff2", weight: "700", style: "normal" },
+  ],
   display: "swap",
 });
 
