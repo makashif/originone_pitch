@@ -42,6 +42,8 @@ export const SLIDES = [
   { id: "slide-p15", label: "Ads & Payment" },
   { id: "slide-p16", label: "E-commerce & Retail Management Platform" },
   { id: "slide-p17", label: "Real Estate Discovery & Investment Platform" },
+  { id: "slide-p18", label: "Digital Health Platform" },
+  { id: "slide-p19", label: "Vape Local" },
   { id: "slide-why", label: "Why Origin One" },
   { id: "slide-connect", label: "Start a Project" },
 ];

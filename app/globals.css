@@ -642,7 +642,9 @@ body {
   inset: calc(var(--device-w) * 0.033);
   border-radius: calc(var(--device-w) * 0.175);
   overflow: hidden;
-  background: #000;
+  /* Light, not black: captures with transparent rounded corners must not
+     show dark wedges through them. */
+  background: #f7f6f1;
   box-shadow: 0 0 0 1px rgb(var(--ink-rgb) / 0.18);
 }
 
@@ -756,7 +758,7 @@ body {
 .ext-body {
   flex: 1;
   position: relative;
-  background: #000;
+  background: #f7f6f1;
   overflow: hidden;
   border-radius: 0.6rem;
 }
@@ -824,7 +826,7 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  background: #000;
+  background: #f7f6f1;
   border-radius: 2px;
   overflow: hidden;
   box-shadow: 0 0 0 1px rgb(var(--ink-rgb) / 0.18);
@@ -889,12 +891,212 @@ body.pdf-export-active .mockup-positioning {
 }
 
 /* ═══════════════════════════════════════════════════════
+   SCREEN SHOWCASE — web app + phone (or second web screen)
+   Composition, with W = --showcase-w:
+     browser  0.86W wide at top-left (16:10 screen)
+     phone    0.56W tall, bottom-right, overlapping the browser
+     web      0.52W wide, bottom-right, overlapping the browser
+═══════════════════════════════════════════════════════ */
+:root {
+  --showcase-w: clamp(330px, min(43vw, 80vh), 680px);
+}
+
+.showcase {
+  position: relative;
+  width: var(--showcase-w);
+  height: calc(var(--showcase-w) * 0.7);
+  flex-shrink: 0;
+}
+
+.showcase--solo {
+  height: auto;
+}
+
+.showcase-main {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(var(--showcase-w) * 0.86);
+}
+
+.showcase--solo .showcase-main {
+  position: relative;
+  width: 100%;
+}
+
+.showcase-front {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
+.showcase-phone {
+  --device-h: calc(var(--showcase-w) * 0.56);
+  --device-w: calc(var(--showcase-w) * 0.56 * 0.487);
+}
+
+.showcase-web {
+  width: calc(var(--showcase-w) * 0.52);
+}
+
+/* Phone fan — up to three phones stepping left and up from the corner,
+   front-most on the right. --i is the phone's index (0 = front). */
+.showcase--fan {
+  height: calc(var(--showcase-w) * 0.74);
+}
+
+.showcase-fan-phone {
+  position: absolute;
+  right: calc(var(--i) * var(--showcase-w) * 0.2);
+  bottom: calc(var(--i) * var(--showcase-w) * 0.035);
+  z-index: calc(4 - var(--i));
+  --device-h: calc(var(--showcase-w) * 0.5);
+  --device-w: calc(var(--showcase-w) * 0.5 * 0.487);
+}
+
+.showcase-fan-phone .device-outer::after {
+  display: none;
+}
+
+/* Light browser window — ivory chrome, silver bar, URL pill */
+.browser {
+  background: #fbfaf6;
+  border: 1px solid rgb(var(--ink-rgb) / 0.12);
+  border-radius: calc(var(--showcase-w) * 0.018);
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 clamp(14px, 3vh, 36px) clamp(30px, 6vh, 72px) -18px rgb(var(--ink-rgb) / 0.3),
+    0 4px 12px -6px rgb(var(--ink-rgb) / 0.12);
+}
+
+.browser-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: clamp(18px, calc(var(--showcase-w) * 0.042), 28px);
+  padding: 0 calc(var(--showcase-w) * 0.02);
+  background: linear-gradient(180deg, #f6f5f1 0%, #ebe9e3 100%);
+  border-bottom: 1px solid rgb(var(--ink-rgb) / 0.08);
+}
+
+.browser-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgb(var(--ink-rgb) / 0.14);
+  flex-shrink: 0;
+}
+
+.browser-url {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 58%;
+  padding: 2px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgb(var(--ink-rgb) / 0.08);
+  font-family: var(--f-mono);
+  font-size: clamp(0.42rem, calc(var(--showcase-w) * 0.0145), 0.6rem);
+  letter-spacing: 0.04em;
+  color: var(--tx-3);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.browser-url svg {
+  color: var(--stem);
+  flex-shrink: 0;
+}
+
+.browser-screen {
+  position: relative;
+  aspect-ratio: var(--screen-ratio, 16 / 10);
+  overflow: hidden;
+  background: #f7f6f1;
+}
+
+.browser-screen img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: top 9s cubic-bezier(0.45, 0, 0.55, 1), transform 9s cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+/* Hover: glide down the full page, then back up on leave. */
+.browser:hover .browser-screen img {
+  top: 100%;
+  transform: translateY(-100%);
+}
+
+.showcase-phone .device-outer::after {
+  display: none;
+}
+
+body.pdf-export-active {
+  --showcase-w: calc(1380px * 0.42) !important;
+}
+
+body.pdf-export-active .browser-screen img {
+  transition: none !important;
+  top: 0 !important;
+  transform: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════
    PORTFOLIO GALLERY
 ═══════════════════════════════════════════════════════ */
 
+/* Disclaimer — as a card spanning the last row's empty slots, or as a
+   note under the grid. Which one shows is set per breakpoint in
+   PortfolioGallerySlide.tsx. */
+.portfolio-card.disclaimer-card {
+  justify-content: center;
+  background: linear-gradient(135deg, rgb(var(--stem-bright-rgb) / 0.12) 0%, rgb(var(--ivory-rgb) / 0.6) 100%);
+  border: 1px solid var(--accent-line);
+  cursor: default;
+}
+
+.portfolio-card.disclaimer-card:hover {
+  transform: none;
+  box-shadow: none;
+  background: linear-gradient(135deg, rgb(var(--stem-bright-rgb) / 0.12) 0%, rgb(var(--ivory-rgb) / 0.6) 100%);
+}
+
+.disclaimer-note {
+  align-items: flex-start;
+  gap: 0.45rem;
+  margin-top: clamp(0.6rem, 1.6vh, 1rem);
+  max-width: 1100px;
+  font-family: var(--f-body);
+  font-size: clamp(0.56rem, 0.74vw, 0.7rem);
+  line-height: 1.5;
+  color: var(--tx-3);
+}
+
+.disclaimer-note svg {
+  margin-top: 0.15em;
+}
+
+.disclaimer-note strong {
+  color: var(--tx-2);
+  font-weight: 600;
+}
+
+/* Column counts per breakpoint live in PortfolioGallerySlide.tsx, next
+   to the disclaimer placement that depends on them. */
 .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
   gap: 1px;
   background: var(--border);
 }
@@ -983,18 +1185,18 @@ body.pdf-export-active .mockup-positioning {
 .cover-title {
   font-family: var(--f-display);
   font-weight: 700;
-  font-size: clamp(0.78rem, min(1.15vw, 2vh), 1.02rem);
-  letter-spacing: 0.42em;
-  padding-left: 0.42em;
+  font-size: clamp(1.15rem, min(2.05vw, 3.6vh), 1.95rem);
+  letter-spacing: 0.32em;
+  padding-left: 0.32em;
   text-transform: uppercase;
   color: var(--stem);
 }
 
 .cover-tagline {
-  margin-top: clamp(0.6rem, 1.8vh, 1.1rem);
+  margin-top: clamp(0.45rem, 1.4vh, 0.85rem);
   font-family: var(--f-display);
   font-weight: 600;
-  font-size: clamp(1.35rem, min(2.4vw, 4.2vh), 2.3rem);
+  font-size: clamp(0.95rem, min(1.35vw, 2.35vh), 1.3rem);
   line-height: 1.1;
   letter-spacing: -0.015em;
   color: var(--ink);
@@ -1084,11 +1286,10 @@ body.pdf-export-active .mockup-positioning {
    a card would genuinely become too narrow to read (~185px), not
    merely because the window got smaller. ─── */
 
-/* ─── ≤1150px — portfolio cards would drop under ~185px at 5-up ─── */
+/* ─── ≤1150px — five-column grids step down ─── */
 @media screen and (max-width: 1150px) {
 
-  .grid-5,
-  .portfolio-grid {
+  .grid-5 {
     grid-template-columns: repeat(4, 1fr);
   }
 }
@@ -1110,6 +1311,7 @@ body.pdf-export-active .mockup-positioning {
     --device-h: clamp(200px, 35svh, 300px);
     --ext-h: clamp(180px, 32svh, 280px);
     --laptop-w: clamp(260px, min(70vw, 80vh), 400px);
+    --showcase-w: clamp(280px, min(80vw, 90vh), 480px);
     --px: clamp(1.5rem, 5vw, 3.5rem);
     --py: clamp(2rem, 5vh, 4rem);
   }
@@ -1120,8 +1322,7 @@ body.pdf-export-active .mockup-positioning {
     gap: var(--sp-md);
   }
 
-  .grid-5,
-  .portfolio-grid {
+  .grid-5 {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -1211,6 +1412,7 @@ body.pdf-export-active .mockup-positioning {
     --device-h: clamp(200px, 34svh, 280px);
     --ext-h: clamp(180px, 30svh, 250px);
     --laptop-w: min(84vw, 340px);
+    --showcase-w: min(88vw, 400px);
     --px: 1.25rem;
     --py: clamp(1.75rem, 4.5vh, 2.5rem);
   }
@@ -1222,7 +1424,6 @@ body.pdf-export-active .mockup-positioning {
   .grid-5,
   .grid-auto,
   .grid-auto-lg,
-  .portfolio-grid,
   .mv-grid,
   .feature-grid,
   .form-row {
@@ -1279,6 +1480,12 @@ body.pdf-export-active .mockup-positioning {
     font-size: clamp(1.15rem, 6.4vw, 1.9rem);
   }
 
+  .cover-title {
+    font-size: clamp(0.95rem, 4.6vw, 1.2rem);
+    letter-spacing: 0.24em;
+    padding-left: 0.24em;
+  }
+
   .cover-meta {
     font-size: 0.55rem;
     gap: 0.6rem;
@@ -1324,6 +1531,7 @@ body.pdf-export-active .mockup-positioning {
     --device-h: clamp(200px, 40svh, 340px);
     --ext-h: clamp(190px, 36svh, 320px);
     --laptop-w: clamp(280px, min(34vw, 62vh), 460px);
+    --showcase-w: clamp(300px, min(40vw, 74vh), 600px);
     --sp-md: clamp(0.6rem, 2.6vh, 1.1rem);
     --sp-lg: clamp(0.9rem, 4vh, 1.8rem);
     --sp-xl: clamp(1.1rem, 6vh, 2.6rem);
@@ -1349,6 +1557,7 @@ body.pdf-export-active .mockup-positioning {
     --device-h: clamp(190px, 38svh, 300px);
     --ext-h: clamp(175px, 34svh, 280px);
     --laptop-w: clamp(260px, min(30vw, 58vh), 420px);
+    --showcase-w: clamp(280px, min(36vw, 70vh), 540px);
     --sp-xs: clamp(0.15rem, 0.7vh, 0.3rem);
     --sp-sm: clamp(0.3rem, 1.4vh, 0.6rem);
     --sp-md: clamp(0.5rem, 2.2vh, 0.9rem);
@@ -1381,6 +1590,7 @@ body.pdf-export-active .mockup-positioning {
     --device-h: clamp(170px, 36svh, 260px);
     --ext-h: clamp(160px, 32svh, 240px);
     --laptop-w: clamp(240px, min(28vw, 54vh), 380px);
+    --showcase-w: clamp(260px, min(30vw, 62vh), 440px);
   }
 
   .card {
@@ -1611,6 +1821,7 @@ body.pdf-export-active .device-body {
     --py: 2.5rem !important;
     --device-h: 340px !important;
     --device-w: calc(340px * 0.487) !important;
+    --showcase-w: 560px !important;
   }
 
   /* ── Hide all interactive chrome ── */

@@ -73,10 +73,10 @@ export default async function Image() {
             ORIGIN ONE LABS
           </div>
           <div style={{ marginTop: 24, width: 72, height: 3, borderRadius: 3, backgroundImage: `linear-gradient(90deg, ${CYAN}, ${CYAN_HI})` }} />
-          <div style={{ marginTop: 20, fontSize: 22, fontWeight: 700, letterSpacing: "0.42em", paddingLeft: "0.42em", color: CYAN }}>
+          <div style={{ marginTop: 20, fontSize: 32, fontWeight: 700, letterSpacing: "0.32em", paddingLeft: "0.32em", color: CYAN }}>
             COMPANY PROFILE
           </div>
-          <div style={{ display: "flex", marginTop: 14, fontSize: 36, fontWeight: 500, letterSpacing: "-0.01em" }}>
+          <div style={{ display: "flex", marginTop: 12, fontSize: 25, fontWeight: 500, letterSpacing: "-0.01em" }}>
             Build What&nbsp;<span style={{ color: CYAN, fontWeight: 700 }}>Matters.</span>
           </div>
         </div>

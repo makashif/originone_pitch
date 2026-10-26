@@ -5,6 +5,7 @@ import SlideWrapper, { itemVariants } from "./SlideWrapper";
 import DeviceMockup from "./DeviceMockup";
 import LaptopMockup from "./LaptopMockup";
 import ExtensionMockup from "./ExtensionMockup";
+import ScreenShowcase from "./ScreenShowcase";
 
 interface Feature {
   title: string;
@@ -22,13 +23,15 @@ interface ProjectSlideProps {
   features: Feature[];
   mockupSrc?: string;
   mockupSrcSplash?: string;
-  mockupType?: "mobile" | "laptop" | "extension";
+  mockupType?: "mobile" | "laptop" | "extension" | "showcase";
+  /** Web app + front surface, for mockupType="showcase". */
+  showcase?: React.ComponentProps<typeof ScreenShowcase>;
   topMaxWidth?: string;
 }
 
 export default function ProjectSlide({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  id, slideNumber, title, description, domain, background, status, features, mockupSrc, mockupSrcSplash, mockupType = "mobile", topMaxWidth = "620px",
+  id, slideNumber, title, description, domain, background, status, features, mockupSrc, mockupSrcSplash, mockupType = "mobile", showcase, topMaxWidth = "620px",
 }: ProjectSlideProps) {
   return (
     <SlideWrapper id={id} bgImage={background} overlay="rgba(246,245,240,0.86)">
@@ -180,7 +183,9 @@ export default function ProjectSlide({
                 willChange: "transform"
               }}
             >
-              {mockupType === "laptop" ? (
+              {mockupType === "showcase" && showcase ? (
+                <ScreenShowcase {...showcase} />
+              ) : mockupType === "laptop" ? (
                 <motion.div whileHover={{ scale: 1.03, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }}>
                   <LaptopMockup src={mockupSrc} alt={`${title} app screenshot`} />
                 </motion.div>

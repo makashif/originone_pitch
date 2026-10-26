@@ -146,13 +146,71 @@ const projects: Project[] = [
     stack: "Next.js · Node.js · PostgreSQL",
     tags: ["Sales Pipeline", "Workflow Automation", "Analytics"],
   },
+  {
+    number: "20",
+    title: "Digital Health Platform",
+    category: "HealthTech · Wellbeing",
+    stack: "Web App · iOS · Android",
+    tags: ["Health Score", "Daily Plans", "Video Sessions"],
+  },
+  {
+    number: "21",
+    title: "Vape Local",
+    category: "E-Commerce · Retail",
+    stack: "Web Storefront · Trade & Retail",
+    tags: ["Brand Merchandising", "Deals & Bundles", "Fast Fulfilment"],
+  },
 ];
+
+/* ─────────────────────────────────────────────────────────────
+   Grid layout — one table drives both the column count at each
+   breakpoint and where the disclaimer goes:
+     · the last row has ≥ 2 empty slots → a disclaimer card spans them
+     · the last row is full, or has 1 slot → a note below the grid
+   Emitted as plain media-query CSS (not React state), so the PDF
+   export's fixed 1380px clone re-evaluates it like any other rule.
+   Widths match the deck's breakpoints in globals.css.
+───────────────────────────────────────────────────────────── */
+const LAYOUT: { cols: number; max?: number }[] = [
+  { cols: 6 },               // > 1350px
+  { cols: 5, max: 1350 },
+  { cols: 4, max: 1150 },
+  { cols: 2, max: 960 },
+  { cols: 1, max: 700 },
+];
+
+function layoutCss(count: number) {
+  return LAYOUT.map(({ cols, max }) => {
+    const empty = (cols - (count % cols)) % cols;
+    const asCard = empty >= 2;
+    const rules = `
+      #slide-portfolio .portfolio-grid { grid-template-columns: repeat(${cols}, 1fr); }
+      #slide-portfolio .disclaimer-card { display: ${asCard ? "flex" : "none"}; grid-column: span ${asCard ? empty : 1}; }
+      #slide-portfolio .disclaimer-note { display: ${asCard ? "none" : "flex"}; }`;
+    return max ? `@media screen and (max-width: ${max}px) {${rules}\n}` : rules;
+  }).join("\n");
+}
+
+const DISCLAIMER =
+  "The projects and case studies featured here represent a selected portfolio of Origin One Labs\u2019 work. We have successfully delivered 50+ projects across diverse industries; however, many engagements are protected by confidentiality agreements and cannot be publicly disclosed.";
+
+function InfoIcon({ size = 14 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="var(--stem)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }} aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="12" y1="16" x2="12" y2="12"></line>
+      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+    </svg>
+  );
+}
 
 export default function PortfolioGallerySlide() {
   const { goTo } = useDeck();
 
   return (
     <SlideWrapper id="slide-portfolio" bgImage="/light/sleek_dark_bg.jpg" overlay="rgba(246,245,240,0.86)">
+      <style>{layoutCss(projects.length)}</style>
+
       {/* Header */}
       <div className="stack stack-xs" style={{ marginBottom: "clamp(0.5rem, 1vh, 1rem)" }}>
         <motion.p className="t-label eyebrow" variants={itemVariants}>
@@ -171,8 +229,8 @@ export default function PortfolioGallerySlide() {
         </motion.p>
       </div>
 
-      {/* Project grid — 4 cols × 2 rows, with disclaimer on 3rd row */}
-      <div className="grid-5" style={{
+      {/* Project grid — columns and disclaimer placement come from LAYOUT */}
+      <div className="portfolio-grid" style={{
         background: "transparent",
         gap: "clamp(0.2rem, 0.4vw, 0.75rem)",
       }}>
@@ -236,27 +294,10 @@ export default function PortfolioGallerySlide() {
           </motion.div>
         ))}
 
-        {/* Disclaimer Card (Spans the 3rd row) */}
-        <motion.div
-          variants={itemVariants}
-          className="portfolio-card"
-          style={{
-            // gridColumn: "1 / -1",
-            background: "linear-gradient(135deg, rgb(var(--stem-bright-rgb) / 0.12) 0%, rgb(var(--ivory-rgb) / 0.6) 100%)",
-            border: "1px solid var(--accent-line)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            padding: "clamp(0.5rem, 0.4vw, 1.5rem)",
-            opacity: 1
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--stem)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: "0.4rem" }}>
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="16" x2="12" y2="12"></line>
-              <line x1="12" y1="8" x2="12.01" y2="8"></line>
-            </svg>
+        {/* Disclaimer — card spanning the last row's empty slots */}
+        <motion.div variants={itemVariants} className="portfolio-card disclaimer-card">
+          <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+            <InfoIcon />
             <h3 style={{
               fontFamily: "var(--f-display)", fontWeight: 600,
               fontSize: "clamp(0.72rem, 1vw, 0.88rem)",
@@ -265,15 +306,20 @@ export default function PortfolioGallerySlide() {
               Disclaimer
             </h3>
           </div>
-
           <p style={{
-            fontFamily: "var(--f-body)", fontSize: "clamp(0.52rem, 0.7vw, 0.65rem)",
-            color: "var(--tx-2)", lineHeight: 1.2
+            fontFamily: "var(--f-body)", fontSize: "clamp(0.56rem, 0.74vw, 0.7rem)",
+            color: "var(--tx-2)", lineHeight: 1.45,
           }}>
-            The projects and case studies featured on this website represent a selected portfolio of Origin One Labs&apos; work. We have successfully delivered 50+ projects across diverse industries; however, many engagements are protected by confidentiality agreements and cannot be publicly disclosed.
+            {DISCLAIMER}
           </p>
         </motion.div>
       </div>
+
+      {/* Disclaimer — note below the grid when the last row is full */}
+      <motion.p variants={itemVariants} className="disclaimer-note">
+        <InfoIcon size={12} />
+        <span><strong>Disclaimer:</strong> {DISCLAIMER}</span>
+      </motion.p>
     </SlideWrapper>
   );
 }

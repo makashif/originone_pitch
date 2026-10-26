@@ -174,8 +174,24 @@ const p17Features = [
 
 
 
+// ── Project 18 — Digital Health Platform ──
+const p18Features = [
+  { title: "Composite Health Score", desc: "A single score built from energy, sleep, nutrition confidence, cycle wellbeing, and strength — reassessed through the programme, with a domain-by-domain breakdown of what moved and why." },
+  { title: "Personalised Daily Plans", desc: "Protocol-driven daily focus and habit plans across nutrition, movement, and mindfulness — with check-ins, streaks, and progress tracked against each member's goals." },
+  { title: "Clinician Sessions & Messaging", desc: "Video sessions with the care team built into the programme — booking, rescheduling, and joining calls alongside secure messaging, all from the member dashboard." },
+  { title: "Insights & Guided Learning", desc: "Weekly insights generated from check-in data and a curated learning library matched to each member's programme, delivered consistently across web and mobile." },
+];
+
+// ── Project 19 — Vape Local ──
+const p19Features = [
+  { title: "Brand-Led Catalogue & Merchandising", desc: "Brand carousels, category tiles, and spotlight campaigns across disposables, pod kits, nic salts and e-liquids, nicotine pouches, and hardware." },
+  { title: "Deals, Bundles & Clearance", desc: "Promotional banners, bundle pricing, trending lists, and clearance ranges that keep high-volume trade and retail buyers moving to checkout." },
+  { title: "Fulfilment-Aware Shopping", desc: "Free-delivery thresholds, same-day dispatch cut-offs, and Saturday delivery messaging surfaced throughout the journey to drive order timing." },
+  { title: "Accounts, Trade & Compliance", desc: "Customer accounts and trade registration, help and contact channels, VPD information, and regulatory nicotine warnings built into product presentation." },
+];
+
 /* ─────────────────────────────────────────────────────────────
-   PAGE COMPOSITION — 26 Slides
+   PAGE COMPOSITION — 28 Slides
    01 Hero → 02 About → 03 Solutions → 04 Tech → 05 Portfolio Overview →
    06 P1 (Fuutura Wallet) →
    07 P2 (Fuutura Trade) →
@@ -196,7 +212,9 @@ const p17Features = [
    22 P15 (Ads & Payment) →
    23 P16 (E-Commerce Platform) →
    24 P17 (CRM Platform) →
-   25 Why Us → 26 Connect
+   25 P18 (Digital Health Platform) →
+   26 P19 (Vape Local) →
+   27 Why Us → 28 Connect
 ───────────────────────────────────────────────────────────── */
 
 export default function Home() {
@@ -229,8 +247,11 @@ export default function Home() {
         background="/light/fwallet_premium_bg.jpg"
         status="Delivered"
         features={p1Features}
-        mockupSrcSplash="/FwalletS.jpg"
-        mockupSrc="/Fwallet.jpg"
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/fuutura/wallet-web-dashboard.jpg", alt: "Fuutura Wallet dashboard", url: "wallet.fuutura.com" },
+          front: { kind: "web", src: "/screens/fuutura/wallet-web-transactions.jpg", alt: "Fuutura Wallet transaction history", url: "wallet.fuutura.com/activity" },
+        }}
       />
 
       {/* ── Project 02 — Fuutura Trade ── */}
@@ -243,8 +264,11 @@ export default function Home() {
         background="/light/ftrade_premium_bg.jpg"
         status="Delivered"
         features={p2Features}
-        mockupSrcSplash="/FtradeS.jpg"
-        mockupSrc="/Ftrade.jpg"
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/fuutura/trade-web-terminal.jpg", alt: "Fuutura Trade web terminal", url: "trade.fuutura.com" },
+          front: { kind: "phone", src: "/screens/fuutura/trade-mobile.jpg", alt: "Fuutura Trade mobile app" },
+        }}
       />
 
       {/* ── Project 03 — Fuutura Extension ── */}
@@ -257,8 +281,8 @@ export default function Home() {
         background="/light/fextension_premium_bg.jpg"
         status="Delivered"
         features={p3Features}
-        mockupSrcSplash="/FextS.jpg"
-        mockupSrc="/Fext.jpg"
+        mockupSrcSplash="/screens/fuutura/extension-tokens.jpg"
+        mockupSrc="/screens/fuutura/extension-account.jpg"
         mockupType="extension"
       />
 
@@ -272,8 +296,11 @@ export default function Home() {
         background="/light/fkyc_premium_bg.jpg"
         status="Delivered"
         features={p4Features}
-        mockupSrcSplash="/FidS.jpg"
-        mockupSrc="/Fid.jpg"
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/fuutura/id-web-dashboard.jpg", alt: "Fuutura ID identity dashboard", url: "id.fuutura.com" },
+          front: { kind: "phone", src: "/screens/fuutura/id-mobile.jpg", alt: "Fuutura ID mobile app" },
+        }}
       />
 
       {/* ── Project 4b — Fuutura Chat ── */}
@@ -487,6 +514,43 @@ export default function Home() {
         features={p17Features}
         mockupSrc="/new screens/image.png"
         mockupType="laptop"
+      />
+
+      {/* ── Project 18 — Digital Health Platform ── */}
+      <ProjectSlide
+        id="slide-p18"
+        slideNumber="25"
+        title="Digital Health Platform"
+        description="A personalised digital health platform for structured wellbeing programmes — combining a composite health score, daily habit plans, guided learning, and clinician video sessions in one connected experience across web and mobile."
+        domain="HealthTech · Wellbeing · Web & Mobile"
+        background="/light/health_premium_bg.jpg"
+        status="Delivered"
+        features={p18Features}
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/health/web-dashboard.png", alt: "Digital health platform member dashboard", url: "Member dashboard" },
+          phones: [
+            { src: "/screens/health/mobile-today.jpg", alt: "Mobile app — today's plan" },
+            { src: "/screens/health/mobile-score.jpg", alt: "Mobile app — health score" },
+            { src: "/screens/health/mobile-breakdown.jpg", alt: "Mobile app — score breakdown" },
+          ],
+        }}
+      />
+
+      {/* ── Project 19 — Vape Local ── */}
+      <ProjectSlide
+        id="slide-p19"
+        slideNumber="26"
+        title="Vape Local — E-Commerce Platform"
+        description="A high-volume UK vape and nicotine e-commerce platform — brand-led merchandising, deal-driven navigation, and fulfilment-aware shopping across vapes, e-liquids, nicotine pouches, and hardware for trade and retail customers."
+        domain="E-Commerce · Retail · Web"
+        background="/light/ecommerce_premium_bg.jpg"
+        status="Delivered"
+        features={p19Features}
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/vapelocal/web-home.jpg", alt: "Vape Local storefront home page", url: "Vape Local · Storefront", ratio: 16 / 9 },
+        }}
       />
 
       {/* ── 23 Why Origin One ── */}
