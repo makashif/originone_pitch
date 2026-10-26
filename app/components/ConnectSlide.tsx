@@ -4,11 +4,21 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { PopupModal } from "react-calendly";
+import { CONTACT, channelUrl, inquiryText, isChannelAvailable, type Channel, type Inquiry } from "../lib/contact";
+
+const CHANNELS: { id: Channel; label: string; app: string }[] = [
+  { id: "whatsapp", label: "WhatsApp", app: "WhatsApp" },
+  { id: "email", label: "Email", app: "your email app" },
+  { id: "sms", label: "SMS", app: "Messages" },
+];
 
 export default function ConnectSlide() {
   const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true });
   const [showForm, setShowForm] = useState(false);
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sent">("idle");
+  const [sent, setSent] = useState<{ channel: Channel; url: string; text: string } | null>(null);
+  const [copied, setCopied] = useState(false);
+  const channels = CHANNELS.filter((c) => isChannelAvailable(c.id));
   const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
   const [rootElement, setRootElement] = useState<HTMLElement | null>(null);
 
@@ -37,32 +47,53 @@ export default function ConnectSlide() {
     };
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  /* Opens the visitor's own app with the inquiry pre-addressed and
+     pre-written (see lib/contact.ts) — no third-party service. The submit
+     button that was clicked picks the channel; native validation runs
+     first. Opening happens synchronously inside the click so browsers
+     don't treat it as a pop-up. */
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus("submitting");
+    const submitter = (e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null;
+    const channel = (submitter?.value as Channel) || channels[0]?.id;
+    if (!channel) return;
 
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+    const data = new FormData(e.currentTarget);
+    const field = (name: string) => String(data.get(name) ?? "").trim();
+    const inquiry: Inquiry = {
+      name: field("name"),
+      email: field("email"),
+      company: field("company"),
+      phone: field("phone"),
+      projectType: field("project_type"),
+      message: field("message"),
+    };
 
-    // Add hidden honeypot and disable captcha for seamless UX
-    formData.append("_captcha", "false");
-    formData.append("_template", "box");
-
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/makashifkpsph@gmail.com", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        setStatus("success");
-        form.reset();
-      } else {
-        setStatus("error");
-      }
-    } catch (err) {
-      setStatus("error");
+    const url = channelUrl(channel, inquiry);
+    if (channel === "whatsapp") {
+      window.open(url, "_blank", "noopener");
+    } else {
+      window.location.assign(url);
     }
+    setSent({ channel, url, text: inquiryText(inquiry) });
+    setCopied(false);
+    setStatus("sent");
+  };
+
+  const copyMessage = async () => {
+    if (!sent) return;
+    try {
+      await navigator.clipboard.writeText(sent.text);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  const closeForm = () => {
+    setShowForm(false);
+    setStatus("idle");
+    setSent(null);
   };
 
   return (
@@ -200,19 +231,27 @@ export default function ConnectSlide() {
                     overflowY: "auto"
                   }}
                 >
-                  {status === "success" ? (
-                    <div className="stack" style={{ alignItems: "center", textAlign: "center", padding: "2rem 0" }}>
+                  {status === "sent" && sent ? (
+                    <div className="stack" style={{ alignItems: "center", textAlign: "center", padding: "1.5rem 0" }}>
                       <div style={{ width: "56px", height: "56px", borderRadius: "50%", background: "var(--accent-dim)", border: "1px solid var(--accent-line)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.2rem" }}>
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--stem)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                       </div>
-                      <h3 className="t-h3" style={{ marginBottom: "0.5rem" }}>Request Received</h3>
-                      <p className="t-body">We&apos;ll be in touch shortly to discuss your project.</p>
-                      <button className="btn btn-outline" onClick={() => { setShowForm(false); setStatus("idle"); }} style={{ marginTop: "2rem" }}>CLOSE</button>
+                      <h3 className="t-h3" style={{ marginBottom: "0.5rem" }}>One last step</h3>
+                      <p className="t-body" style={{ maxWidth: "400px" }}>
+                        Your inquiry is ready in {CHANNELS.find((c) => c.id === sent.channel)?.app}. Press <strong>Send</strong> there and it reaches us directly.
+                      </p>
+                      <p className="t-sm" style={{ marginTop: "0.6rem", maxWidth: "400px" }}>
+                        Nothing opened? Use the buttons below, or email us at{" "}
+                        <a href={`mailto:${CONTACT.email}`} style={{ color: "var(--stem)" }}>{CONTACT.email}</a>.
+                      </p>
+                      <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap", justifyContent: "center", marginTop: "1.5rem" }}>
+                        <a className="btn btn-filled" href={sent.url} target={sent.channel === "whatsapp" ? "_blank" : undefined} rel="noopener noreferrer" style={{ textDecoration: "none" }}>OPEN AGAIN</a>
+                        <button type="button" className="btn btn-outline" onClick={copyMessage}>{copied ? "COPIED" : "COPY MESSAGE"}</button>
+                        <button type="button" className="btn-ghost" onClick={closeForm} style={{ fontSize: "0.65rem", letterSpacing: "0.1em" }}>CLOSE</button>
+                      </div>
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="stack" style={{ textAlign: "left", gap: "clamp(1rem, 2vh, 1.5rem)" }}>
-                      <input type="hidden" name="_subject" value="New Project Inquiry" />
-
                       <div className="form-row">
                         <div className="stack" style={{ gap: "0.4rem" }}>
                           <label style={{ fontFamily: "var(--f-mono)", fontSize: "0.65rem", letterSpacing: "0.15em", color: "var(--tx-2)" }}>NAME *</label>
@@ -257,21 +296,21 @@ export default function ConnectSlide() {
                         <textarea name="message" required className="form-textarea" placeholder="Tell us about your goals, timeline, and budget range."></textarea>
                       </div>
 
-                      {status === "error" && (
-                        <p className="t-sm" style={{ color: "#c62828", marginTop: "0.5rem" }}>Something went wrong. Please try again or email us directly.</p>
-                      )}
-
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "clamp(1rem, 3vh, 2rem)" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.75rem", marginTop: "clamp(0.75rem, 2.5vh, 1.75rem)" }}>
                         <button type="button" className="btn-ghost" onClick={() => setShowForm(false)} style={{ cursor: "pointer", fontSize: "0.65rem", letterSpacing: "0.1em", transition: "color 0.2s ease" }}>
                           ← CANCEL
                         </button>
 
-                        <button type="submit" className="btn btn-filled" disabled={status === "submitting"}>
-                          {status === "submitting" ? "SENDING..." : "SEND INQUIRY"}
-                          {status !== "submitting" && (
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                          )}
-                        </button>
+                        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap", justifyContent: "flex-end" }}>
+                          <span style={{ fontFamily: "var(--f-mono)", fontSize: "0.6rem", letterSpacing: "0.14em", color: "var(--tx-3)" }}>SEND VIA</span>
+                          {channels.map((c, i) => (
+                            <button key={c.id} type="submit" name="channel" value={c.id}
+                              className={`btn ${i === 0 ? "btn-filled" : "btn-outline"}`}
+                              style={{ padding: "0.6rem 1.1rem" }}>
+                              {c.label.toUpperCase()}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     </form>
                   )}
