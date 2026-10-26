@@ -4,21 +4,14 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { PopupModal } from "react-calendly";
-import { CONTACT, channelUrl, inquiryText, isChannelAvailable, type Channel, type Inquiry } from "../lib/contact";
-
-const CHANNELS: { id: Channel; label: string; app: string }[] = [
-  { id: "whatsapp", label: "WhatsApp", app: "WhatsApp" },
-  { id: "email", label: "Email", app: "your email app" },
-  { id: "sms", label: "SMS", app: "Messages" },
-];
+import { CALENDLY_URL, CONTACT_EMAIL, inquiryText, mailtoUrl, submitToFormspree, type Inquiry } from "../lib/contact";
 
 export default function ConnectSlide() {
   const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true });
   const [showForm, setShowForm] = useState(false);
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
-  const [sent, setSent] = useState<{ channel: Channel; url: string; text: string } | null>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "received" | "fallback">("idle");
+  const [fallback, setFallback] = useState<{ url: string; text: string } | null>(null);
   const [copied, setCopied] = useState(false);
-  const channels = CHANNELS.filter((c) => isChannelAvailable(c.id));
   const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
   const [rootElement, setRootElement] = useState<HTMLElement | null>(null);
 
@@ -47,18 +40,12 @@ export default function ConnectSlide() {
     };
   }, []);
 
-  /* Opens the visitor's own app with the inquiry pre-addressed and
-     pre-written (see lib/contact.ts) — no third-party service. The submit
-     button that was clicked picks the channel; native validation runs
-     first. Opening happens synchronously inside the click so browsers
-     don't treat it as a pop-up. */
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  /* Formspree first (lib/contact.ts). If it fails, fall back to the
+     visitor's own email app with the inquiry pre-written to us. */
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const submitter = (e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null;
-    const channel = (submitter?.value as Channel) || channels[0]?.id;
-    if (!channel) return;
-
-    const data = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const data = new FormData(form);
     const field = (name: string) => String(data.get(name) ?? "").trim();
     const inquiry: Inquiry = {
       name: field("name"),
@@ -69,21 +56,24 @@ export default function ConnectSlide() {
       message: field("message"),
     };
 
-    const url = channelUrl(channel, inquiry);
-    if (channel === "whatsapp") {
-      window.open(url, "_blank", "noopener");
-    } else {
-      window.location.assign(url);
+    setStatus("sending");
+    if (await submitToFormspree(inquiry)) {
+      form.reset();
+      setStatus("received");
+      return;
     }
-    setSent({ channel, url, text: inquiryText(inquiry) });
+
+    const url = mailtoUrl(inquiry);
+    setFallback({ url, text: inquiryText(inquiry) });
     setCopied(false);
-    setStatus("sent");
+    setStatus("fallback");
+    window.location.assign(url);
   };
 
   const copyMessage = async () => {
-    if (!sent) return;
+    if (!fallback) return;
     try {
-      await navigator.clipboard.writeText(sent.text);
+      await navigator.clipboard.writeText(fallback.text);
       setCopied(true);
     } catch {
       setCopied(false);
@@ -93,7 +83,7 @@ export default function ConnectSlide() {
   const closeForm = () => {
     setShowForm(false);
     setStatus("idle");
-    setSent(null);
+    setFallback(null);
   };
 
   return (
@@ -204,7 +194,7 @@ export default function ConnectSlide() {
                       Start a Project
                     </button>
 
-                    <button id="cta-consult" className="btn btn-outline" onClick={() => { /* setIsCalendlyOpen(true) */ }}>
+                    <button id="cta-consult" className="btn btn-outline" onClick={() => setIsCalendlyOpen(true)}>
                       Schedule a Consultation
                     </button>
                   </motion.div>
@@ -231,24 +221,34 @@ export default function ConnectSlide() {
                     overflowY: "auto"
                   }}
                 >
-                  {status === "sent" && sent ? (
+                  {status === "received" || (status === "fallback" && fallback) ? (
                     <div className="stack" style={{ alignItems: "center", textAlign: "center", padding: "1.5rem 0" }}>
                       <div style={{ width: "56px", height: "56px", borderRadius: "50%", background: "var(--accent-dim)", border: "1px solid var(--accent-line)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.2rem" }}>
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--stem)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                       </div>
-                      <h3 className="t-h3" style={{ marginBottom: "0.5rem" }}>One last step</h3>
-                      <p className="t-body" style={{ maxWidth: "400px" }}>
-                        Your inquiry is ready in {CHANNELS.find((c) => c.id === sent.channel)?.app}. Press <strong>Send</strong> there and it reaches us directly.
-                      </p>
-                      <p className="t-sm" style={{ marginTop: "0.6rem", maxWidth: "400px" }}>
-                        Nothing opened? Use the buttons below, or email us at{" "}
-                        <a href={`mailto:${CONTACT.email}`} style={{ color: "var(--stem)" }}>{CONTACT.email}</a>.
-                      </p>
-                      <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap", justifyContent: "center", marginTop: "1.5rem" }}>
-                        <a className="btn btn-filled" href={sent.url} target={sent.channel === "whatsapp" ? "_blank" : undefined} rel="noopener noreferrer" style={{ textDecoration: "none" }}>OPEN AGAIN</a>
-                        <button type="button" className="btn btn-outline" onClick={copyMessage}>{copied ? "COPIED" : "COPY MESSAGE"}</button>
-                        <button type="button" className="btn-ghost" onClick={closeForm} style={{ fontSize: "0.65rem", letterSpacing: "0.1em" }}>CLOSE</button>
-                      </div>
+                      {status === "received" ? (
+                        <>
+                          <h3 className="t-h3" style={{ marginBottom: "0.5rem" }}>Inquiry received</h3>
+                          <p className="t-body" style={{ maxWidth: "400px" }}>Thank you — we&apos;ll be in touch shortly to discuss your project.</p>
+                          <button type="button" className="btn btn-outline" onClick={closeForm} style={{ marginTop: "1.75rem" }}>CLOSE</button>
+                        </>
+                      ) : fallback && (
+                        <>
+                          <h3 className="t-h3" style={{ marginBottom: "0.5rem" }}>One last step</h3>
+                          <p className="t-body" style={{ maxWidth: "400px" }}>
+                            We couldn&apos;t send your inquiry directly, so it&apos;s ready in your email app instead. Press <strong>Send</strong> there and it reaches us.
+                          </p>
+                          <p className="t-sm" style={{ marginTop: "0.6rem", maxWidth: "400px" }}>
+                            Nothing opened? Use the buttons below, or email us at{" "}
+                            <a href={`mailto:${CONTACT_EMAIL}`} style={{ color: "var(--stem)" }}>{CONTACT_EMAIL}</a>.
+                          </p>
+                          <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap", justifyContent: "center", marginTop: "1.5rem" }}>
+                            <a className="btn btn-filled" href={fallback.url} style={{ textDecoration: "none" }}>OPEN EMAIL APP</a>
+                            <button type="button" className="btn btn-outline" onClick={copyMessage}>{copied ? "COPIED" : "COPY MESSAGE"}</button>
+                            <button type="button" className="btn-ghost" onClick={closeForm} style={{ fontSize: "0.65rem", letterSpacing: "0.1em" }}>CLOSE</button>
+                          </div>
+                        </>
+                      )}
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="stack" style={{ textAlign: "left", gap: "clamp(1rem, 2vh, 1.5rem)" }}>
@@ -301,16 +301,12 @@ export default function ConnectSlide() {
                           ← CANCEL
                         </button>
 
-                        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap", justifyContent: "flex-end" }}>
-                          <span style={{ fontFamily: "var(--f-mono)", fontSize: "0.6rem", letterSpacing: "0.14em", color: "var(--tx-3)" }}>SEND VIA</span>
-                          {channels.map((c, i) => (
-                            <button key={c.id} type="submit" name="channel" value={c.id}
-                              className={`btn ${i === 0 ? "btn-filled" : "btn-outline"}`}
-                              style={{ padding: "0.6rem 1.1rem" }}>
-                              {c.label.toUpperCase()}
-                            </button>
-                          ))}
-                        </div>
+                        <button type="submit" className="btn btn-filled" disabled={status === "sending"}>
+                          {status === "sending" ? "SENDING..." : "SEND INQUIRY"}
+                          {status !== "sending" && (
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                          )}
+                        </button>
                       </div>
                     </form>
                   )}
@@ -332,7 +328,7 @@ export default function ConnectSlide() {
       {/* Calendly Popup Modal */}
       {rootElement && (
         <PopupModal
-          url="https://calendly.com/your-username-here" /* REPLACE THIS WITH YOUR CALENDLY URL */
+          url={CALENDLY_URL}
           onModalClose={() => setIsCalendlyOpen(false)}
           open={isCalendlyOpen}
           rootElement={rootElement}

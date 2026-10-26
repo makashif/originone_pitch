@@ -1,24 +1,15 @@
 /* ─────────────────────────────────────────────────────────────
-   Contact channels for the "Start a Project" form.
+   "Start a Project" form delivery.
 
-   No third-party service, account, SMTP login or API key: the form
-   builds the inquiry and opens it, pre-addressed and pre-written, in
-   the visitor's own app — Mail, Messages or WhatsApp. They press Send,
-   and it arrives from their own address/number, so we can reply
-   straight back.
-
-   Fill in the numbers below in international format (country code
-   first, e.g. "+971501234567"). A channel with no number is hidden.
+   1. Formspree emails the inquiry to us in the background.
+   2. If that fails (offline, blocked, service down, rate-limited), the
+      form falls back to the visitor's own email app: a mailto: link with
+      the inquiry pre-addressed and pre-written, so they just press Send.
 ───────────────────────────────────────────────────────────── */
-export const CONTACT = {
-  email: "hello@originonelabs.com",
-  /** Receives the inquiry as a text message (SMS). */
-  smsNumber: "",
-  /** Receives the inquiry on WhatsApp. */
-  whatsappNumber: "",
-};
+export const CONTACT_EMAIL = "hello@originonelabs.com";
 
-export type Channel = "whatsapp" | "email" | "sms";
+/** Override per deployment with NEXT_PUBLIC_FORMSPREE_FORM_ID. */
+const FORMSPREE_FORM_ID = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || "xojoonad";
 
 export interface Inquiry {
   name: string;
@@ -47,24 +38,34 @@ export function inquiryText(q: Inquiry): string {
   ].join("\n");
 }
 
-const digits = (n: string) => n.replace(/[^\d]/g, "");
-
-export function isChannelAvailable(channel: Channel): boolean {
-  if (channel === "email") return !!CONTACT.email;
-  if (channel === "sms") return !!digits(CONTACT.smsNumber);
-  return !!digits(CONTACT.whatsappNumber);
+/** Opens the visitor's email app with the inquiry ready to send. */
+export function mailtoUrl(q: Inquiry): string {
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(inquiryText(q))}`;
 }
 
-/** URL that opens the visitor's app with the inquiry ready to send. */
-export function channelUrl(channel: Channel, q: Inquiry): string {
-  const text = inquiryText(q);
-  switch (channel) {
-    case "whatsapp":
-      return `https://wa.me/${digits(CONTACT.whatsappNumber)}?text=${encodeURIComponent(text)}`;
-    case "email":
-      return `mailto:${CONTACT.email}?subject=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(text)}`;
-    case "sms":
-      // "?&body=" is understood by both iOS ("&body") and Android ("?body").
-      return `sms:+${digits(CONTACT.smsNumber)}?&body=${encodeURIComponent(text)}`;
+export async function submitToFormspree(q: Inquiry): Promise<boolean> {
+  try {
+    const res = await fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        _subject: SUBJECT,
+        _replyto: q.email,
+        name: q.name,
+        email: q.email,
+        company: q.company || undefined,
+        phone: q.phone || undefined,
+        project_type: q.projectType || undefined,
+        message: q.message,
+      }),
+    });
+    return res.ok;
+  } catch {
+    return false;
   }
 }
+
+/* "Schedule a Consultation" — Calendly booking page. Override per
+   deployment with NEXT_PUBLIC_CALENDLY_URL; same default as the main site. */
+export const CALENDLY_URL =
+  process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/hello-originonelabs/30min";
