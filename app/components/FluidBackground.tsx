@@ -3,6 +3,17 @@
 import { useEffect, useRef } from "react";
 import WebGLFluid from "webgl-fluid-enhanced";
 
+function isWebGLAvailable() {
+  try {
+    const canvas = document.createElement("canvas");
+    const gl = canvas.getContext("webgl2") ?? canvas.getContext("webgl");
+    gl?.getExtension("WEBGL_lose_context")?.loseContext();
+    return !!gl;
+  } catch {
+    return false;
+  }
+}
+
 export default function FluidBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
   const initializedRef = useRef(false);
@@ -11,8 +22,18 @@ export default function FluidBackground() {
     if (!containerRef.current || initializedRef.current) return;
     initializedRef.current = true;
 
-    // Initialize the WebGL Fluid simulation
-    const fluid = new WebGLFluid(containerRef.current);
+    // Purely decorative: where WebGL is unavailable (blocked, an old or
+    // blacklisted GPU, or the browser's context limit reached) skip the
+    // effect instead of crashing the deck. webgl-fluid-enhanced assumes a
+    // working context and does not null-check it itself.
+    if (!isWebGLAvailable()) return;
+
+    let fluid: WebGLFluid;
+    try {
+      fluid = new WebGLFluid(containerRef.current);
+    } catch {
+      return;
+    }
     fluid.setConfig({
       hover: true,
       densityDissipation: 4,

@@ -38,6 +38,9 @@ MOBILE_JOBS = [
     ("Home (30).png", "wallet-mobile-home.jpg"),
     ("Splash (8).png", "chat-mobile-splash.jpg"),
     ("Chat.png", "chat-mobile-list.jpg"),
+    # Supplied straight into public/ (2x captures, ~4 MB each).
+    (os.path.join(OUT, "vpn-mobile-splash.png"), "vpn-mobile-splash.jpg"),
+    (os.path.join(OUT, "vpn-mobile-connected.png"), "vpn-mobile-connected.jpg"),
 ]
 
 PHONES = {"trade-mobile.jpg", "id-mobile.jpg"}

@@ -331,8 +331,8 @@ export default function Home() {
         background="/light/fvpn_premium_bg.jpg"
         status="Delivered"
         features={pVpnFeatures}
-        mockupSrcSplash="/FvpnS.jpg"
-        mockupSrc="/Fvpn.jpg"
+        mockupSrcSplash="/screens/fuutura/vpn-mobile-splash.jpg"
+        mockupSrc="/screens/fuutura/vpn-mobile-connected.jpg"
         mockupType="mobile"
       />
 
