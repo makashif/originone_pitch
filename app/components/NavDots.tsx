@@ -31,12 +31,12 @@ export default function NavDots() {
             width: current === i ? "28px" : "8px",
             height: "8px",
             borderRadius: "99px",
-            background: current === i ? "var(--tri)" : "rgba(11,12,16,0.2)",
+            background: current === i ? "var(--stem)" : "rgba(11,12,16,0.16)",
             border: "none",
             cursor: "pointer",
             padding: 0,
             transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-            boxShadow: current === i ? "0 0 10px rgba(28,200,208,0.55)" : "none",
+            boxShadow: current === i ? "0 0 10px rgba(42,180,245,0.55)" : "none",
           }}
         />
       ))}

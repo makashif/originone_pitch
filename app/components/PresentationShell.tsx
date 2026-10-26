@@ -280,8 +280,8 @@ export default function PresentationShell({ children }: { children: ReactNode })
           left: 0,
           height: "2px",
           width: `${((current + 1) / SLIDES.length) * 100}%`,
-          background: "var(--tri-hi)",
-          boxShadow: "0 0 12px rgba(28,200,208,0.6)",
+          background: "linear-gradient(90deg, var(--stem), var(--stem-bright))",
+          boxShadow: "0 0 12px rgba(42,180,245,0.6)",
           zIndex: 1000,
           transition: "width 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
         }}

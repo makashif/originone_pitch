@@ -1,30 +1,22 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { MARK_VIEWBOX } from "./components/BrandMark";
 
-/* Social share card — Brand kit V2, light mode: Ink ring + Turquoise
-   Cyan stem on Ivory, matching the main originonelabs.com theme. */
+/* Social share card — mirrors the deck's cover: stacked brand lockup,
+   "Company Profile" title, tagline, and corner meta, in Cyan Blue on
+   Ivory. Centred so it survives the square crop WhatsApp and others
+   apply to small previews. */
 
-export const alt = "Origin One Labs — AI-Native Technology & Engineering Partner. Build what matters.";
+export const alt = "Origin One Labs — Company Profile. AI-native technology and engineering partner. Build what matters.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 const IVORY = "#f6f5f0";
 const INK = "#0b0c10";
-const STEM = "#0a8c93";
-
-/* The mark, drawn from the brand kit's proportions: a ring whose
-   stroke equals the stem width, the stem running ~1.6× the ring. */
-function Mark({ ring }: { ring: number }) {
-  const stroke = ring * 0.17;
-  const stemH = ring * 1.6;
-  return (
-    <div style={{ position: "relative", display: "flex", width: ring, height: stemH, alignItems: "center", justifyContent: "center" }}>
-      <div style={{ width: ring, height: ring, borderRadius: ring, border: `${stroke}px solid ${INK}` }} />
-      <div style={{ position: "absolute", left: (ring - stroke) / 2, top: 0, width: stroke, height: stemH, background: STEM }} />
-    </div>
-  );
-}
+const CYAN = "#0a78c2";
+const CYAN_HI = "#2ab4f5";
+const MUTED = "rgba(11,12,16,0.56)";
 
 export default async function Image() {
   const dir = join(process.cwd(), "app/_og");
@@ -33,6 +25,9 @@ export default async function Image() {
     readFile(join(dir, "PlusJakartaSans-700.woff")),
   ]);
 
+  const meta = { fontSize: 17, fontWeight: 700, letterSpacing: "0.22em", color: MUTED } as const;
+  const rule = { flex: 1, height: 1, margin: "0 24px", background: "rgba(10,120,194,0.28)" } as const;
+
   return new ImageResponse(
     (
       <div
@@ -40,52 +35,61 @@ export default async function Image() {
           width: "100%",
           height: "100%",
           display: "flex",
-          position: "relative",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "space-between",
           background: IVORY,
           backgroundImage:
-            "linear-gradient(rgba(11,12,16,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(11,12,16,0.045) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
+            "radial-gradient(circle at 50% 46%, rgba(42,180,245,0.14) 0%, rgba(246,245,240,0) 46%), linear-gradient(rgba(11,12,16,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(11,12,16,0.04) 1px, transparent 1px)",
+          backgroundSize: "100% 100%, 60px 60px, 60px 60px",
           fontFamily: "Jakarta",
           color: INK,
-          padding: "72px 80px",
+          padding: "44px 64px 0",
         }}
       >
-        {/* Copy */}
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", flex: 1 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-            <Mark ring={30} />
-            <div style={{ fontSize: 24, fontWeight: 700, letterSpacing: "0.16em" }}>ORIGIN ONE LABS</div>
-          </div>
+        {/* Header meta */}
+        <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
+          <div style={meta}>COMPANY PROFILE</div>
+          <div style={rule} />
+          <div style={meta}>EDITION 2026</div>
+        </div>
 
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ fontSize: 112, fontWeight: 700, lineHeight: 0.98, letterSpacing: "-0.03em" }}>Build What</div>
-            <div style={{ fontSize: 112, fontWeight: 700, lineHeight: 0.98, letterSpacing: "-0.03em", color: "#0a6a70" }}>Matters</div>
-            <div style={{ marginTop: 30, fontSize: 28, fontWeight: 500, color: "rgba(11,12,16,0.7)" }}>
-              AI-Native Technology & Engineering Partner
-            </div>
+        {/* Lockup */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          {/* The OG renderer needs fixed pixel dimensions on the <svg>. */}
+          <svg
+            width={Math.round((150 * MARK_VIEWBOX.w) / MARK_VIEWBOX.h)}
+            height={150}
+            viewBox={`${MARK_VIEWBOX.x} ${MARK_VIEWBOX.y} ${MARK_VIEWBOX.w} ${MARK_VIEWBOX.h}`}
+          >
+            <path
+              fill={INK}
+              fillRule="evenodd"
+              d="M200 122a78 78 0 1 1 0 156a78 78 0 1 1 0-156zM200 148a52 52 0 1 0 0 104a52 52 0 1 0 0-104z"
+            />
+            <rect fill={CYAN} x="187" y="74" width="26" height="252" />
+          </svg>
+          <div style={{ marginTop: 26, fontSize: 68, fontWeight: 700, letterSpacing: "0.14em", paddingLeft: "0.14em", lineHeight: 1 }}>
+            ORIGIN ONE LABS
           </div>
-
-          <div style={{ display: "flex", fontSize: 20, fontWeight: 500, letterSpacing: "0.08em", color: "rgba(11,12,16,0.55)" }}>
-            originonelabs.com
+          <div style={{ marginTop: 24, width: 72, height: 3, borderRadius: 3, backgroundImage: `linear-gradient(90deg, ${CYAN}, ${CYAN_HI})` }} />
+          <div style={{ marginTop: 20, fontSize: 22, fontWeight: 700, letterSpacing: "0.42em", paddingLeft: "0.42em", color: CYAN }}>
+            COMPANY PROFILE
+          </div>
+          <div style={{ display: "flex", marginTop: 14, fontSize: 36, fontWeight: 500, letterSpacing: "-0.01em" }}>
+            Build What&nbsp;<span style={{ color: CYAN, fontWeight: 700 }}>Matters.</span>
           </div>
         </div>
 
-        {/* Large mark */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 360 }}>
-          <Mark ring={250} />
+        {/* Footer meta + Cyan Blue bar */}
+        <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+          <div style={{ display: "flex", alignItems: "center", width: "100%", paddingBottom: 30 }}>
+            <div style={{ ...meta, letterSpacing: "0.08em", fontWeight: 500 }}>originonelabs.com</div>
+            <div style={rule} />
+            <div style={{ ...meta, letterSpacing: "0.08em", fontWeight: 500 }}>AI-Native Technology & Engineering Partner</div>
+          </div>
+          <div style={{ display: "flex", height: 10, margin: "0 -64px", backgroundImage: `linear-gradient(90deg, ${CYAN}, ${CYAN_HI})` }} />
         </div>
-
-        {/* Tri-stem bar — all three colourways */}
-        <div
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: 10,
-            backgroundImage: "linear-gradient(90deg, #1cc8d0, #2ab4f5, #5fe3b8)",
-          }}
-        />
       </div>
     ),
     {

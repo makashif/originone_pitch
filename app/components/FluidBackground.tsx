@@ -22,7 +22,7 @@ export default function FluidBackground() {
       splatRadius: 0.1,
       shading: true,
       colorful: true,
-      colorPalette: ["#1cc8d0", "#2ab4f5", "#5fe3b8"], // the three brand stems
+      colorPalette: ["#2ab4f5", "#5cc6f7", "#2ab4f5"], // Cyan Blue, the primary stem
       bloom: false,
       bloomIterations: 8,
       bloomResolution: 256,

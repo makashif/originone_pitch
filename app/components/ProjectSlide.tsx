@@ -62,7 +62,7 @@ export default function ProjectSlide({
                 borderRadius: "999px",
                 background: "var(--accent-dim)",
                 fontFamily: "var(--f-body)", fontSize: "0.58rem",
-                letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--stem-ink)", fontWeight: 600
+                letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--stem)", fontWeight: 600
               }}>
               <motion.span
                 animate={{ opacity: [0.3, 1, 0.3] }}

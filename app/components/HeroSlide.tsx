@@ -2,115 +2,108 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import BrandMark from "./BrandMark";
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
+/* Cover — Company Profile.
+   Hierarchy follows the brand kit's stacked lockup: the mark and the
+   ORIGIN ONE LABS wordmark lead, then the document title, then the
+   tagline and positioning line. Corner meta frames it like a printed
+   corporate cover. */
 export default function HeroSlide() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
+  const show = (delay: number, y = 14) => ({
+    initial: { opacity: 0, y },
+    animate: inView ? { opacity: 1, y: 0 } : {},
+    transition: { duration: 0.85, delay, ease },
+  });
 
   return (
     <section
       ref={ref}
       id="slide-hero"
-      className="slide"
+      className="slide cover"
       style={{ alignItems: "center", justifyContent: "center", textAlign: "center" }}
     >
-      {/* Background */}
+      {/* Background — the embossed mark render, washed toward Ivory */}
       <div
         className="slide-bg"
         style={{ backgroundImage: "url('/light/hero_corporate_bg.jpg')", backgroundPosition: "center 30%" }}
       />
       <div
         className="slide-overlay"
-        style={{ background: "linear-gradient(180deg, rgba(246,245,240,0.3) 0%, rgba(246,245,240,0.68) 42%, rgba(246,245,240,0.97) 100%)" }}
+        style={{ background: "radial-gradient(ellipse 70% 62% at 50% 50%, rgba(246,245,240,0.9) 0%, rgba(246,245,240,0.72) 60%, rgba(246,245,240,0.5) 100%)" }}
       />
 
+      {/* ── Corner meta: document header / footer ── */}
+      <motion.div className="cover-meta cover-meta-top" {...show(0.1, 0)}>
+        <span>Company Profile</span>
+        <span className="cover-meta-rule" />
+        <span>Edition 2026</span>
+      </motion.div>
+      <motion.div className="cover-meta cover-meta-bottom" {...show(1.1, 0)}>
+        <span>originonelabs.com</span>
+        <span className="cover-meta-rule" />
+        <span>hello@originonelabs.com</span>
+      </motion.div>
+
       {/* ── Content ── */}
-      <div className="slide-content" style={{
-        display: "flex", flexDirection: "column", alignItems: "center",
-        gap: "clamp(0.8rem, 1.6vh, 1.4rem)",
-        maxWidth: "900px", margin: "0 auto", padding: "0 1rem",
-      }}>
+      <div className="slide-content cover-content">
 
-        {/* Eyebrow */}
-        <motion.p
-          className="t-label eyebrow"
-          style={{ letterSpacing: "0.28em", alignSelf: "center" }}
-          initial={{ opacity: 0, y: 8 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.18 }}
+        {/* Logo lockup — stacked, as in the brand kit */}
+        <motion.div
+          className="cover-mark"
+          initial={{ opacity: 0, scale: 0.86 }}
+          animate={inView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 1.1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         >
-          Origin One Labs · AI-Native Technology & Engineering Partner
-        </motion.p>
+          <BrandMark height="100%" />
+        </motion.div>
 
-        {/* Headline */}
-        <motion.h1
-          className="t-hero"
-          style={{ color: "var(--ink)" }}
-          initial={{ opacity: 0, y: 36 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.95, delay: 0.32, ease }}
-        >
-          Build What<br />
-          <span className="t-dim">Matters</span>
+        <motion.h1 className="cover-wordmark" {...show(0.35, 18)}>
+          ORIGIN ONE LABS
         </motion.h1>
 
-        {/* Sub */}
-        <motion.div
-          style={{ display: "flex", flexDirection: "column", gap: "0.5rem", alignItems: "center", maxWidth: "600px", textAlign: "center" }}
-          initial={{ opacity: 0, y: 14 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.55 }}
-        >
-          <p className="t-body" style={{ fontWeight: 500, color: "var(--tx-1)" }}>
-            Technology, AI, and Engineering Solutions Built for Real Business Growth.
-          </p>
-          <p className="t-body">
-            Origin One Labs is an AI-native technology and engineering partner that designs, builds, and scales intelligent digital systems for modern businesses.
-          </p>
-        </motion.div>
-
-        {/* Rule */}
         <motion.span
-          className="rule rule-stem"
-          style={{ transformOrigin: "center", width: "48px" }}
+          className="cover-rule"
           initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}}
-          transition={{ duration: 0.55, delay: 0.78 }}
+          transition={{ duration: 0.7, delay: 0.55, ease }}
         />
 
-        {/* Tech stack pills */}
-        <motion.div
-          style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", justifyContent: "center" }}
-          initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.9 }}
-        >
-          {["AI", "Web2", "Web3", "Enterprise", "Mobile"].map((tag) => (
-            <span key={tag} className="tech-badge" style={{ fontSize: "0.54rem" }}>{tag}</span>
-          ))}
-        </motion.div>
+        {/* Document title */}
+        <motion.p className="cover-title" {...show(0.65)}>
+          Company Profile
+        </motion.p>
 
         {/* Tagline */}
-        <motion.p
-          className="t-mono"
-          style={{ marginTop: "0.2rem" }}
-          initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 1.05 }}
-        >
-          End-to-end. Production-grade. No shortcuts.
+        <motion.p className="cover-tagline" {...show(0.78)}>
+          Build What <span className="t-dim">Matters.</span>
         </motion.p>
+
+        {/* Positioning */}
+        <motion.p className="t-body cover-lede" {...show(0.9)}>
+          An AI-native technology and engineering partner — designing, building,
+          and scaling intelligent digital systems for modern businesses.
+        </motion.p>
+
+        {/* Capability pills */}
+        <motion.div className="cover-pills" {...show(1.0, 0)}>
+          {["AI Systems", "Web & Mobile", "Web3", "Enterprise", "Cloud"].map((tag) => (
+            <span key={tag} className="tech-badge">{tag}</span>
+          ))}
+        </motion.div>
       </div>
 
       {/* Scroll indicator */}
       <motion.div
-        className="no-print"
+        className="no-print cover-scroll"
         initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 1, delay: 1.3 }}
-        style={{
-          position: "absolute", bottom: "clamp(1.2rem, 3vh, 2rem)",
-          left: "50%", transform: "translateX(-50%)",
-          display: "flex", flexDirection: "column", alignItems: "center", zIndex: 2,
-        }}
+        transition={{ duration: 1, delay: 1.4 }}
       >
         <svg width="14" height="22" viewBox="0 0 14 22" fill="none"
           style={{ animation: "bounce 2.2s ease-in-out infinite" }} aria-hidden="true">
-          <path d="M7 3L7 19M7 19L2 13M7 19L12 13" stroke="rgba(11,12,16,0.3)"
+          <path d="M7 3L7 19M7 19L2 13M7 19L12 13" stroke="var(--stem)"
             strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </motion.div>

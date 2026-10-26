@@ -51,7 +51,7 @@ export default function PdfExportOverlay({ isExporting, progress, total }: PdfEx
           <motion.div
             style={{
               height: "100%",
-              background: "var(--tri-hi)",
+              background: "linear-gradient(90deg, var(--stem), var(--stem-bright))",
             }}
             initial={{ width: 0 }}
             animate={{ width: `${percentage}%` }}
