@@ -16,7 +16,8 @@ from screen_utils import flatten_corners, save_jpeg  # noqa: E402
 PUBLIC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "public")
 
 JOBS = [
-    ("hrms.png", "hrms.jpg"),
+    # Updated HRMS admin dashboard (employees, attendance, leave, payroll).
+    (os.path.expanduser("~/Downloads/Dashboard.png"), "hrms.jpg"),
     ("D24.png", "digital24.jpg"),
     ("new screens/IMG_8589.png", "clinic.jpg"),
     ("new screens/IMG_8591.png", "manufacturing.jpg"),

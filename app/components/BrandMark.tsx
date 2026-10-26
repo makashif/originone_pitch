@@ -9,7 +9,7 @@ export const MARK_VIEWBOX = { x: 122, y: 74, w: 156, h: 252 };
 export default function BrandMark({
   height,
   ring = "#0b0c10",
-  stem = "#0a78c2",
+  stem = "#0a8c93",
   style,
 }: {
   height: number | string;

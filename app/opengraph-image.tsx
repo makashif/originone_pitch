@@ -4,7 +4,7 @@ import { join } from "node:path";
 import { MARK_VIEWBOX } from "./components/BrandMark";
 
 /* Social share card — mirrors the deck's cover: stacked brand lockup,
-   "Company Profile" title, tagline, and corner meta, in Cyan Blue on
+   "Company Profile" title, tagline, and corner meta, in Turquoise Cyan on
    Ivory. Centred so it survives the square crop WhatsApp and others
    apply to small previews. */
 
@@ -14,8 +14,8 @@ export const contentType = "image/png";
 
 const IVORY = "#f6f5f0";
 const INK = "#0b0c10";
-const CYAN = "#0a78c2";
-const CYAN_HI = "#2ab4f5";
+const CYAN = "#0a8c93";
+const CYAN_HI = "#1cc8d0";
 const MUTED = "rgba(11,12,16,0.56)";
 
 export default async function Image() {
@@ -26,7 +26,7 @@ export default async function Image() {
   ]);
 
   const meta = { fontSize: 17, fontWeight: 700, letterSpacing: "0.22em", color: MUTED } as const;
-  const rule = { flex: 1, height: 1, margin: "0 24px", background: "rgba(10,120,194,0.28)" } as const;
+  const rule = { flex: 1, height: 1, margin: "0 24px", background: "rgba(10,140,147,0.28)" } as const;
 
   return new ImageResponse(
     (
@@ -40,7 +40,7 @@ export default async function Image() {
           justifyContent: "space-between",
           background: IVORY,
           backgroundImage:
-            "radial-gradient(circle at 50% 46%, rgba(42,180,245,0.14) 0%, rgba(246,245,240,0) 46%), linear-gradient(rgba(11,12,16,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(11,12,16,0.04) 1px, transparent 1px)",
+            "radial-gradient(circle at 50% 46%, rgba(28,200,208,0.14) 0%, rgba(246,245,240,0) 46%), linear-gradient(rgba(11,12,16,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(11,12,16,0.04) 1px, transparent 1px)",
           backgroundSize: "100% 100%, 60px 60px, 60px 60px",
           fontFamily: "Jakarta",
           color: INK,
@@ -81,7 +81,7 @@ export default async function Image() {
           </div>
         </div>
 
-        {/* Footer meta + Cyan Blue bar */}
+        {/* Footer meta + Turquoise Cyan bar */}
         <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
           <div style={{ display: "flex", alignItems: "center", width: "100%", paddingBottom: 30 }}>
             <div style={{ ...meta, letterSpacing: "0.08em", fontWeight: 500 }}>originonelabs.com</div>

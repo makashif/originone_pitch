@@ -28,6 +28,11 @@ interface ProjectSlideProps {
   topMaxWidth?: string;
 }
 
+const mockupVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] as const } },
+};
+
 export default function ProjectSlide({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   id, slideNumber, title, description, domain, background, status, features, mockupSrc, mockupSrcSplash, mockupType = "mobile", showcase, topMaxWidth = "620px",
@@ -37,11 +42,11 @@ export default function ProjectSlide({
       {/* Full-height positioning context */}
       <div className="project-slide-frame">
 
-        {/* ── Top: label + title + description + divider ── */}
-        <div className="stack stack-sm" style={{ maxWidth: topMaxWidth }}>
+        {/* ── Header: label + title + description + divider ── */}
+        <div className="stack stack-sm">
 
           {/* Top row */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingBottom: "0.2rem" }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <motion.p className="t-label eyebrow" variants={itemVariants} style={{ position: "relative", overflow: "hidden" }}>
               <motion.span
                 className="label-shimmer"
@@ -56,28 +61,8 @@ export default function ProjectSlide({
                   pointerEvents: "none"
                 }}
               />
-              {slideNumber} / Project Overview
+              {slideNumber.padStart(2, "0")} / Project Overview
             </motion.p>
-            <motion.span variants={itemVariants}
-              style={{
-                display: "inline-flex", alignItems: "center", gap: "0.45rem",
-                padding: "0.28rem 0.85rem", border: "1px solid var(--accent-line)",
-                borderRadius: "999px",
-                background: "var(--accent-dim)",
-                fontFamily: "var(--f-body)", fontSize: "0.58rem",
-                letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--stem)", fontWeight: 600
-              }}>
-              <motion.span
-                animate={{ opacity: [0.3, 1, 0.3] }}
-                transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-                style={{
-                  width: "6px", height: "6px", borderRadius: "50%",
-                  background: status === "Delivered" ? "var(--stem-bright)" : "var(--border-strong)",
-                  boxShadow: status === "Delivered" ? "0 0 8px 1px rgb(var(--stem-bright-rgb) / 0.7)" : "none"
-                }}
-              />
-              {status}
-            </motion.span>
           </div>
 
           {/* Domain + title */}
@@ -85,28 +70,28 @@ export default function ProjectSlide({
             {/* <motion.p className="t-mono" variants={itemVariants} style={{ color: "var(--accent)", opacity: 0.6 }}>
               {domain}
             </motion.p> */}
-            <motion.h2 className="t-h3" variants={itemVariants} style={{ maxWidth: "900px" }}>
+            <motion.h2 className="t-h3" variants={itemVariants} style={{ maxWidth: topMaxWidth }}>
               {title}
             </motion.h2>
           </div>
 
+          {/* Overview Description */}
+          <motion.p className="t-body" variants={itemVariants} style={{ maxWidth: "900px" }}>
+            {description}
+          </motion.p>
+
+          <motion.div variants={itemVariants} style={{ borderBottom: "1px solid var(--border)", margin: "0.25rem 0", maxWidth: "900px" }} />
+
         </div>
 
-        {/* ── Bottom row: features grid + mockup, both bottom-aligned ── */}
+        {/* ── Row: Key Features + screens, sharing one top line ── */}
         <div className="project-slide-row">
 
-          {/* Left: description + divider + features grid */}
+          {/* Left: features grid */}
           <div className="stack stack-sm project-slide-left">
 
-            {/* Overview Description */}
-            <motion.p className="t-body" variants={itemVariants} style={{ maxWidth: "900px" }}>
-              {description}
-            </motion.p>
-
-            <motion.div variants={itemVariants} style={{ borderBottom: "1px solid var(--border)", margin: "0.25rem 0", maxWidth: "900px" }} />
-
             {/* Key Features (2x2 Grid) */}
-            <div className="feature-grid">
+            <div className="feature-grid" style={{ marginTop: 0 }}>
               {features.map((f, i) => (
                 <motion.div
                   key={i}
@@ -168,13 +153,10 @@ export default function ProjectSlide({
 
           {/* Right Area Wrapper — takes the remaining space on the right */}
           <div className="mockup-positioning project-slide-right">
-            {/* Device Mockup */}
+            {/* Device Mockup — fades in without moving, so a PDF export taken
+                mid-reveal can never shift the screens off the features' top line. */}
             <motion.div
-              variants={itemVariants}
-              animate={{ y: [0, -10, 0] }}
-              transition={{
-                y: { repeat: Infinity, duration: 6, ease: "easeInOut" }
-              }}
+              variants={mockupVariants}
               style={{
                 flexShrink: 0,
                 display: "flex",

@@ -54,17 +54,17 @@
   --shadow-md: 0 18px 48px -24px rgb(var(--ink-rgb) / 0.28);
 }
 
-/* ─── Primary stem — Cyan Blue ───
-   Cyan Blue (Brand kit V2 · option 02) is the deck's primary colour on
-   every slide: #0A78C2 is the light-mode stem (marks, lines, accent
-   type on Ivory), #2AB4F5 the bright shade for fills behind Ink. The
+/* ─── Primary stem — Turquoise Cyan ───
+   Turquoise Cyan (Brand kit V2 · option 01) is the deck's primary colour
+   on every slide: #0A8C93 is the light-mode stem (marks, lines, accent
+   type on Ivory), #1CC8D0 the bright shade for fills behind Ink. The
    other two colourways appear only in the small tri-stem accents. */
 :root {
-  --stem: var(--stem-b);
-  --stem-bright: var(--stem-b-hi);
-  --stem-rgb: 10 120 194;
-  --stem-bright-rgb: 42 180 245;
-  --stem-soft: #e3f2fb;
+  --stem: var(--stem-a);
+  --stem-bright: var(--stem-a-hi);
+  --stem-rgb: 10 140 147;
+  --stem-bright-rgb: 28 200 208;
+  --stem-soft: #e2f6f7;
 }
 
 :root {
@@ -304,6 +304,8 @@ body {
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
+  /* Fixed-width digits: slide numbers don't shift what follows them. */
+  font-variant-numeric: tabular-nums;
   color: var(--tx-3);
 }
 
@@ -355,7 +357,7 @@ body {
   color: var(--accent);
 }
 
-/* Headline second line — the brand's light-mode Cyan Blue stem. */
+/* Headline second line — the brand's light-mode Turquoise Cyan stem. */
 .t-dim {
   color: var(--stem);
 }
@@ -462,21 +464,27 @@ body {
 }
 
 /* Project Slide Layout */
+/* One spacing step (--project-gap) separates the title block from the
+   description and the text column from the screens, so the rhythm is
+   symmetric at every size and on every export page. */
 .project-slide-frame {
+  --project-gap: clamp(0.85rem, 2.6vh, 1.6rem);
   position: relative;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: var(--project-gap);
 }
 
+/* Screens start on the same top line as the Key Features grid. */
 .project-slide-row {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
+  align-items: flex-start;
   width: 100%;
-  row-gap: clamp(1rem, 6vh, 3rem);
+  row-gap: var(--project-gap);
 }
 
 .project-slide-left {
@@ -883,11 +891,21 @@ body.pdf-export-active .laptop-base {
 
 .mockup-positioning {
   position: relative;
-  top: -6vh;
 }
 
-body.pdf-export-active .mockup-positioning {
-  top: 0 !important;
+/* Export frames vary in width per slide; keep text and screens side by
+   side so every project page has the same composition. */
+body.pdf-export-active .project-slide-row {
+  flex-wrap: nowrap !important;
+}
+
+body.pdf-export-active .project-slide-left {
+  flex: 1 1 0 !important;
+  min-width: 0;
+}
+
+body.pdf-export-active .project-slide-right {
+  flex: 0 0 auto !important;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -1364,10 +1382,6 @@ body.pdf-export-active .browser-screen img {
   }
 
   /* The upward nudge only makes sense inside a fixed-height frame. */
-  .mockup-positioning {
-    top: 0;
-  }
-
   .about-values-empty {
     display: none !important;
   }
@@ -1547,9 +1561,6 @@ body.pdf-export-active .browser-screen img {
     gap: 0.4rem;
   }
 
-  .mockup-positioning {
-    top: -3vh;
-  }
 }
 
 @media screen and (min-width: 961px) and (max-height: 780px) {
@@ -1577,10 +1588,6 @@ body.pdf-export-active .browser-screen img {
 
   .portfolio-mini-device {
     height: clamp(80px, 16svh, 140px);
-  }
-
-  .mockup-positioning {
-    top: 0;
   }
 }
 

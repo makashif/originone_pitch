@@ -43,7 +43,7 @@ export default function FluidBackground() {
       splatRadius: 0.1,
       shading: true,
       colorful: true,
-      colorPalette: ["#2ab4f5", "#5cc6f7", "#2ab4f5"], // Cyan Blue, the primary stem
+      colorPalette: ["#1cc8d0", "#4fd6dc", "#1cc8d0"], // Turquoise Cyan, the primary stem
       bloom: false,
       bloomIterations: 8,
       bloomResolution: 256,
