@@ -13,7 +13,7 @@ import sys
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from screen_utils import flatten_corners, save_jpeg  # noqa: E402
+from screen_utils import crop_opaque, flatten_corners, phone_ratio_crop, remove_notch, save_jpeg  # noqa: E402
 
 SRC = "/Users/macbookpro/Claude test/fuutura_pitch/public/images/screens"
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "public", "screens", "fuutura")
@@ -30,10 +30,31 @@ JOBS = [
     ("extension/extension_s3.png", "extension-account.jpg", 900),
 ]
 
+# Phone screens exported from the design file (rounded screen + drop shadow
+# on transparency), saved to ~/Downloads. (source, output name)
+DOWNLOADS = os.path.expanduser("~/Downloads")
+MOBILE_JOBS = [
+    ("Splash (6).png", "wallet-mobile-welcome.jpg"),
+    ("Home (30).png", "wallet-mobile-home.jpg"),
+    ("Splash (8).png", "chat-mobile-splash.jpg"),
+    ("Chat.png", "chat-mobile-list.jpg"),
+]
+
+PHONES = {"trade-mobile.jpg", "id-mobile.jpg"}
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     for src, name, width in JOBS:
         img = flatten_corners(Image.open(os.path.join(SRC, src)))
+        if name in PHONES:
+            img = remove_notch(img)
         path = os.path.join(OUT, name)
         save_jpeg(img, path, width)
         print(f"{name}: {os.path.getsize(path) // 1024} KB")
+
+    for src, name in MOBILE_JOBS:
+        img = phone_ratio_crop(flatten_corners(crop_opaque(Image.open(os.path.join(DOWNLOADS, src)))))
+        path = os.path.join(OUT, name)
+        save_jpeg(img, path, 786)
+        w, h = Image.open(path).size
+        print(f"{name}: {w}x{h}, {os.path.getsize(path) // 1024} KB")

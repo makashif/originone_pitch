@@ -1101,14 +1101,15 @@ body.pdf-export-active .browser-screen img {
   background: var(--border);
 }
 
+/* Compact rhythm: padding and gaps track the screen height, so the
+   21-card grid tightens on short laptops instead of being shrunk. */
 .portfolio-card {
   background: var(--surface);
-  padding: clamp(1rem, 0.5vh, 1.6rem) clamp(0.9rem, 0.5vw, 1.4rem);
+  padding: clamp(0.5rem, 1.25vh, 0.9rem) clamp(0.65rem, 0.85vw, 1rem);
   display: flex;
   flex-direction: column;
-  gap: clamp(0.6rem, 0.4vh, 1.2rem);
+  gap: clamp(0.3rem, 0.75vh, 0.55rem);
   transition: background 0.2s;
-  cursor: default;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }
@@ -1768,13 +1769,15 @@ body.pdf-export-active {
   --ext-w: calc(var(--ext-h) * 0.65) !important;
 }
 
+/* A4-landscape capture frame, 1380×976 by default (1380 / (297/210)).
+   fitSlideForExport (usePdfExport.ts) resizes it per slide, keeping the
+   proportion, so each slide's content fills its page. */
 body.pdf-export-active .slide {
-  width: 1380px !important;
-  height: 976px !important;
-  /* Exactly 1380 / (297/210) */
-  max-width: 1380px !important;
-  max-height: 976px !important;
-  min-height: 976px !important;
+  width: var(--export-w, 1380px) !important;
+  height: var(--export-h, 976px) !important;
+  max-width: var(--export-w, 1380px) !important;
+  max-height: var(--export-h, 976px) !important;
+  min-height: var(--export-h, 976px) !important;
   margin: 0 auto !important;
   flex: none !important;
   justify-content: center !important;
@@ -1788,8 +1791,13 @@ body.pdf-export-active .slide-content {
   flex-direction: column !important;
   justify-content: center !important;
   height: 100% !important;
-  max-height: calc(976px - 2 * var(--py)) !important;
+  max-height: calc(var(--export-h, 976px) - 2 * var(--py)) !important;
   overflow: visible !important;
+}
+
+/* The label's sweeping shimmer would be frozen mid-sweep in a capture. */
+body.pdf-export-active .label-shimmer {
+  display: none !important;
 }
 
 /* Hide heavy shadows and blurs during PDF export to prevent html2canvas artifacts */

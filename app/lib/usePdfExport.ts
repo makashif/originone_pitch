@@ -3,6 +3,85 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { SLIDES } from "../components/PresentationShell";
 
+/* ─────────────────────────────────────────────────────────────
+   Export frame — every slide becomes one A4-landscape page.
+
+   Slides are designed for 16:10 screens, so on the taller A4 page
+   their content would sit at screen size inside wide empty bands,
+   while the densest slides (the portfolio) would run off the page.
+
+   fitSlideForExport sizes each slide's capture frame instead: same
+   A4 proportion, but 1380/s × 976/s. Content lays out naturally in
+   that frame (no CSS transforms — html2canvas mis-renders text under
+   transform: scale), and the capture is then placed full-page, so it
+   appears s× larger. It picks the largest s at which the content
+   still fits the frame's safe area: sparse slides grow, dense slides
+   shrink, everything stays centred.
+───────────────────────────────────────────────────────────── */
+const EXPORT_W = 1380;
+const EXPORT_H = 976;
+const FIT_MAX = 1.3;
+const FIT_MIN = 0.6;
+const FIT_STEP = 0.02;
+
+function fitSlideForExport(doc: Document, slideId: string) {
+  const slide = doc.getElementById(slideId);
+  const content = slide?.querySelector<HTMLElement>(".slide-content");
+  const view = doc.defaultView;
+  if (!slide || !content || !view) return;
+
+  const setFrame = (s: number) => {
+    slide.style.setProperty("--export-w", `${(EXPORT_W / s).toFixed(1)}px`);
+    slide.style.setProperty("--export-h", `${(EXPORT_H / s).toFixed(1)}px`);
+  };
+  // Measure the content's own height, not the frame-filling box.
+  content.style.setProperty("height", "auto", "important");
+  content.style.setProperty("max-height", "none", "important");
+
+  let scale = FIT_MIN;
+  for (let s = FIT_MAX; s >= FIT_MIN; s -= FIT_STEP) {
+    setFrame(s);
+    const cs = view.getComputedStyle(slide);
+    const availH = slide.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    const naturalH = Math.max(content.scrollHeight, content.offsetHeight);
+    if (naturalH <= availH) {
+      scale = s;
+      break;
+    }
+  }
+  setFrame(scale);
+}
+
+/* Force every reveal animation to its end state in the clone: slides
+   that have not been scrolled to yet are still hidden, mid-fade or
+   mid-blur when captured. */
+const CLONE_RESET_CSS = `
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  [style*="opacity: 0"],
+  [style*="opacity:0"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  [style*="translateY"],
+  [style*="translateX"],
+  [style*="scale"] {
+    transform: none !important;
+  }
+  [style*="blur"] {
+    filter: none !important;
+  }
+`;
+
+function prepareClone(doc: Document, slideId: string) {
+  const style = doc.createElement("style");
+  style.innerHTML = CLONE_RESET_CSS;
+  doc.head.appendChild(style);
+  fitSlideForExport(doc, slideId);
+}
+
 export function usePdfExport() {
   const [isExporting, setIsExporting] = useState(false);
   const [exportProgress, setExportProgress] = useState(0);
@@ -30,29 +109,10 @@ export function usePdfExport() {
         allowTaint: false,
         backgroundColor: "#f6f5f0",
         logging: false,
-        windowWidth: 1380,
-        windowHeight: 976,
+        windowWidth: EXPORT_W,
+        windowHeight: EXPORT_H,
         ignoreElements: (el) => el.classList.contains("no-print"),
-        onclone: (clonedDoc) => {
-          const style = clonedDoc.createElement("style");
-          style.innerHTML = `
-            * {
-              animation: none !important;
-              transition: none !important;
-            }
-            [style*="opacity: 0"],
-            [style*="opacity:0"] {
-              opacity: 1 !important;
-              visibility: visible !important;
-            }
-            [style*="translateY"],
-            [style*="translateX"],
-            [style*="scale"] {
-              transform: none !important;
-            }
-          `;
-          clonedDoc.head.appendChild(style);
-        },
+        onclone: (clonedDoc) => prepareClone(clonedDoc, slideId),
       });
 
       const imgData = canvas.toDataURL("image/jpeg", 0.95);
@@ -112,31 +172,11 @@ export function usePdfExport() {
           allowTaint: false,
           backgroundColor: "#f6f5f0",
           logging: false,
-          windowWidth: 1380, // Force a fixed window width so html2canvas doesn't crop at the user's viewport edge
-          windowHeight: 976,
+          windowWidth: EXPORT_W, // Force a fixed window width so html2canvas doesn't crop at the user's viewport edge
+          windowHeight: EXPORT_H,
           // Ignore the UI chrome during export
           ignoreElements: (el) => el.classList.contains("no-print"),
-          onclone: (clonedDoc) => {
-            // Inject a style block to force all Framer Motion initial states to their final visible states
-            const style = clonedDoc.createElement("style");
-            style.innerHTML = `
-              * {
-                animation: none !important;
-                transition: none !important;
-              }
-              [style*="opacity: 0"],
-              [style*="opacity:0"] {
-                opacity: 1 !important;
-                visibility: visible !important;
-              }
-              [style*="translateY"],
-              [style*="translateX"],
-              [style*="scale"] {
-                transform: none !important;
-              }
-            `;
-            clonedDoc.head.appendChild(style);
-          },
+          onclone: (clonedDoc) => prepareClone(clonedDoc, slideId),
         });
 
         const imgData = canvas.toDataURL("image/jpeg", 0.95);

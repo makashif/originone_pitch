@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import SlideWrapper, { itemVariants } from "./SlideWrapper";
 import DeviceMockup from "./DeviceMockup";
-import LaptopMockup from "./LaptopMockup";
 import ExtensionMockup from "./ExtensionMockup";
 import ScreenShowcase from "./ScreenShowcase";
 
@@ -23,7 +22,7 @@ interface ProjectSlideProps {
   features: Feature[];
   mockupSrc?: string;
   mockupSrcSplash?: string;
-  mockupType?: "mobile" | "laptop" | "extension" | "showcase";
+  mockupType?: "mobile" | "extension" | "showcase";
   /** Web app + front surface, for mockupType="showcase". */
   showcase?: React.ComponentProps<typeof ScreenShowcase>;
   topMaxWidth?: string;
@@ -45,6 +44,7 @@ export default function ProjectSlide({
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingBottom: "0.2rem" }}>
             <motion.p className="t-label eyebrow" variants={itemVariants} style={{ position: "relative", overflow: "hidden" }}>
               <motion.span
+                className="label-shimmer"
                 initial={{ left: "-100%" }}
                 animate={{ left: "200%" }}
                 transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut", repeatDelay: 4 }}
@@ -178,17 +178,12 @@ export default function ProjectSlide({
               style={{
                 flexShrink: 0,
                 display: "flex",
-                gap: mockupType === "extension" ? "clamp(0.8rem, min(1.5vw, 2.6vh), 2rem)" : "clamp(3.5rem, min(6.5vw, 11.5vh), 7.5rem)",
-                marginRight: mockupType === "laptop" ? "calc(var(--laptop-w) * 0.08)" : 0,
+                gap: mockupType === "extension" ? "clamp(0.8rem, min(1.5vw, 2.6vh), 2rem)" : "clamp(1.25rem, min(2.6vw, 4.6vh), 2.75rem)",
                 willChange: "transform"
               }}
             >
               {mockupType === "showcase" && showcase ? (
                 <ScreenShowcase {...showcase} />
-              ) : mockupType === "laptop" ? (
-                <motion.div whileHover={{ scale: 1.03, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }}>
-                  <LaptopMockup src={mockupSrc} alt={`${title} app screenshot`} />
-                </motion.div>
               ) : mockupType === "extension" ? (
                 <>
                   {mockupSrcSplash && (

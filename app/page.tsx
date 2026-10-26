@@ -250,7 +250,10 @@ export default function Home() {
         mockupType="showcase"
         showcase={{
           web: { src: "/screens/fuutura/wallet-web-dashboard.jpg", alt: "Fuutura Wallet dashboard", url: "wallet.fuutura.com" },
-          front: { kind: "web", src: "/screens/fuutura/wallet-web-transactions.jpg", alt: "Fuutura Wallet transaction history", url: "wallet.fuutura.com/activity" },
+          phones: [
+            { src: "/screens/fuutura/wallet-mobile-home.jpg", alt: "Fuutura Wallet mobile — home" },
+            { src: "/screens/fuutura/wallet-mobile-welcome.jpg", alt: "Fuutura Wallet mobile — welcome" },
+          ],
         }}
       />
 
@@ -313,8 +316,8 @@ export default function Home() {
         background="/light/fchat_premium_bg.jpg"
         status="Delivered"
         features={pChatFeatures}
-        mockupSrcSplash="/FchatS.jpg"
-        mockupSrc="/Fchat.jpg"
+        mockupSrcSplash="/screens/fuutura/chat-mobile-splash.jpg"
+        mockupSrc="/screens/fuutura/chat-mobile-list.jpg"
         mockupType="mobile"
       />
 
@@ -344,8 +347,10 @@ export default function Home() {
         background="/light/fhrms_premium_bg.jpg"
         status="Delivered"
         features={p5Features}
-        mockupSrc="/hrms.png"
-        mockupType="laptop"
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/web/hrms.jpg", alt: "Origin One Labs HRMS dashboard", url: "HRMS · Dashboard" },
+        }}
       />
 
       {/* ── Project 06 — Digital24 ── */}
@@ -358,8 +363,10 @@ export default function Home() {
         background="/light/digital24_premium_bg.jpg"
         status="Delivered"
         features={p6Features}
-        mockupSrc="/D24.png"
-        mockupType="laptop"
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/web/digital24.jpg", alt: "Digital24 PR distribution platform", url: "Digital24 · Home" },
+        }}
       />
 
       {/* ── Project 07 — Intelizzz ── */}
@@ -399,8 +406,10 @@ export default function Home() {
         background="/light/health_premium_bg.jpg"
         status="Delivered"
         features={p9Features}
-        mockupSrc="/new screens/IMG_8589.png"
-        mockupType="laptop"
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/web/clinic.jpg", alt: "Clinic management dashboard", url: "Clinic · Dashboard" },
+        }}
       />
 
       {/* ── Project 10 — SAAP ── */}
@@ -413,8 +422,10 @@ export default function Home() {
         background="/light/saap_premium_bg.jpg"
         status="Delivered"
         features={p10Features}
-        mockupSrc="/new screens/IMG_8591.png"
-        mockupType="laptop"
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/web/manufacturing.jpg", alt: "Manufacturing and production analytics", url: "Production · Analytics" },
+        }}
       />
 
       {/* ── Project 11 — Marketplace Platform ── */}
@@ -427,8 +438,10 @@ export default function Home() {
         background="/light/marketplace_premium_bg.jpg"
         status="Delivered"
         features={p11Features}
-        mockupSrc="/new screens/IMG_8600.png"
-        mockupType="laptop"
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/web/social-commerce.jpg", alt: "Property marketplace home page", url: "Marketplace · Home" },
+        }}
       />
 
       {/* ── Project 12 — Logistics & Dispatch Platform ── */}
@@ -441,8 +454,10 @@ export default function Home() {
         background="/light/logistics_premium_bg.jpg"
         status="Delivered"
         features={p12Features}
-        mockupSrc="/new screens/IMG_8593.png"
-        mockupType="laptop"
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/web/logistics.jpg", alt: "Logistics and dispatch dashboard", url: "Dispatch · Dashboard" },
+        }}
       />
 
       {/* ── Project 13 — Creative Community & Media Platform ── */}
@@ -455,8 +470,10 @@ export default function Home() {
         background="/light/community_premium_bg.jpg"
         status="Delivered"
         features={p13Features}
-        mockupSrc="/new screens/IMG_8594.png"
-        mockupType="laptop"
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/web/creative-community.jpg", alt: "Creative community feed", url: "Community · Feed" },
+        }}
       />
 
       {/* ── Project 14 — FinTech Platform ── */}
@@ -469,8 +486,10 @@ export default function Home() {
         background="/light/fintech_premium_bg.jpg"
         status="Delivered"
         features={p14Features}
-        mockupSrc="/new screens/IMG_8602.png"
-        mockupType="laptop"
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/web/payment-credit.jpg", alt: "Payment and credit services home page", url: "Lending · Home" },
+        }}
       />
 
       {/* ── Project 15 — Multiple Payment Gateways & Advertisement Platform ── */}
@@ -483,8 +502,10 @@ export default function Home() {
         background="/light/ads_payment_premium_bg.jpg"
         status="Delivered"
         features={p15Features}
-        mockupSrc="/new screens/IMG_8603.png"
-        mockupType="laptop"
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/web/ads-payment.jpg", alt: "Ads and payment campaigns page", url: "Campaigns · Home" },
+        }}
         topMaxWidth="850px"
       />
 
@@ -498,8 +519,10 @@ export default function Home() {
         background="/light/ecommerce_premium_bg.jpg"
         status="Delivered"
         features={p16Features}
-        mockupSrc="/new screens/IMG_8599.png"
-        mockupType="laptop"
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/web/ecommerce-retail.jpg", alt: "E-commerce storefront catalogue", url: "Store · Catalogue" },
+        }}
       />
 
       {/* ── Project 17 — CRM Platform ── */}
@@ -512,8 +535,10 @@ export default function Home() {
         background="/light/crm_premium_bg.jpg"
         status="Delivered"
         features={p17Features}
-        mockupSrc="/new screens/image.png"
-        mockupType="laptop"
+        mockupType="showcase"
+        showcase={{
+          web: { src: "/screens/web/real-estate.jpg", alt: "CRM real-time dashboard", url: "CRM · Real-time" },
+        }}
       />
 
       {/* ── Project 18 — Digital Health Platform ── */}

@@ -5,7 +5,7 @@ mockups with a bezel baked in. Flattening those to RGB naively turns the
 transparent corners black — instead, fill each corner from the pixels
 beside it so the screen reads edge to edge inside our own device frames.
 """
-from PIL import Image
+from PIL import Image, ImageDraw
 
 
 def flatten_corners(img: Image.Image) -> Image.Image:
@@ -95,6 +95,41 @@ def phone_screen(img: Image.Image) -> Image.Image:
                 if 0 <= X < sw and 0 <= Y < sh and (x * x + y * y) > (r - 1) ** 2:
                     sp[X, Y] = colour
     return screen
+
+
+def remove_notch(img: Image.Image) -> Image.Image:
+    """Paint out a baked-in notch or Dynamic Island so the deck's phone
+    frames show a clean screen. Looks for dark pixels in the top-centre
+    band (clear of the status-bar time and icons) and repaints that box,
+    row by row, with the colour just left of it."""
+    img = img.convert("RGB")
+    w, h = img.size
+    px = img.load()
+    # Only the first unbroken dark block from the top is the notch/island —
+    # stop at the first clean row so page titles below it are never touched.
+    xs, ys = [], []
+    for y in range(int(h * 0.07)):
+        row = [x for x in range(int(w * 0.3), int(w * 0.72)) if sum(px[x, y]) < 120]
+        if row:
+            xs += row
+            ys.append(y)
+        elif ys:
+            break
+    if not xs:
+        return img
+    x0, x1 = max(min(xs) - 4, 0), min(max(xs) + 4, w - 1)
+    y1 = min(max(ys) + 4, h - 1)
+    draw = ImageDraw.Draw(img)
+    for y in range(y1 + 1):
+        draw.line([(x0, y), (x1, y)], fill=px[max(x0 - 6, 0), y])
+    return img
+
+
+def phone_ratio_crop(img: Image.Image, ratio: float = 393 / 852) -> Image.Image:
+    """Trim a full-length phone capture to one screen (width/height = ratio),
+    keeping the top. The deck's phone frame expects a screen-shaped image."""
+    w, h = img.size
+    return img.crop((0, 0, w, round(w / ratio))) if h > w / ratio + 2 else img
 
 
 def save_jpeg(img: Image.Image, path: str, width: int) -> None:

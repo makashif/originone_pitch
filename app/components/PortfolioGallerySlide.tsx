@@ -212,19 +212,19 @@ export default function PortfolioGallerySlide() {
       <style>{layoutCss(projects.length)}</style>
 
       {/* Header */}
-      <div className="stack stack-xs" style={{ marginBottom: "clamp(0.5rem, 1vh, 1rem)" }}>
+      <div className="stack stack-xs" style={{ marginBottom: "clamp(0.25rem, 0.8vh, 0.6rem)" }}>
         <motion.p className="t-label eyebrow" variants={itemVariants}>
           05 / Our Track Record
         </motion.p>
-        <motion.h2 className="t-h2" variants={itemVariants} style={{ maxWidth: "900px" }}>
+        <motion.h2 className="t-h2" variants={itemVariants} style={{ maxWidth: "900px", fontSize: "clamp(1.7rem, min(3.4vw, 6.2vh), 3.4rem)", lineHeight: 1 }}>
           Multiple projects delivered.<br />
           <span className="t-dim">Engineered for scale.</span>
         </motion.h2>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "flex-start", margin: "clamp(0.5rem, 2.2vh, 1.5rem) 0" }}>
+      <div style={{ display: "flex", justifyContent: "flex-start", margin: "clamp(0.3rem, 1.3vh, 0.9rem) 0 clamp(0.5rem, 1.8vh, 1.1rem)" }}>
         <motion.p className="t-body" variants={itemVariants}
-          style={{ maxWidth: "900px" }}>
+          style={{ maxWidth: "900px", lineHeight: 1.55 }}>
           Below are some of our featured work from multiple successfully delivered projects. From Web3 infrastructure to AI ecosystems, we architect and deploy battle-tested technology that powers global businesses.
         </motion.p>
       </div>
@@ -262,20 +262,20 @@ export default function PortfolioGallerySlide() {
             <h3 style={{
               fontFamily: "var(--f-display)", fontWeight: 600,
               fontSize: "clamp(0.72rem, 1vw, 0.88rem)",
-              color: "var(--tx-1)", letterSpacing: "-0.01em", lineHeight: 1.25,
+              color: "var(--tx-1)", letterSpacing: "-0.01em", lineHeight: 1.18,
             }}>
               {project.title}
             </h3>
 
             {/* Tags */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.22rem 0.28rem" }}>
               {project.tags.map((tag, j) => (
                 <span key={j} style={{
                   fontFamily: "var(--f-mono)", fontSize: "0.46rem",
                   letterSpacing: "0.06em", color: "var(--tx-3)",
                   background: "var(--surface-2)",
                   border: "1px solid var(--border)",
-                  padding: "0.12rem 0.4rem", borderRadius: "2px",
+                  padding: "0.08rem 0.38rem", borderRadius: "2px", lineHeight: 1.45,
                 }}>
                   {tag}
                 </span>
@@ -286,8 +286,8 @@ export default function PortfolioGallerySlide() {
             <p style={{
               fontFamily: "var(--f-mono)", fontSize: "0.45rem",
               color: "var(--tx-4)", letterSpacing: "0.05em",
-              lineHeight: 1.5, marginTop: "auto",
-              borderTop: "1px solid var(--border)", paddingTop: "0.4rem",
+              lineHeight: 1.4, marginTop: "auto",
+              borderTop: "1px solid var(--border)", paddingTop: "clamp(0.25rem, 0.6vh, 0.4rem)",
             }}>
               {project.stack}
             </p>
@@ -308,7 +308,7 @@ export default function PortfolioGallerySlide() {
           </div>
           <p style={{
             fontFamily: "var(--f-body)", fontSize: "clamp(0.56rem, 0.74vw, 0.7rem)",
-            color: "var(--tx-2)", lineHeight: 1.45,
+            color: "var(--tx-2)", lineHeight: 1.4,
           }}>
             {DISCLAIMER}
           </p>

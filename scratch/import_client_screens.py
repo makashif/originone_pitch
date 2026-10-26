@@ -3,7 +3,8 @@
   python3 scratch/import_client_screens.py <dir with the supplied images>
 
 Digital Health Platform — 1 web dashboard (shadowed card, transparent
-corners) + 3 phone mockups (bezel baked in; the screen is cut out so it can
+corners; the re-branded version from ~/Downloads is preferred when present)
++ 3 phone mockups (bezel baked in; the screen is cut out so it can
 sit in the deck's own silver phone frame). Vape Local — 1 web screenshot.
 """
 import os
@@ -11,7 +12,7 @@ import sys
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from screen_utils import crop_opaque, flatten_corners, phone_screen, save_jpeg  # noqa: E402
+from screen_utils import crop_opaque, flatten_corners, phone_screen, remove_notch, save_jpeg  # noqa: E402
 
 PUBLIC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "public", "screens")
 
@@ -26,12 +27,14 @@ JOBS = [
 
 if __name__ == "__main__":
     src_dir = sys.argv[1]
+    rebranded = os.path.expanduser("~/Downloads/web-dashboard-origin-one-labs.png")
     for src, out, kind, width in JOBS:
-        img = Image.open(os.path.join(src_dir, src))
+        path_in = rebranded if src == "1.webp" and os.path.exists(rebranded) else os.path.join(src_dir, src)
+        img = Image.open(path_in)
         if kind == "web-card":
             img = flatten_corners(crop_opaque(img))
         elif kind == "phone":
-            img = phone_screen(img)
+            img = remove_notch(phone_screen(img))
         else:
             img = img.convert("RGB")
         path = os.path.join(PUBLIC, out)
